@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Currículo - Henrique Lima</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "secondary": "#ff6b6b", 
+                        "tertiary": "#4ecdc4", 
+                        "quaternary": "#45b7d1", 
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#181811",
+                        "surface-dark": "#2a2a20",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Space Grotesk", "sans-serif"],
+                    },
+                    borderWidth: {
+                        '3': '3px',
+                        '4': '4px',
+                        '5': '5px',
+                    },
+                    boxShadow: {
+                        'hard': '5px 5px 0px 0px #000000',
+                        'hard-sm': '3px 3px 0px 0px #000000',
+                        'hard-white': '5px 5px 0px 0px #ffffff',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px black;
+        }
+        .text-stroke-white {
+            -webkit-text-stroke: 1px white;
+        }
+        ::-webkit-scrollbar {
+            width: 16px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #181811;
+            border-left: 3px solid #333;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f2f20d;
+            border: 3px solid #181811;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffffff;
+        }
+        
+        .brutalist-card {
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .brutalist-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px 0px rgba(255,255,255,0.9);
+        }
+        
+        .brutalist-btn {
+            transition: all 0.1s ease;
+        }
+        .brutalist-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 0px 0px 0px 0px;
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white selection:bg-primary selection:text-black overflow-x-hidden">
+<!-- Navbar -->
+<nav class="sticky top-0 z-50 w-full border-b-4 border-white bg-background-dark px-4 py-4 md:px-10">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+        <div class="flex items-center gap-2 group cursor-pointer">
+            <div class="h-8 w-8 bg-primary border-2 border-white flex items-center justify-center group-hover:bg-white transition-colors">
+                <span class="material-symbols-outlined text-black font-bold">terminal</span>
+            </div>
+            <h1 class="text-2xl font-bold tracking-tighter hover:text-primary transition-colors">HENRIQUE.LIMA</h1>
+        </div>
+        
+        <!-- Language Switcher -->
+        <div class="flex gap-4 items-center">
+            <button onclick="setLanguage('pt')" class="hover:scale-110 transition-transform" title="Português">
+                <img src="https://cdn-icons-png.flaticon.com/512/14009/14009874.png" alt="Bandeira do Brasil" width="32" height="32">
+            </button>
+            <button onclick="setLanguage('en')" class="hover:scale-110 transition-transform" title="English">
+                <img src="https://cdn-icons-png.flaticon.com/512/8281/8281549.png" alt="USA Flag" width="32" height="32">
+            </button>
+        </div>
+
+        <div class="hidden md:flex gap-8 items-center">
+            <a class="text-lg font-bold hover:underline hover:decoration-4 hover:decoration-primary underline-offset-4" href="#experience" data-i18n="nav-experience">Experiência</a>
+            <a class="text-lg font-bold hover:underline hover:decoration-4 hover:decoration-tertiary underline-offset-4" href="#expertise" data-i18n="nav-expertise">Expertise</a>
+            <a class="text-lg font-bold hover:underline hover:decoration-4 hover:decoration-secondary underline-offset-4" href="#skills" data-i18n="nav-skills">Skills</a>
+        </div>
+        <button onclick="window.open('https://wa.me/5571999088651', '_blank')" class="brutalist-btn hidden md:flex items-center justify-center gap-2 border-2 border-white bg-white px-6 py-2 text-black font-bold shadow-[4px_4px_0px_0px_#f2f20d] hover:bg-gray-100">
+            <span data-i18n="nav-contact">Contato</span>
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </button>
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 border-2 border-white bg-transparent text-white">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-background-dark border-b-4 border-white p-6 flex flex-col gap-6 shadow-[0px_10px_20px_rgba(0,0,0,0.5)] z-40">
+        <a class="text-xl font-bold hover:text-primary" href="#experience" onclick="toggleMobileMenu()" data-i18n="nav-experience">Experiência</a>
+        <a class="text-xl font-bold hover:text-tertiary" href="#expertise" onclick="toggleMobileMenu()" data-i18n="nav-expertise">Expertise</a>
+        <a class="text-xl font-bold hover:text-secondary" href="#skills" onclick="toggleMobileMenu()" data-i18n="nav-skills">Skills</a>
+        <button onclick="window.open('https://wa.me/5571999088651', '_blank')" class="brutalist-btn flex items-center justify-center gap-2 border-2 border-white bg-white px-6 py-3 text-black font-bold shadow-[4px_4px_0px_0px_#f2f20d]">
+            <span data-i18n="nav-contact">Contato</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="relative w-full border-b-4 border-white">
+    <div class="mx-auto max-w-7xl px-4 py-20 md:py-32 md:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+            <!-- Text Content -->
+            <div class="md:col-span-8 flex flex-col gap-6 relative z-10 order-2 md:order-1">
+                <div class="inline-block w-fit border-2 border-white bg-secondary px-3 py-1 text-sm font-bold uppercase tracking-wider text-black shadow-[4px_4px_0px_0px_#ffffff] rotate-[-2deg]" data-i18n="hero-badge">
+                    QA Engineer & Automation
+                </div>
+                <h1 class="text-4xl md:text-8xl lg:text-9xl font-black leading-[0.9] tracking-tighter uppercase" data-aos="fade-up">
+                    <span data-i18n="hero-hello">Olá,</span><br/>
+                    <span data-i18n="hero-im">Sou</span> <span class="text-primary text-stroke-white" style="-webkit-text-stroke: 2px white; color: transparent;">Henrique</span>
+                </h1>
+                <h2 class="text-2xl md:text-4xl font-bold text-white/90" data-aos="fade-up" data-aos-delay="200">
+                    <span class="bg-white text-black px-2" data-i18n="hero-role-1">QA Engineer</span> &amp; <span data-i18n="hero-role-2">Especialista em Automação</span>
+                </h2>
+                
+                <!-- Mobile Image Container (Visible only on mobile, between h2 and p) -->
+                <div class="md:hidden relative flex justify-center py-6" data-aos="zoom-in">
+                    <div class="relative h-64 w-64">
+                        <div class="absolute inset-0 rotate-3 border-4 border-white bg-tertiary"></div>
+                        <div class="absolute inset-0 -rotate-6 border-4 border-white bg-secondary mix-blend-hard-light translate-x-4 translate-y-4"></div>
+                        <div class="absolute inset-0 rotate-0 border-4 border-white bg-background-dark overflow-hidden flex items-center justify-center">
+                             <img class="h-full w-full object-cover grayscale contrast-125 filter hover:grayscale-0 transition-all duration-300" alt="Foto de Perfil de Henrique Lima" src="imagemPerfil.jpg"/>
+                        </div>
+                         <!-- Floating Badge Mobile -->
+                        <div class="absolute -bottom-4 -left-4 border-4 border-black bg-white p-2 shadow-[3px_3px_0px_0px_#f2f20d] rotate-3 z-20">
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xl">verified</span>
+                                <span class="font-black text-sm text-black" data-i18n="badge-exp">4+ ANOS EXP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="max-w-xl text-xl md:text-2xl font-medium leading-relaxed text-gray-300" data-i18n="hero-desc" data-aos="fade-up" data-aos-delay="400">
+                    Atuo há 4 anos como QA Engineer na Netcracker Technology, oferecendo suporte técnico, testes de ponta a ponta e automações inteligentes. Foco na resolução de problemas e melhoria contínua.
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row gap-6" data-aos="fade-up" data-aos-delay="600">
+                    <a href="https://drive.google.com/drive/u/0/folders/1qx124oq4z5SXKLyc9_ajQ4zjoOTHfMTK" target="_blank" class="brutalist-btn flex items-center justify-center gap-3 border-4 border-white bg-primary px-8 py-4 text-xl font-bold text-black shadow-[6px_6px_0px_0px_#ffffff] hover:bg-[#ffff00]">
+                        <span class="material-symbols-outlined">download</span>
+                        <span data-i18n="btn-download">Baixar CV</span>
+                    </a>
+                    <a href="https://wa.me/5571999088651" target="_blank" class="brutalist-btn flex items-center justify-center gap-3 border-4 border-white bg-transparent px-8 py-4 text-xl font-bold text-white shadow-[6px_6px_0px_0px_#f2f20d] hover:bg-white hover:text-black">
+                        <span class="material-symbols-outlined">mail</span>
+                        <span data-i18n="btn-contact">Fale Comigo</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Abstract Visual (Desktop Only) -->
+            <div class="hidden md:flex md:col-span-4 relative justify-center md:justify-end order-1 md:order-2" data-aos="fade-left" data-aos-duration="1000">
+                <div class="relative h-80 w-80 md:h-96 md:w-full">
+                    <div class="absolute inset-0 rotate-3 border-4 border-white bg-tertiary"></div>
+                    <div class="absolute inset-0 -rotate-6 border-4 border-white bg-secondary mix-blend-hard-light translate-x-4 translate-y-4"></div>
+                    <div class="absolute inset-0 rotate-0 border-4 border-white bg-background-dark overflow-hidden flex items-center justify-center">
+                         <img class="h-full w-full object-cover grayscale contrast-125 filter hover:grayscale-0 transition-all duration-300" alt="Foto de Perfil de Henrique Lima" src="imagemPerfil.jpg"/>
+                    </div>
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -left-6 border-4 border-black bg-white p-4 shadow-[5px_5px_0px_0px_#f2f20d] rotate-3 z-20" data-aos="zoom-in" data-aos-delay="800">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-3xl">verified</span>
+                            <span class="font-black text-xl text-black" data-i18n="badge-exp">4+ ANOS EXP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Marquee Banner -->
+<div class="w-full border-b-4 border-white bg-primary py-4 text-black overflow-hidden">
+    <div class="marquee-container">
+        <div class="marquee-content" id="marquee-pt">
+            <span class="mx-4 text-4xl font-black uppercase">QA Engineer • Automação • n8n • Supabase • PostgreSQL • SaaS • JavaScript • Python • API REST • Webhooks • Bots Inteligentes • SQL • Data Modeling • E2E Testing • Cypress • Selenium • QA Engineer • Automação • n8n • Supabase • PostgreSQL • SaaS • JavaScript • Python • API REST • Webhooks • Bots Inteligentes • SQL • Data Modeling • E2E Testing • Cypress • Selenium • </span>
+            <span class="mx-4 text-4xl font-black uppercase">QA Engineer • Automação • n8n • Supabase • PostgreSQL • SaaS • JavaScript • Python • API REST • Webhooks • Bots Inteligentes • SQL • Data Modeling • E2E Testing • Cypress • Selenium • QA Engineer • Automação • n8n • Supabase • PostgreSQL • SaaS • JavaScript • Python • API REST • Webhooks • Bots Inteligentes • SQL • Data Modeling • E2E Testing • Cypress • Selenium • </span>
+        </div>
+        <div class="marquee-content hidden" id="marquee-en">
+            <span class="mx-4 text-4xl font-black uppercase">QA Engineer • Automation • n8n • Supabase • PostgreSQL • SaaS • JavaScript • Python • API REST • Webhooks • Smart Bots • SQL • Data Modeling • E2E Testing • Cypress • Selenium • QA Engineer • Automation • n8n • Supabase • PostgreSQL • SaaS • JavaScript • Python • API REST • Webhooks • Smart Bots • SQL • Data Modeling • E2E Testing • Cypress • Selenium • </span>
+            <span class="mx-4 text-4xl font-black uppercase">QA Engineer • Automation • n8n • Supabase • PostgreSQL • SaaS • JavaScript • Python • API REST • Webhooks • Smart Bots • SQL • Data Modeling • E2E Testing • Cypress • Selenium • QA Engineer • Automation • n8n • Supabase • PostgreSQL • SaaS • JavaScript • Python • API REST • Webhooks • Smart Bots • SQL • Data Modeling • E2E Testing • Cypress • Selenium • </span>
+        </div>
+    </div>
+</div>
+
+<!-- Experience Section -->
+<section class="w-full border-b-4 border-white bg-background-light dark:bg-[#181811] py-20" id="experience">
+    <div class="mx-auto max-w-6xl px-4 md:px-10">
+        <div class="mb-16 flex items-center gap-4">
+            <div class="h-12 w-12 border-4 border-white bg-secondary"></div>
+            <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tight text-white stroke-black text-stroke-white md:text-stroke-0" data-i18n="section-experience">Experiência</h2>
+        </div>
+        <div class="flex flex-col gap-10">
+            
+            <!-- Netcracker -->
+            <div class="brutalist-card group relative grid grid-cols-1 md:grid-cols-12 border-4 border-white bg-surface-dark shadow-[8px_8px_0px_0px_#4ecdc4]" data-aos="fade-up">
+                <div class="col-span-1 md:col-span-3 border-b-4 border-white md:border-b-0 md:border-r-4 bg-tertiary p-8 flex items-center justify-center md:justify-start flex-col">
+                    <span class="text-2xl font-black text-black">Netcracker</span>
+                    <span class="text-lg font-bold text-black/80" data-i18n="date-netcracker">Mai 2021 - Presente</span>
+                </div>
+                <div class="col-span-1 md:col-span-9 p-8">
+                    <div class="mb-6">
+                        <h3 class="text-3xl font-bold text-white mb-2">QA Engineer</h3>
+                        <p class="text-gray-400 font-mono text-sm mb-4" data-i18n="date-qa">Fev 2024 - Presente</p>
+                        <ul class="list-disc list-outside ml-5 text-gray-300 space-y-2" data-i18n="desc-netcracker-qa">
+                            <li>Execução de casos de teste E2E para suporte e identificação de bugs após deploys.</li>
+                            <li>Configuração de testes de sistema, criação de tickets e análise de bugs.</li>
+                            <li>Validação de cenários de teste com desenvolvedores e feedback com equipe de produtos.</li>
+                            <li>Automação de testes e requisições de API (REST), provisionamento de faturamento.</li>
+                        </ul>
+                    </div>
+                    <div class="border-t-2 border-white/20 pt-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Analyst Client Support II</h3>
+                        <p class="text-gray-400 font-mono text-sm mb-4" data-i18n="date-analyst">Mai 2021 - Fev 2024</p>
+                        <ul class="list-disc list-outside ml-5 text-gray-300 space-y-2" data-i18n="desc-netcracker-analyst">
+                            <li>Análise de incidentes e troubleshooting em ambientes de QA.</li>
+                            <li>Criação e revisão de casos de teste, validação com analistas de negócio.</li>
+                            <li>Suporte técnico e execução de sanity tests durante releases em produção.</li>
+                            <li>Monitoramento de SLA de incidentes e deploy de correções de dados.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ThinkSeg -->
+            <div class="brutalist-card group relative grid grid-cols-1 md:grid-cols-12 border-4 border-white bg-surface-dark shadow-[8px_8px_0px_0px_#ff6b6b]" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-span-1 md:col-span-3 border-b-4 border-white md:border-b-0 md:border-r-4 bg-secondary p-8 flex items-center justify-center md:justify-start flex-col">
+                    <span class="text-2xl font-black text-black">ThinkSeg</span>
+                    <span class="text-lg font-bold text-black/80" data-i18n="date-thinkseg">Mai 2020 - Jan 2021</span>
+                </div>
+                <div class="col-span-1 md:col-span-9 p-8">
+                    <h3 class="text-3xl font-bold text-white mb-4" data-i18n="role-thinkseg">Estagiário de Data Science</h3>
+                    <ul class="list-disc list-outside ml-5 text-lg text-gray-300 leading-relaxed space-y-2" data-i18n="desc-thinkseg">
+                        <li>Desenvolvimento de scripts Python para automação de processos.</li>
+                        <li>Criação de dashboards e planilhas inteligentes para suporte a áreas da empresa.</li>
+                        <li>Extração e processamento de dados para métricas de KPI.</li>
+                        <li>Criação de scripts SQL para mineração de dados.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cognizant -->
+            <div class="brutalist-card group relative grid grid-cols-1 md:grid-cols-12 border-4 border-white bg-surface-dark shadow-[8px_8px_0px_0px_#45b7d1]" data-aos="fade-up" data-aos-delay="400">
+                <div class="col-span-1 md:col-span-3 border-b-4 border-white md:border-b-0 md:border-r-4 bg-quaternary p-8 flex items-center justify-center md:justify-start flex-col">
+                    <span class="text-2xl font-black text-black">Cognizant</span>
+                    <span class="text-lg font-bold text-black/80" data-i18n="date-cognizant">Ago 2018 - Jun 2019</span>
+                </div>
+                <div class="col-span-1 md:col-span-9 p-8">
+                    <h3 class="text-3xl font-bold text-white mb-4" data-i18n="role-cognizant">Analista de Conteúdo</h3>
+                    <p class="text-lg text-gray-300 leading-relaxed" data-i18n="desc-cognizant">
+                        Análise e revisão de conteúdo sensível em redes sociais. Classificação de mídia (vídeo, foto, texto) e alinhamento de diretrizes de comunidade.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Previous Experience -->
+            <div class="brutalist-card group relative grid grid-cols-1 md:grid-cols-12 border-4 border-white bg-surface-dark shadow-[8px_8px_0px_0px_#ffffff]" data-aos="fade-up" data-aos-delay="600">
+                <div class="col-span-1 md:col-span-3 border-b-4 border-white md:border-b-0 md:border-r-4 bg-white p-8 flex items-center justify-center md:justify-start flex-col">
+                    <span class="text-2xl font-black text-black" data-i18n="label-previous">Anterior</span>
+                    <span class="text-lg font-bold text-black/80">2014 - 2018</span>
+                </div>
+                <div class="col-span-1 md:col-span-9 p-8">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white">Easy (Easy Taxi)</h3>
+                        <p class="text-gray-400 text-sm mb-2">Customer Support Specialist (2017 - 2018)</p>
+                        <p class="text-gray-300" data-i18n="desc-easy">Suporte a motoristas e passageiros, resolução de problemas e reformulação de processos internos.</p>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white">Uber</h3>
+                        <p class="text-gray-400 text-sm mb-2">Community Support Representative (2016 - 2017)</p>
+                        <p class="text-gray-300" data-i18n="desc-uber">Suporte nível crítico e análise de indicadores.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Porto Seguro</h3>
+                        <p class="text-gray-400 text-sm mb-2">Customer Support Specialist (2014 - 2017)</p>
+                        <p class="text-gray-300" data-i18n="desc-porto">Assistência a sinistros e atividades relacionadas a seguros.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Expertise Areas Section (Replaces Projects) -->
+<section class="w-full bg-[#181811] py-20 border-b-4 border-white" id="expertise">
+    <div class="mx-auto max-w-7xl px-4 md:px-10">
+        <div class="mb-16 flex items-center gap-4">
+            <div class="h-12 w-12 border-4 border-white bg-quaternary rotate-45"></div>
+            <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tight text-white" data-i18n="section-areas">Áreas de Atuação</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Area 1 -->
+            <div class="flex flex-col border-4 border-white bg-surface-dark p-6 shadow-[8px_8px_0px_0px_#f2f20d]" data-aos="zoom-in">
+                <div class="mb-4 text-primary">
+                    <span class="material-symbols-outlined text-5xl">bug_report</span>
+                </div>
+                <h3 class="mb-4 text-2xl font-black uppercase text-white" data-i18n="area-qa-title">Qualidade de Software (QA)</h3>
+                <ul class="space-y-2 text-gray-300" data-i18n="area-qa-desc">
+                    <li>• Execução de testes E2E</li>
+                    <li>• Criação de cenários de testes e casos de uso</li>
+                    <li>• Validação com desenvolvedores</li>
+                    <li>• Análise de bugs e tickets (JIRA)</li>
+                </ul>
+            </div>
+            
+            <!-- Area 2 -->
+            <div class="flex flex-col border-4 border-white bg-surface-dark p-6 shadow-[8px_8px_0px_0px_#ff6b6b] mt-4 md:mt-0 md:-translate-y-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="mb-4 text-secondary">
+                    <span class="material-symbols-outlined text-5xl">api</span>
+                </div>
+                <h3 class="mb-4 text-2xl font-black uppercase text-white" data-i18n="area-api-title">Integrações & APIs</h3>
+                <ul class="space-y-2 text-gray-300" data-i18n="area-api-desc">
+                    <li>• Testes e automações API REST</li>
+                    <li>• Provisionamento de ordens/billing</li>
+                    <li>• Integração com order management</li>
+                    <li>• Migração de dados e scripts</li>
+                </ul>
+            </div>
+
+            <!-- Area 3 -->
+            <div class="flex flex-col border-4 border-white bg-surface-dark p-6 shadow-[8px_8px_0px_0px_#45b7d1]" data-aos="zoom-in" data-aos-delay="400">
+                <div class="mb-4 text-quaternary">
+                    <span class="material-symbols-outlined text-5xl">smart_toy</span>
+                </div>
+                <h3 class="mb-4 text-2xl font-black uppercase text-white" data-i18n="area-auto-title">Automação Inteligente</h3>
+                <ul class="space-y-2 text-gray-300" data-i18n="area-auto-desc">
+                    <li>• Fluxos automatizados com n8n</li>
+                    <li>• Integração Supabase, Webhooks</li>
+                    <li>• Extração e tratamento de dados</li>
+                    <li>• Bots e fluxos de atendimento</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="w-full border-b-4 border-white bg-[#222210] py-20" id="skills">
+    <div class="mx-auto max-w-7xl px-4 md:px-10">
+        <div class="mb-16 flex flex-row-reverse items-center justify-end gap-4">
+            <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tight text-white text-right" data-i18n="section-skills">Skills &amp; Ferramentas</h2>
+            <div class="h-12 w-12 border-4 border-white bg-primary rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Skill Group 1 -->
+            <div class="border-4 border-white bg-[#181811] p-6 shadow-[8px_8px_0px_0px_#f2f20d]" data-aos="fade-up">
+                <h3 class="text-2xl font-bold text-primary mb-6 uppercase border-b-2 border-white/20 pb-2">Tech Stack</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-primary hover:text-black cursor-default transition-colors">JavaScript</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-primary hover:text-black cursor-default transition-colors">Python</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-primary hover:text-black cursor-default transition-colors">SQL</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-primary hover:text-black cursor-default transition-colors">API REST</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-primary hover:text-black cursor-default transition-colors">Data Modeling</span>
+                </div>
+            </div>
+            <!-- Skill Group 2 -->
+            <div class="border-4 border-white bg-[#181811] p-6 shadow-[8px_8px_0px_0px_#ff6b6b] mt-4 md:mt-0 lg:mt-8 rotate-1" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-2xl font-bold text-secondary mb-6 uppercase border-b-2 border-white/20 pb-2" data-i18n="skill-tools">Ferramentas</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-secondary hover:text-black cursor-default transition-colors">JIRA</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-secondary hover:text-black cursor-default transition-colors">n8n</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-secondary hover:text-black cursor-default transition-colors">Supabase</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-secondary hover:text-black cursor-default transition-colors">Postman</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-secondary hover:text-black cursor-default transition-colors">Webhooks</span>
+                </div>
+            </div>
+            <!-- Skill Group 3 -->
+            <div class="border-4 border-white bg-[#181811] p-6 shadow-[8px_8px_0px_0px_#45b7d1] mt-0 md:mt-8 lg:mt-0 -rotate-1" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="text-2xl font-bold text-quaternary mb-6 uppercase border-b-2 border-white/20 pb-2" data-i18n="skill-languages">Idiomas</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-quaternary hover:text-black cursor-default transition-colors" data-i18n="lang-pt">Português (Nativo)</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-quaternary hover:text-black cursor-default transition-colors" data-i18n="lang-en">Inglês (Profissional)</span>
+                    <span class="border-2 border-white bg-white/10 px-4 py-2 text-lg font-bold text-white hover:bg-quaternary hover:text-black cursor-default transition-colors" data-i18n="lang-es">Espanhol (Básico)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="w-full py-20 bg-background-light dark:bg-[#181811] border-b-4 border-white">
+    <div class="mx-auto max-w-5xl px-4 md:px-10">
+        <h2 class="text-4xl font-black uppercase tracking-tight text-white mb-10 text-center" data-i18n="section-education">Formação Acadêmica</h2>
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
+            <div class="flex-1 border-4 border-white bg-white p-6 shadow-[6px_6px_0px_0px_#181811] dark:shadow-[6px_6px_0px_0px_#f2f20d] text-black">
+                <h3 class="text-xl font-bold uppercase mb-1" data-i18n="edu-degree">Análise e Desenvolvimento de Sistemas</h3>
+                <p class="font-bold text-gray-600 mb-4">Faculdade de Tecnologia de São Paulo (FATEC-SP)</p>
+                <p class="text-sm font-medium">2018 - 2021</p>
+            </div>
+            <div class="flex-1 border-4 border-white bg-white p-6 shadow-[6px_6px_0px_0px_#181811] dark:shadow-[6px_6px_0px_0px_#f2f20d] text-black md:mt-6">
+                <h3 class="text-xl font-bold uppercase mb-1" data-i18n="edu-cert">Certificação</h3>
+                <p class="font-bold text-gray-600 mb-4" data-i18n="edu-cert-name">Modelagem de Dados</p>
+                <p class="text-sm font-medium">-</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full bg-primary pt-16 pb-8 text-black" id="contact">
+    <div class="mx-auto max-w-7xl px-4 md:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+            <div>
+                <h2 class="text-6xl md:text-8xl font-black uppercase leading-none tracking-tighter mb-6" data-i18n="footer-title">Vamos<br/>Conversar</h2>
+                <p class="text-xl font-bold max-w-md" data-i18n="footer-subtitle">
+                    Disponível para novas oportunidades e projetos.
+                </p>
+            </div>
+            <div class="flex flex-col gap-4 justify-center">
+                <a class="brutalist-btn group flex items-center justify-between border-4 border-black bg-white p-6 text-2xl font-bold shadow-[6px_6px_0px_0px_#000000] hover:bg-black hover:text-white" href="mailto:henrique.souza.lima@outlook.com">
+                    <span class="text-base md:text-2xl truncate">henrique.souza.lima@outlook.com</span>
+                    <span class="material-symbols-outlined group-hover:rotate-45 transition-transform">arrow_outward</span>
+                </a>
+                <a class="brutalist-btn group flex items-center justify-between border-4 border-black bg-[#0077b5] text-white p-6 text-2xl font-bold shadow-[6px_6px_0px_0px_#000000] hover:bg-black hover:text-white" href="https://www.linkedin.com/in/limahenrique/" target="_blank">
+                    <span>LinkedIn</span>
+                    <span class="material-symbols-outlined group-hover:rotate-45 transition-transform">arrow_outward</span>
+                </a>
+                <a class="brutalist-btn group flex items-center justify-between border-4 border-black bg-[#25D366] text-white p-6 text-2xl font-bold shadow-[6px_6px_0px_0px_#000000] hover:bg-black hover:text-white" href="https://wa.me/5571999088651" target="_blank">
+                    <span>WhatsApp</span>
+                    <span class="material-symbols-outlined group-hover:rotate-45 transition-transform">arrow_outward</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between items-end border-t-4 border-black pt-6">
+            <p class="font-bold uppercase text-sm">© 2024 Henrique Lima. All rights reserved.</p>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <span class="font-bold uppercase text-sm">São Paulo, SP</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+    });
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    }
+
+    const translations = {
+        pt: {
+            "nav-experience": "Experiência",
+            "nav-expertise": "Expertise",
+            "nav-skills": "Skills",
+            "nav-contact": "Contato",
+            "hero-badge": "QA Engineer & Automação",
+            "hero-hello": "Olá,",
+            "hero-im": "Sou",
+            "hero-role-1": "QA Engineer",
+            "hero-role-2": "Especialista em Automação",
+            "hero-desc": "Atuo há 4 anos como QA Engineer na Netcracker Technology, oferecendo suporte técnico, testes de ponta a ponta e automações inteligentes. Foco na resolução de problemas e melhoria contínua.",
+            "btn-download": "Baixar CV",
+            "btn-contact": "Fale Comigo",
+            "badge-exp": "4+ ANOS EXP",
+            "section-experience": "Experiência",
+            "date-netcracker": "Mai 2021 - Presente",
+            "date-qa": "Fev 2024 - Presente",
+            "desc-netcracker-qa": "<li>Execução de casos de teste E2E para suporte e identificação de bugs após deploys.</li><li>Configuração de testes de sistema, criação de tickets e análise de bugs.</li><li>Validação de cenários de teste com desenvolvedores e feedback com equipe de produtos.</li><li>Automação de testes e requisições de API (REST), provisionamento de faturamento.</li>",
+            "date-analyst": "Mai 2021 - Fev 2024",
+            "desc-netcracker-analyst": "<li>Análise de incidentes e troubleshooting em ambientes de QA.</li><li>Criação e revisão de casos de teste, validação com analistas de negócio.</li><li>Suporte técnico e execução de sanity tests durante releases em produção.</li><li>Monitoramento de SLA de incidentes e deploy de correções de dados.</li>",
+            "date-thinkseg": "Mai 2020 - Jan 2021",
+            "role-thinkseg": "Estagiário de Data Science",
+            "desc-thinkseg": "<li>Desenvolvimento de scripts Python para automação de processos.</li><li>Criação de dashboards e planilhas inteligentes para suporte a áreas da empresa.</li><li>Extração e processamento de dados para métricas de KPI.</li><li>Criação de scripts SQL para mineração de dados.</li>",
+            "date-cognizant": "Ago 2018 - Jun 2019",
+            "role-cognizant": "Analista de Conteúdo",
+            "desc-cognizant": "Análise e revisão de conteúdo sensível em redes sociais. Classificação de mídia (vídeo, foto, texto) e alinhamento de diretrizes de comunidade.",
+            "label-previous": "Anterior",
+            "desc-easy": "Suporte a motoristas e passageiros, resolução de problemas e reformulação de processos internos.",
+            "desc-uber": "Suporte nível crítico e análise de indicadores.",
+            "desc-porto": "Assistência a sinistros e atividades relacionadas a seguros.",
+            "section-areas": "Áreas de Atuação",
+            "area-qa-title": "Qualidade de Software (QA)",
+            "area-qa-desc": "<li>• Execução de testes E2E</li><li>• Criação de cenários de testes e casos de uso</li><li>• Validação com desenvolvedores</li><li>• Análise de bugs e tickets (JIRA)</li>",
+            "area-api-title": "Integrações & APIs",
+            "area-api-desc": "<li>• Testes e automações API REST</li><li>• Provisionamento de ordens/billing</li><li>• Integração com order management</li><li>• Migração de dados e scripts</li>",
+            "area-auto-title": "Automação Inteligente",
+            "area-auto-desc": "<li>• Fluxos automatizados com n8n</li><li>• Integração Supabase, Webhooks</li><li>• Extração e tratamento de dados</li><li>• Bots e fluxos de atendimento</li>",
+            "section-skills": "Skills & Ferramentas",
+            "skill-tools": "Ferramentas",
+            "skill-languages": "Idiomas",
+            "lang-pt": "Português (Nativo)",
+            "lang-en": "Inglês (Profissional)",
+            "lang-es": "Espanhol (Básico)",
+            "section-education": "Formação Acadêmica",
+            "edu-degree": "Análise e Desenvolvimento de Sistemas",
+            "edu-cert": "Certificação",
+            "edu-cert-name": "Modelagem de Dados",
+            "footer-title": "Vamos<br/>Conversar",
+            "footer-subtitle": "Disponível para novas oportunidades e projetos."
+        },
+        en: {
+            "nav-experience": "Experience",
+            "nav-expertise": "Expertise",
+            "nav-skills": "Skills",
+            "nav-contact": "Contact",
+            "hero-badge": "QA Engineer & Automation",
+            "hero-hello": "Hello,",
+            "hero-im": "I'm",
+            "hero-role-1": "QA Engineer",
+            "hero-role-2": "Automation Specialist",
+            "hero-desc": "I have been working as a QA Engineer at Netcracker Technology for 4 years, offering technical support, end-to-end testing, and smart automations. Focused on problem-solving and continuous improvement.",
+            "btn-download": "Download CV",
+            "btn-contact": "Contact Me",
+            "badge-exp": "4+ YEARS EXP",
+            "section-experience": "Experience",
+            "date-netcracker": "May 2021 - Present",
+            "date-qa": "Feb 2024 - Present",
+            "desc-netcracker-qa": "<li>E2E test cases scenario execution in order to provide support/find bugs after deployments</li><li>System test configuration, ticket creation and bug analysis</li><li>Test scenario validation with developers</li><li>Automation of tests and API requests (REST), billing provisioning.</li>",
+            "date-analyst": "May 2021 - Feb 2024",
+            "desc-netcracker-analyst": "<li>Incident analysis and troubleshooting (QA environments)</li><li>Test Cases creation and review, scenarios validation with developers</li><li>Technical support and execution of sanity tests during release implementation</li><li>Incident SLA monitoring and data fixes deployment.</li>",
+            "date-thinkseg": "May 2020 - Jan 2021",
+            "role-thinkseg": "Data Science Intern",
+            "desc-thinkseg": "<li>Development of python scripts for automation processes.</li><li>Creation of smart spreadsheets and dashboards for company support.</li><li>Data extraction and processing for KPI metrics.</li><li>Creation of SQL scripts for data mining.</li>",
+            "date-cognizant": "Aug 2018 - Jun 2019",
+            "role-cognizant": "Content Analyst",
+            "desc-cognizant": "Analysis and review of sensitive content on social networks. Media classification (video, photo, text) and community guidelines alignment.",
+            "label-previous": "Previous",
+            "desc-easy": "Customer support for drivers and passengers, problem solving and internal process reformulation.",
+            "desc-uber": "Critical level support and indicator analysis.",
+            "desc-porto": "Assistance with claims and insurance-related activities.",
+            "section-areas": "Expertise Areas",
+            "area-qa-title": "Software Quality (QA)",
+            "area-qa-desc": "<li>• E2E Testing Execution</li><li>• Test Scenarios & Use Cases</li><li>• Developer Validation</li><li>• Bug Analysis & JIRA Tickets</li>",
+            "area-api-title": "Integrations & APIs",
+            "area-api-desc": "<li>• REST API Testing & Automation</li><li>• Order/Billing Provisioning</li><li>• Order Management Integration</li><li>• Data Migration & Scripts</li>",
+            "area-auto-title": "Smart Automation",
+            "area-auto-desc": "<li>• n8n Automated Workflows</li><li>• Supabase & Webhooks Integration</li><li>• Data Extraction & Processing</li><li>• Bots & Support Flows</li>",
+            "section-skills": "Skills & Tools",
+            "skill-tools": "Tools",
+            "skill-languages": "Languages",
+            "lang-pt": "Portuguese (Native)",
+            "lang-en": "English (Professional)",
+            "lang-es": "Spanish (Basic)",
+            "section-education": "Education",
+            "edu-degree": "Analysis and Systems Development",
+            "edu-cert": "Certification",
+            "edu-cert-name": "Data Modeling",
+            "footer-title": "Let's<br/>Work<br/>Together",
+            "footer-subtitle": "Currently open for freelance projects and new opportunities."
+        }
+    };
+
+    function setLanguage(lang) {
+        // Update text elements
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                if (element.tagName === 'UL') {
+                     element.innerHTML = translations[lang][key];
+                } else {
+                     element.innerHTML = translations[lang][key];
+                }
+            }
+        });
+
+        // Toggle Marquee
+        const marqueePt = document.getElementById('marquee-pt');
+        const marqueeEn = document.getElementById('marquee-en');
+        
+        if (lang === 'en') {
+            marqueePt.classList.add('hidden');
+            marqueeEn.classList.remove('hidden');
+            document.documentElement.lang = 'en';
+        } else {
+            marqueePt.classList.remove('hidden');
+            marqueeEn.classList.add('hidden');
+            document.documentElement.lang = 'pt-BR';
+        }
+    }
+</script>
+</body>
+</html>
