@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="pt-BR">
+<html class="dark" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -616,6 +616,11 @@
             document.documentElement.lang = 'pt-BR';
         }
     }
+
+    // Set default language to English on load
+    document.addEventListener('DOMContentLoaded', () => {
+        setLanguage('en');
+    });
 </script>
 </body>
 </html>
