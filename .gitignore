@@ -1,3 +1,10 @@
 node_modules
 .DS_Store
 *.log
+.verify
+.verify-smoke
+test-results/
+playwright-report/
+pedro-game/
+screenshot_*.png
+render_*.png

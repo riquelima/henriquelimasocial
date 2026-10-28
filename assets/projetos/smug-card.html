@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMUG - Demonstração Interativa da Animação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            handlee: ['Handlee', 'cursive'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Keyframes extraídos e refinados */
+    @keyframes hero-stop-spotlight {
+      0%, 100% { opacity: 0; }
+      20%, 80% { opacity: 1; }
+    }
+    @keyframes hero-stop-sketch-draw {
+      0% { stroke-dashoffset: 1; opacity: 0; }
+      30% { opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 1; }
+    }
+    @keyframes hero-stop-cursor {
+      0% { transform: translate(50px, 45px) scale(0.9); opacity: 0; }
+      25% { transform: translate(0px, 0px) scale(1); opacity: 1; }
+      55% { transform: translate(-2px, -2px) scale(0.92); opacity: 1; }
+      75% { transform: translate(0px, 0px) scale(1); opacity: 1; }
+      100% { transform: translate(25px, 25px) scale(1); opacity: 0; }
+    }
+    @keyframes smug-u-motion {
+      0% { transform: translate(-4.5px, -3.5px); }
+      50% { transform: translate(0px, 3.8px); }
+      100% { transform: translate(4.5px, -3.5px); }
+    }
+    .animate-spotlight {
+      animation: hero-stop-spotlight 1200ms ease-in-out forwards;
+    }
+    .animate-sketch {
+      stroke-dasharray: 1;
+      animation: hero-stop-sketch-draw 450ms ease-out 250ms both;
+    }
+    .animate-cursor {
+      animation: hero-stop-cursor 1200ms ease-in-out forwards;
+    }
+    .smug-u-dot {
+      animation: smug-u-motion 950ms ease-in-out infinite alternate;
+    }
+    /* Estilos de barra de rolagem sutil */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.12);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-[#0c1421] text-[#111] font-sans antialiased m-0 p-0 w-full h-screen overflow-hidden flex flex-col">
+  <div class="w-full h-full flex flex-col">
+
+  <!-- Container Geral -->
+  <div class="w-full max-w-5xl mx-auto flex flex-col gap-6">
+
+    <div id="sim-container" class="relative w-full h-full overflow-hidden bg-white text-black flex flex-col select-none">
+
+      <!-- Overlay de Spotlight, Círculo Desenhado e Cursor -->
+      <div id="spotlight-overlay" class="pointer-events-none absolute inset-0 z-30 hidden">
+        <div id="spotlight-bg" class="absolute inset-0 animate-spotlight"></div>
+        <svg id="spotlight-svg" class="absolute" viewBox="0 0 100 40" preserveAspectRatio="none" fill="none" aria-hidden="true">
+          <path d="M8 20 C8 8 30 3 50 3 C70 3 92 8 92 20 C92 32 70 37 50 37 C30 37 8 32 8 20 C8 14 9 12 11 11" 
+                stroke="#8d51ff" stroke-width="3" stroke-linecap="round" pathLength="1" class="animate-sketch" />
+        </svg>
+        <!-- Ícone do Cursor -->
+        <div id="spotlight-cursor" class="absolute animate-cursor">
+          <svg class="w-5 h-5 fill-black text-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.35)]" viewBox="0 0 24 24">
+            <path d="M3 3l7 18 3-7 7-3L3 3z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Barra Superior da Janela: Status de Escuta / Pronto -->
+      <div class="flex w-full shrink-0 items-center gap-2 px-4 pt-3 pb-2 border-b border-black/5">
+        <span id="status-dot" class="size-2 shrink-0 rounded-full bg-gray-400 transition-colors duration-300"></span>
+        <span id="status-label" class="text-[11px] font-medium text-[#9a9a9a]">Pronto</span>
+        <div class="ml-auto flex items-center gap-1 text-[11px] text-gray-400">
+          <span class="inline-block size-1.5 rounded-full bg-emerald-500"></span>
+          <span>Sobreposição Invisível Ativa</span>
+        </div>
+      </div>
+
+      <!-- Corpo Principal: Sidebar + Conteúdo -->
+      <div class="flex min-h-0 flex-1 overflow-hidden">
+
+        <!-- Sidebar de Ícones (Listen, Requests, Transcript, Context, History, Translate) -->
+        <aside class="w-12 shrink-0 flex flex-col items-center justify-start gap-1.5 border-r border-black/5 px-1.5 py-3 bg-[#fafafa]">
+          <!-- Escuta / Ao Vivo -->
+          <button type="button" onclick="setPanel(null)" id="nav-btn-null" title="Escuta Ativa" class="grid size-9 place-content-center rounded-full transition-colors bg-black/5 text-black/80">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+          </button>
+          
+          <div class="my-0.5 h-px w-5 bg-black/10"></div>
+
+          <!-- Pedidos / Requests -->
+          <button type="button" onclick="setPanel('requests')" id="nav-btn-requests" title="Pedidos" class="grid size-9 place-content-center rounded-full transition-colors text-black/40 hover:bg-black/5 hover:text-black/70">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </button>
+
+          <!-- Transcrição / Transcript -->
+          <button type="button" onclick="setPanel('transcript')" id="nav-btn-transcript" title="Transcrição" class="grid size-9 place-content-center rounded-full transition-colors text-black/40 hover:bg-black/5 hover:text-black/70">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </button>
+
+          <!-- Contexto / Context -->
+          <button type="button" onclick="setPanel('context')" id="nav-btn-context" title="Contexto" class="grid size-9 place-content-center rounded-full transition-colors text-black/40 hover:bg-black/5 hover:text-black/70">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+
+          <!-- Histórico / Past sessions -->
+          <button type="button" onclick="setPanel('history')" id="nav-btn-history" title="Sessões Anteriores" class="grid size-9 place-content-center rounded-full transition-colors text-black/40 hover:bg-black/5 hover:text-black/70">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </button>
+
+          <!-- Tradução / Translate -->
+          <button type="button" onclick="setPanel('translate')" id="nav-btn-translate" title="Tradução em Tempo Real" class="grid size-9 place-content-center rounded-full transition-colors text-black/40 hover:bg-black/5 hover:text-black/70">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </button>
+        </aside>
+
+        <!-- Área Central de Conteúdo e Painéis Auxiliares -->
+        <div class="flex min-w-0 flex-1 flex-col overflow-hidden">
+          
+          <div class="flex min-h-0 flex-1 overflow-hidden px-4 pb-2 pt-3">
+            
+            <!-- Painel Esquerdo / Principal -->
+            <div id="main-content-panel" class="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg">
+
+              <!-- Tela Idle: Modo Espera -->
+              <div id="view-mode" class="flex flex-1 flex-col items-center justify-center px-6 text-center">
+                <div class="size-12 rounded-full bg-black/5 flex items-center justify-center mb-3">
+                  <svg class="size-6 text-black/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+                </div>
+                <h2 class="text-sm font-semibold text-black/90">Pronto quando você estiver</h2>
+                <p class="mt-1 text-xs text-gray-500 max-w-sm">Escolha o modo da chamada abaixo e clique em Iniciar para ativar as respostas automáticas indetectáveis.</p>
+              </div>
+
+              <!-- Tela Ativa: Pergunta + Resposta em Tempo Real -->
+              <div id="view-active" class="hidden flex-1 flex-col min-h-0 overflow-hidden">
+                <!-- Cabeçalho da Pergunta do Entrevistador -->
+                <div class="mb-2 shrink-0 border-b border-black/5 pb-2 text-xs text-emerald-600 flex items-center gap-1.5">
+                  <span class="font-semibold uppercase tracking-wider text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">Pergunta</span>
+                  <span id="active-question-text" class="font-medium text-black/85 text-xs truncate"></span>
+                </div>
+
+                <!-- Resposta Streaming com Syntax Highlighter -->
+                <div class="min-h-0 flex-1 overflow-y-auto pr-1 text-xs sm:text-[13px] leading-relaxed text-black/90 space-y-3">
+                  <!-- Texto de Explicação -->
+                  <p id="answer-intro-text" class="whitespace-pre-line"></p>
+                  
+                  <!-- Bloco de Código com Syntax Highlight Estilo Catppuccin / Night Owl -->
+                  <div id="code-block-wrapper" class="hidden">
+                    <div class="flex items-center justify-between bg-[#1e1e2e] px-3 py-1.5 rounded-t-lg border-b border-white/10 text-[11px] font-mono text-gray-400">
+                      <span>solucao.js</span>
+                      <span class="text-emerald-400 text-[10px]">O(n) complexidade</span>
+                    </div>
+                    <pre class="overflow-x-auto rounded-b-lg border border-black/15 bg-[#181825] p-3 font-mono text-[12px] leading-5 text-[#cdd6f4]"><code id="code-content"></code></pre>
+                  </div>
+
+                  <!-- Cursor de Streaming piscando -->
+                  <span id="streaming-cursor" class="inline-block animate-pulse text-blue-500 font-bold ml-0.5">▋</span>
+                </div>
+
+                <!-- Sugestões de Follow-up (Aparece quando a resposta termina) -->
+                <div id="followup-box" class="mt-2 shrink-0 border-t border-black/5 pt-2 hidden">
+                  <div class="mb-2 flex flex-wrap gap-1.5" id="followup-pills"></div>
+                  <div class="flex items-center gap-2 rounded-full bg-black/5 px-3 py-1.5">
+                    <input type="text" placeholder="Faça uma pergunta de acompanhamento sobre esta resposta..." class="min-w-0 flex-1 bg-transparent text-xs text-black/80 placeholder:text-black/40 outline-none" readonly />
+                    <button class="size-6 shrink-0 place-content-center rounded-full bg-black text-white flex items-center justify-center text-xs">
+                      ↑
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Divisor Vertical entre Painel Principal e Painel Lateral de Detalhes -->
+            <div id="panel-divider" class="hidden w-px shrink-0 bg-black/5 sm:block mx-3"></div>
+
+            <!-- Painel Lateral Alternável (Pedidos, Transcrição, Contexto, Histórico, Tradução) -->
+            <div id="side-detail-panel" class="hidden min-h-0 flex-1 flex-col overflow-y-auto rounded-lg text-start">
+              
+              <!-- Conteúdo: Pedidos (Requests) -->
+              <div id="detail-requests" class="hidden flex-col h-full">
+                <div class="flex items-center justify-between mb-2">
+                  <p class="text-xs font-semibold text-black/90">Pedidos <span id="requests-count" class="font-normal text-black/40">(0)</span></p>
+                  <span class="text-[10px] text-gray-400">Sincronizado</span>
+                </div>
+                <p class="mb-3 text-[11px] text-black/40">Selecione uma solicitação para manter a resposta fixada.</p>
+                <div id="requests-list" class="space-y-2 overflow-y-auto"></div>
+              </div>
+
+              <!-- Conteúdo: Transcrição (Transcript) -->
+              <div id="detail-transcript" class="hidden flex-col h-full">
+                <p class="mb-2 text-xs font-semibold text-black/90">Transcrição em Tempo Real</p>
+                <div id="transcript-history-list" class="space-y-2.5 overflow-y-auto text-xs text-black/75"></div>
+              </div>
+
+              <!-- Conteúdo: Contexto (Context) -->
+              <div id="detail-context" class="hidden flex-col h-full text-xs">
+                <p class="font-semibold text-black/90 mb-1">Contexto & Preferências</p>
+                <p class="text-[11px] text-gray-500 mb-3">Defina as instruções que o SMUG usará para adaptar as respostas à sua vaga ou reunião.</p>
+                <div class="space-y-3">
+                  <div>
+                    <label class="text-[10px] font-medium text-gray-400 uppercase">Estilo de Resposta</label>
+                    <div class="flex gap-1.5 mt-1">
+                      <span class="bg-black text-white px-2 py-0.5 rounded text-[11px]">Direto</span>
+                      <span class="bg-black/5 text-black/60 px-2 py-0.5 rounded text-[11px]">Estruturado</span>
+                      <span class="bg-black/5 text-black/60 px-2 py-0.5 rounded text-[11px]">Explicativo</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="text-[10px] font-medium text-gray-400 uppercase">Nível Técnico</label>
+                    <div class="flex gap-1.5 mt-1">
+                      <span class="bg-black/5 text-black/60 px-2 py-0.5 rounded text-[11px]">Pleno</span>
+                      <span class="bg-black text-white px-2 py-0.5 rounded text-[11px]">Sênior / Lead</span>
+                      <span class="bg-black/5 text-black/60 px-2 py-0.5 rounded text-[11px]">Especialista</span>
+                    </div>
+                  </div>
+                  <div class="bg-emerald-50 text-emerald-700 p-2.5 rounded-lg border border-emerald-200 text-[11px]">
+                    ✓ Perfil configurado para Engenharia de Software & Arquitetura.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Conteúdo: Histórico (History) -->
+              <div id="detail-history" class="hidden flex-col h-full text-xs">
+                <p class="font-semibold text-black/90 mb-2">Sessões Recentes</p>
+                <div class="space-y-2">
+                  <div class="p-2 rounded-lg bg-black/5 hover:bg-black/10 transition cursor-pointer">
+                    <p class="font-medium text-black">Entrevista Técnica - Tech Lead</p>
+                    <p class="text-[11px] text-gray-500">Ontem às 15:30 · 14 perguntas respondidas</p>
+                  </div>
+                  <div class="p-2 rounded-lg bg-black/5 hover:bg-black/10 transition cursor-pointer">
+                    <p class="font-medium text-black">Alinhamento Executivo Q3</p>
+                    <p class="text-[11px] text-gray-500">24 de Out · Resumo de atas e notas</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Conteúdo: Tradução (Translate) -->
+              <div id="detail-translate" class="hidden flex-col h-full text-xs">
+                <div class="flex items-center justify-between mb-2">
+                  <p class="font-semibold text-black/90">Tradução Simultânea</p>
+                  <select id="lang-select" onchange="changeLanguage(this.value)" class="text-xs bg-emerald-50 border border-emerald-300 text-emerald-800 rounded-full px-2 py-0.5 outline-none cursor-pointer">
+                    <option value="pt">🇧🇷 Português</option>
+                    <option value="en">🇺🇸 Inglês</option>
+                    <option value="es">🇪🇸 Espanhol</option>
+                    <option value="fr">🇫🇷 Francês</option>
+                  </select>
+                </div>
+                <div class="bg-black/5 p-3 rounded-xl space-y-2">
+                  <p class="text-[11px] font-medium text-emerald-700">Tradução instantânea do áudio recebido:</p>
+                  <p id="translated-text" class="text-xs leading-relaxed text-black/85">
+                    "Aqui eu usaria um hash map — isso reduz tudo a uma única passada O(n) em vez de comparar cada par."
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Barra Inferior: Botão Iniciar / Parar com Timer -->
+          <div class="flex shrink-0 items-center justify-between px-4 pb-3 pt-1 border-t border-black/5">
+            <!-- Controles à Esquerda -->
+            <div id="bottom-bar-idle" class="flex items-center gap-2">
+              <button id="btn-start-hero" type="button" onclick="startInterviewSession()" class="flex items-center gap-1.5 rounded-full border border-emerald-500/80 bg-emerald-500/10 hover:bg-emerald-500/20 px-3.5 py-1 text-xs font-semibold text-emerald-700 transition">
+                <svg class="size-3.5 fill-emerald-600 text-emerald-600" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>Iniciar</span>
+              </button>
+              <div class="flex items-center gap-1.5 rounded-full border border-black/10 bg-black/5 px-2.5 py-1 text-xs text-gray-500">
+                <span class="text-gray-400">Modo:</span>
+                <span class="font-medium text-black/75">Entrevista / Reunião</span>
+              </div>
+            </div>
+
+            <!-- Controles à Esquerda quando Ativo -->
+            <div id="bottom-bar-active" class="hidden items-center gap-2">
+              <div class="flex items-center gap-1.5 rounded-full border border-black/10 bg-black/5 px-2.5 py-1 text-xs">
+                <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="active-timer" class="font-mono text-gray-600 tabular-nums">00:12</span>
+              </div>
+              <button type="button" onclick="stopInterviewSession()" class="flex items-center gap-1 rounded-full border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 px-2.5 py-1 text-xs font-medium transition">
+                <svg class="size-3 fill-red-500" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+                <span>Parar</span>
+              </button>
+            </div>
+
+            <!-- Indicador à Direita -->
+            <div class="text-[11px] text-gray-400 hidden sm:flex items-center gap-1">
+              <span>Atalho:</span>
+              <kbd class="px-1.5 py-0.5 rounded bg-black/5 border border-black/10 font-mono text-[10px]">⌘ + Espaço</kbd>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Toast de Nota Salva Automática quando para a chamada -->
+      <div id="note-saved-toast" class="absolute right-3 bottom-3 z-20 hidden items-start gap-3 rounded-2xl border border-black/10 bg-white px-4 py-3 shadow-xl transition-all">
+        <div class="grid size-8 shrink-0 place-content-center rounded-full bg-emerald-100 text-emerald-700 font-bold">
+          ✓
+        </div>
+        <div>
+          <p class="text-xs font-semibold text-black">Nota gerada automaticamente</p>
+          <p id="note-toast-title" class="text-[11px] text-gray-500 truncate max-w-[200px]"></p>
+        </div>
+      </div>
+
+    </div>
+
+  <script>
+    // Cenários de Entrevista e Reunião em Português
+    const SCENARIOS = [
+      {
+        question: "Vamos fazer um pouco de código — você pode escrever uma função que encontre dois números em um array que somem um valor alvo?",
+        answerIntro: "Aqui eu usaria um hash map — isso transforma o problema em uma única passada O(n), em vez de comparar cada par com complexidade quadrática O(n²).\n\nConforme percorremos o array, calculamos o complemento necessário e verificamos se já o encontramos:",
+        code: `function twoSum(nums, target) {
+  const seen = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+    if (seen.has(complement)) {
+      return [seen.get(complement), i];
+    }
+    seen.set(nums[i], i);
+  }
+  return null;
+}`,
+        noteTitle: "Two Sum — Explicação com Hash Map O(n)",
+        followSuggestions: ["Explicar complexidade de tempo e espaço", "E se houver elementos duplicados?", "Mostrar teste prático com array negativo"],
+        translations: {
+          pt: "Aqui eu usaria um hash map — isso transforma o problema em uma única passada O(n) em vez de comparar cada par.",
+          en: "I'd reach for a hash map here — it turns this into a single O(n) pass instead of comparing every pair.",
+          es: "Optaría por una tabla hash aquí — así se reduce todo a un único recorrido en O(n) en lugar de comparar cada par.",
+          fr: "Je partirais sur une table de hachage — ça ramène le problème à un seul passage en O(n) plutôt que de comparer chaque paire."
+        }
+      },
+      {
+        question: "Como você desenharia um sistema simples de Rate Limiter para uma API de alta escala?",
+        answerIntro: "A melhor abordagem é o algoritmo de Token Bucket utilizando Redis.\n\nCada cliente recebe um bucket virtual com capacidade máxima que se reabastece a uma taxa fixa por segundo. As requisições consomem 1 token; se o bucket esvaziar, retornamos HTTP 429 Too Many Requests instantaneamente.",
+        code: `async function isRateLimited(userId, limit = 60, interval = 60) {
+  const key = \`rate_limit:\${userId}\`;
+  const current = await redis.incr(key);
+  if (current === 1) {
+    await redis.expire(key, interval);
+  }
+  return current > limit;
+}`,
+        noteTitle: "Rate Limiter — Arquitetura Token Bucket com Redis",
+        followSuggestions: ["Como lidar com concorrência distribuída?", "Token Bucket vs Leaky Bucket", "Qual o impacto de latência no gateway?"],
+        translations: {
+          pt: "A melhor abordagem é o algoritmo de Token Bucket utilizando Redis para suportar milhares de requisições por segundo.",
+          en: "The best approach is the Token Bucket algorithm using Redis to handle thousands of requests per second.",
+          es: "El mejor enfoque es el algoritmo Token Bucket utilizando Redis para manejar miles de solicitudes por segundo.",
+          fr: "La meilleure approche est l'algorithme Token Bucket utilisant Redis pour traiter des milliers de requêtes par seconde."
+        }
+      },
+      {
+        question: "Quais são seus maiores diferenciais profissionais e como você agrega valor ao time?",
+        answerIntro: "Meu principal diferencial é aliar velocidade de entrega com arquitetura pragmática e robusta.\n\nTenho facilidade em transformar requisitos de negócio complexos em código limpo, focado em facilidade de manutenção e comunicação clara com produto e stakeholders.",
+        code: null,
+        noteTitle: "Diferenciais e Fit Cultural — Resolução & Arquitetura",
+        followSuggestions: ["Dê um exemplo de conflito técnico resolvido", "Como você lida com dívida técnica e prazos?", "Como ajuda no onboarding de juniores?"],
+        translations: {
+          pt: "Meu principal diferencial é aliar velocidade de entrega com arquitetura pragmática e comunicação transparente.",
+          en: "My key strength is pairing delivery velocity with pragmatic architecture and transparent communication.",
+          es: "Mi principal fortaleza es combinar velocidad de entrega con arquitectura pragmática y comunicación transparente.",
+          fr: "Mon principal atout est d'allier rapidité de livraison, architecture pragmatique et communication claire."
+        }
+      }
+    ];
+
+    // Palavras reservadas para colorização sintática
+    const KEYWORDS = new Set(["function", "const", "let", "var", "for", "if", "return", "new", "async", "await"]);
+
+    // Estado da animação
+    let currentScenarioIndex = 0;
+    let animState = "mode"; // "mode" -> "starting" -> "transcript" -> "answer" -> "ask" -> "gap"
+    let isPaused = false;
+    let activePanel = "requests"; // "requests", "transcript", "context", "history", "translate", or null
+    let activeTimerSeconds = 0;
+    let timerInterval = null;
+    let timeouts = [];
+    let intervals = [];
+
+    // Elementos DOM
+    const simContainer = document.getElementById("sim-container");
+    const spotlightOverlay = document.getElementById("spotlight-overlay");
+    const spotlightBg = document.getElementById("spotlight-bg");
+    const spotlightSvg = document.getElementById("spotlight-svg");
+    const spotlightCursor = document.getElementById("spotlight-cursor");
+    const btnStartHero = document.getElementById("btn-start-hero");
+    const statusDot = document.getElementById("status-dot");
+    const statusLabel = document.getElementById("status-label");
+    const viewMode = document.getElementById("view-mode");
+    const viewActive = document.getElementById("view-active");
+    const bottomBarIdle = document.getElementById("bottom-bar-idle");
+    const bottomBarActive = document.getElementById("bottom-bar-active");
+    const activeTimer = document.getElementById("active-timer");
+    const activeQuestionText = document.getElementById("active-question-text");
+    const answerIntroText = document.getElementById("answer-intro-text");
+    const codeBlockWrapper = document.getElementById("code-block-wrapper");
+    const codeContent = document.getElementById("code-content");
+    const streamingCursor = document.getElementById("streaming-cursor");
+    const followupBox = document.getElementById("followup-box");
+    const followupPills = document.getElementById("followup-pills");
+    const noteSavedToast = document.getElementById("note-saved-toast");
+    const noteToastTitle = document.getElementById("note-toast-title");
+
+    // Inicialização ao carregar
+    window.addEventListener("DOMContentLoaded", () => {
+      runState("mode");
+    });
+
+    function clearAllTimers() {
+      timeouts.forEach(clearTimeout);
+      intervals.forEach(clearInterval);
+      timeouts = [];
+      intervals = [];
+    }
+
+    function addTimeout(fn, ms) {
+      if (isPaused) return;
+      const id = setTimeout(fn, ms);
+      timeouts.push(id);
+      return id;
+    }
+
+    function addInterval(fn, ms) {
+      if (isPaused) return;
+      const id = setInterval(fn, ms);
+      intervals.push(id);
+      return id;
+    }
+
+    // Máquina de Estados da Animação
+    function runState(state) {
+      animState = state;
+      clearAllTimers();
+
+      const scenario = SCENARIOS[currentScenarioIndex % SCENARIOS.length];
+
+      if (state === "mode") {
+        // Estado Inicial de Espera
+        spotlightOverlay.classList.add("hidden");
+        viewMode.classList.remove("hidden");
+        viewActive.classList.add("hidden");
+        bottomBarIdle.classList.remove("hidden");
+        bottomBarActive.classList.add("hidden");
+        statusDot.className = "size-2 shrink-0 rounded-full bg-gray-400";
+        statusLabel.textContent = "Pronto";
+        stopTimer();
+
+        // Aguarda 1400ms e inicia o spotlight sobre o botão Iniciar
+        addTimeout(() => runState("starting"), 1400);
+      }
+      else if (state === "starting") {
+        // Estado Spotlight + Círculo Desenhado + Cursor
+        positionSpotlightOnStartButton();
+        spotlightOverlay.classList.remove("hidden");
+
+        // Após a animação de 1200ms do cursor clicar, inicia a escuta
+        addTimeout(() => {
+          spotlightOverlay.classList.add("hidden");
+          startInterviewSession();
+        }, 1250);
+      }
+      else if (state === "transcript") {
+        // Estado de Escuta e Streaming da Pergunta
+        viewMode.classList.add("hidden");
+        viewActive.classList.remove("hidden");
+        bottomBarIdle.classList.add("hidden");
+        bottomBarActive.classList.remove("hidden");
+        statusDot.className = "size-2 shrink-0 rounded-full bg-emerald-400 animate-pulse";
+        statusLabel.textContent = "Ouvindo...";
+        startTimer();
+
+        activeQuestionText.textContent = "";
+        answerIntroText.textContent = "";
+        codeBlockWrapper.classList.add("hidden");
+        codeContent.textContent = "";
+        followupBox.classList.add("hidden");
+        streamingCursor.classList.remove("hidden");
+
+        // Streaming da pergunta caractere por caractere
+        let charIndex = 0;
+        const qText = scenario.question;
+        const interval = addInterval(() => {
+          charIndex = Math.min(charIndex + 2, qText.length);
+          activeQuestionText.textContent = qText.slice(0, charIndex);
+
+          // Atualiza lista de transcrição
+          updateTranscriptPanel(qText.slice(0, charIndex), true);
+
+          if (charIndex >= qText.length) {
+            clearInterval(interval);
+            updateTranscriptPanel(qText, false);
+            addRequestItem(qText, false);
+            // Pequena pausa antes de começar a responder
+            addTimeout(() => runState("answer"), 550);
+          }
+        }, 22);
+      }
+      else if (state === "answer") {
+        // Estado de Streaming da Resposta da IA + Código
+        statusLabel.textContent = "Respondendo ao vivo...";
+        const fullIntro = scenario.answerIntro;
+        const fullCode = scenario.code || "";
+        let introChar = 0;
+        let codeChar = 0;
+
+        const interval = addInterval(() => {
+          if (introChar < fullIntro.length) {
+            introChar = Math.min(introChar + 3, fullIntro.length);
+            answerIntroText.textContent = fullIntro.slice(0, introChar);
+          } else if (fullCode && codeChar < fullCode.length) {
+            codeBlockWrapper.classList.remove("hidden");
+            codeChar = Math.min(codeChar + 4, fullCode.length);
+            renderHighlightedCode(fullCode.slice(0, codeChar));
+          } else {
+            clearInterval(interval);
+            markRequestAnswered();
+            streamingCursor.classList.add("hidden");
+            addTimeout(() => runState("ask"), 400);
+          }
+        }, 16);
+      }
+      else if (state === "ask") {
+        // Estado com sugestões de follow-up
+        statusLabel.textContent = "Resposta Concluída";
+        followupBox.classList.remove("hidden");
+        followupPills.innerHTML = "";
+        scenario.followSuggestions.forEach(sug => {
+          const pill = document.createElement("span");
+          pill.className = "text-[11px] font-medium bg-black/5 hover:bg-black/10 text-black/80 px-2.5 py-1 rounded-full cursor-pointer transition";
+          pill.textContent = sug;
+          followupPills.appendChild(pill);
+        });
+
+        // Atualiza tradução
+        updateTranslationText();
+
+        // Aguarda e avança para o próximo ciclo
+        addTimeout(() => runState("gap"), 3200);
+      }
+      else if (state === "gap") {
+        // Transição para o próximo cenário
+        currentScenarioIndex = (currentScenarioIndex + 1) % SCENARIOS.length;
+        runState("transcript");
+      }
+    }
+
+    // Calcula a posição do botão Iniciar para renderizar o círculo e cursor exatamente sobre ele
+    function positionSpotlightOnStartButton() {
+      const containerRect = simContainer.getBoundingClientRect();
+      const btnRect = btnStartHero.getBoundingClientRect();
+
+      const top = btnRect.top - containerRect.top;
+      const left = btnRect.left - containerRect.left;
+      const width = btnRect.width;
+      const height = btnRect.height;
+
+      // Spotlight radial
+      spotlightBg.style.background = `radial-gradient(90px 55px at ${left + width/2}px ${top + height/2}px, transparent 40%, rgba(255,255,255,0.65) 100%)`;
+
+      // SVG desenhado
+      spotlightSvg.style.top = `${top - 8}px`;
+      spotlightSvg.style.left = `${left - 8}px`;
+      spotlightSvg.style.width = `${width + 16}px`;
+      spotlightSvg.style.height = `${height + 16}px`;
+
+      // Cursor
+      spotlightCursor.style.top = `${top + height - 4}px`;
+      spotlightCursor.style.left = `${left + width - 4}px`;
+    }
+
+    // Syntax Highlighter ultrarrápido
+    function renderHighlightedCode(codeSnippet) {
+      const lines = codeSnippet.split("\n");
+      codeContent.innerHTML = "";
+
+      lines.forEach((line) => {
+        const lineDiv = document.createElement("div");
+        const tokens = line.split(/(\s+|[(){}\[\],.;])/);
+
+        tokens.forEach(token => {
+          if (!token) return;
+          if (KEYWORDS.has(token)) {
+            const span = document.createElement("span");
+            span.className = "text-[#c792ea] font-semibold";
+            span.textContent = token;
+            lineDiv.appendChild(span);
+          } else if (/^\d+$/.test(token)) {
+            const span = document.createElement("span");
+            span.className = "text-[#f78c6c]";
+            span.textContent = token;
+            lineDiv.appendChild(span);
+          } else if (token.startsWith("//") || line.trim().startsWith("//")) {
+            const span = document.createElement("span");
+            span.className = "text-[#6c7086] italic";
+            span.textContent = token;
+            lineDiv.appendChild(span);
+          } else if (/^[a-zA-Z_$][\w$]*$/.test(token) && line.includes(token + "(")) {
+            const span = document.createElement("span");
+            span.className = "text-[#82aaff]";
+            span.textContent = token;
+            lineDiv.appendChild(span);
+          } else {
+            lineDiv.appendChild(document.createTextNode(token));
+          }
+        });
+
+        codeContent.appendChild(lineDiv);
+      });
+    }
+
+    // Gestão do Timer de Chamada
+    function startTimer() {
+      activeTimerSeconds = 0;
+      updateTimerDisplay();
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (!isPaused) {
+          activeTimerSeconds++;
+          updateTimerDisplay();
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      activeTimerSeconds = 0;
+      updateTimerDisplay();
+    }
+
+    function updateTimerDisplay() {
+      const mins = String(Math.floor(activeTimerSeconds / 60)).padStart(2, '0');
+      const secs = String(activeTimerSeconds % 60).padStart(2, '0');
+      activeTimer.textContent = `${mins}:${secs}`;
+    }
+
+    // Interações de Painel Lateral
+    function setPanel(panel) {
+      activePanel = panel;
+      
+      // Atualiza estilo dos botões da sidebar
+      ["null", "requests", "transcript", "context", "history", "translate"].forEach(p => {
+        const btn = document.getElementById(`nav-btn-${p}`);
+        if (!btn) return;
+        const isActive = (panel === null && p === "null") || (panel === p);
+        if (isActive) {
+          btn.className = "grid size-9 place-content-center rounded-full transition-colors bg-black/10 text-black font-semibold";
+        } else {
+          btn.className = "grid size-9 place-content-center rounded-full transition-colors text-black/40 hover:bg-black/5 hover:text-black/70";
+        }
+      });
+
+      const sideDetailPanel = document.getElementById("side-detail-panel");
+      const panelDivider = document.getElementById("panel-divider");
+
+      if (!panel) {
+        sideDetailPanel.classList.add("hidden");
+        panelDivider.classList.add("hidden");
+        return;
+      }
+
+      sideDetailPanel.classList.remove("hidden");
+      panelDivider.classList.remove("hidden");
+
+      ["requests", "transcript", "context", "history", "translate"].forEach(p => {
+        const el = document.getElementById(`detail-${p}`);
+        if (el) {
+          if (p === panel) el.classList.remove("hidden");
+          else el.classList.add("hidden");
+        }
+      });
+    }
+
+    // Lista de Pedidos (Requests)
+    let requestsList = [];
+    function addRequestItem(text, answered) {
+      requestsList.unshift({ text, answered });
+      renderRequestsList();
+    }
+
+    function markRequestAnswered() {
+      if (requestsList.length > 0) {
+        requestsList[0].answered = true;
+        renderRequestsList();
+      }
+    }
+
+    function renderRequestsList() {
+      const listEl = document.getElementById("requests-list");
+      const countEl = document.getElementById("requests-count");
+      countEl.textContent = `(${requestsList.length})`;
+      listEl.innerHTML = "";
+
+      requestsList.forEach((req) => {
+        const item = document.createElement("div");
+        item.className = `rounded-xl border-l-2 p-2.5 text-xs transition ${req.answered ? 'border-emerald-500 bg-emerald-50/50' : 'border-amber-400 bg-black/5'}`;
+        item.innerHTML = `
+          <p class="font-medium text-black/85 leading-snug">${req.text}</p>
+          <p class="mt-1 text-[10px] font-semibold ${req.answered ? 'text-emerald-700' : 'text-amber-600'}">
+            ${req.answered ? '✓ Respondido' : '⚡ Processando...'}
+          </p>
+        `;
+        listEl.appendChild(item);
+      });
+    }
+
+    // Transcrição
+    function updateTranscriptPanel(currentText, isStreaming) {
+      const el = document.getElementById("transcript-history-list");
+      el.innerHTML = `
+        <div class="space-y-1">
+          <span class="font-semibold text-black/90 text-[11px]">Entrevistador:</span>
+          <p class="leading-relaxed bg-black/5 p-2 rounded-lg">
+            ${currentText} ${isStreaming ? '<span class="text-blue-500 animate-pulse">▋</span>' : ''}
+          </p>
+        </div>
+      `;
+    }
+
+    // Tradução
+    function changeLanguage(lang) {
+      const scenario = SCENARIOS[currentScenarioIndex % SCENARIOS.length];
+      const transText = document.getElementById("translated-text");
+      if (scenario.translations && scenario.translations[lang]) {
+        transText.textContent = `"${scenario.translations[lang]}"`;
+      }
+    }
+
+    function updateTranslationText() {
+      const lang = document.getElementById("lang-select").value;
+      changeLanguage(lang);
+    }
+
+    // Ações do Usuário
+    function startInterviewSession() {
+      runState("transcript");
+    }
+
+    function stopInterviewSession() {
+      clearAllTimers();
+      stopTimer();
+      const scenario = SCENARIOS[currentScenarioIndex % SCENARIOS.length];
+      
+      // Exibe toast de nota salva
+      noteToastTitle.textContent = scenario.noteTitle;
+      noteSavedToast.classList.remove("hidden");
+      setTimeout(() => {
+        noteSavedToast.classList.add("hidden");
+        runState("mode");
+      }, 2500);
+    }
+
+    function togglePlayPause() {
+      isPaused = !isPaused;
+      document.getElementById("play-icon").textContent = isPaused ? "▶️" : "⏸️";
+      document.getElementById("play-text").textContent = isPaused ? "Continuar" : "Pausar";
+      if (!isPaused) {
+        runState(animState);
+      } else {
+        clearAllTimers();
+      }
+    }
+
+    function resetAnimation() {
+      currentScenarioIndex = 0;
+      requestsList = [];
+      renderRequestsList();
+      runState("mode");
+    }
+
+    function nextQuestion() {
+      currentScenarioIndex = (currentScenarioIndex + 1) % SCENARIOS.length;
+      runState("transcript");
+    }
+  </script>
+  </div>
+</body>
+</html>

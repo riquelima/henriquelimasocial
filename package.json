@@ -1,12 +1,21 @@
 {
-  "dependencies": {
-    "pdf-parse": "^2.4.5"
-  },
-  "devDependencies": {
-    "serve": "^14.2.4"
-  },
+  "name": "henrique-lima-portfolio-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfólio de Henrique Lima — Currículo interativo jogável em plataforma 2D/3D",
   "scripts": {
     "start": "serve .",
-    "build": "echo 'Static site, no build needed'"
+    "dev": "python3 -m http.server 8080",
+    "build": "echo 'Static site, no build needed'",
+    "test": "playwright test",
+    "verify": "node tools/verify.cjs --port 8155 --out .verify",
+    "autoplay": "node tools/autoplay.cjs --port 8175 --ms 150000",
+    "shots": "node tools/shot3d.cjs --port 8181",
+    "test:descida": "node tools/testdesc.cjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "playwright": "^1.64.1",
+    "serve": "^14.2.4"
   }
 }
