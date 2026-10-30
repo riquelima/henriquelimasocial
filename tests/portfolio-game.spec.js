@@ -172,4 +172,36 @@ test.describe('Portfólio Henrique Lima — Validações E2E', () => {
     await expect(page.locator('[data-tecla="pulo"]')).toBeVisible();
   });
 
+  test('8. Alternância de idioma (Português / Inglês) e persistência', async ({ page }) => {
+    await page.goto('/');
+
+    // 1. Inicia em Português por padrão
+    await expect(page.locator('#perfil h2')).toContainText('Sobre Mim & Core Skills');
+    await expect(page.locator('.botao-idioma [data-lang="pt"]')).toHaveClass(/ativo/);
+
+    // 2. Clica para mudar para Inglês
+    await page.click('#btnIdioma');
+    await page.waitForTimeout(300);
+
+    // Valida textos em Inglês
+    await expect(page.locator('#perfil h2')).toContainText('About Me & Core Skills');
+    await expect(page.locator('#experiencia h2')).toContainText('Professional Experience');
+    await expect(page.locator('#projetos h2')).toContainText('Systems & Production Projects');
+    await expect(page.locator('.botao-idioma [data-lang="en"]')).toHaveClass(/ativo/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+    // 3. Persistência ao recarregar a página
+    await page.reload();
+    await page.waitForTimeout(400);
+    await expect(page.locator('#perfil h2')).toContainText('About Me & Core Skills');
+    await expect(page.locator('.botao-idioma [data-lang="en"]')).toHaveClass(/ativo/);
+
+    // 4. Voltar para Português
+    await page.click('#btnIdioma');
+    await page.waitForTimeout(300);
+    await expect(page.locator('#perfil h2')).toContainText('Sobre Mim & Core Skills');
+    await expect(page.locator('.botao-idioma [data-lang="pt"]')).toHaveClass(/ativo/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
+  });
+
 });

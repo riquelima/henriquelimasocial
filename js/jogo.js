@@ -107,7 +107,8 @@
   window.addEventListener('keydown', function(e){
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (!painel.hidden) {
-      if ((e.code === 'Escape' || e.code === 'KeyP') && E.modo === 'pausado') { e.preventDefault(); continuar(); }
+      if ((e.code === 'Escape' || e.code === 'KeyP') && E.modo === 'pausado') { e.preventDefault(); continuar(); return; }
+      if (e.code === 'KeyL') { if (PV.i18n) PV.i18n.alternar(); return; }
       return;
     }
     if (emJogo()) {
@@ -115,6 +116,7 @@
       if (a) { e.preventDefault(); if (!e.repeat) apertar(a); return; }
       if (e.code === 'Escape' || e.code === 'KeyP') { e.preventDefault(); pausar(); return; }
       if (e.code === 'KeyM') { alternarSom(); return; }
+      if (e.code === 'KeyL') { if (PV.i18n) PV.i18n.alternar(); return; }
       return;
     }
     if (e.code === 'Enter' && (E.modo === 'menu' || E.modo === 'fora')) {
@@ -609,11 +611,13 @@
     som.tocar('fase');
     if (f === 2 && !E.tut.cabecadaAviso && !E.tut.cabecada) {
       E.tut.cabecadaAviso = true;
-      setTimeout(function(){ dizer('pula por baixo de um cartão!', 3.2); }, 1600);
+      setTimeout(function(){ dizer(PV.i18n ? PV.i18n.t('game_pula_cartao') : 'pula por baixo de um cartão!', 3.2); }, 1600);
     }
     if (f === 1 && !E.tut.socoAviso) {
       E.tut.socoAviso = true;
-      setTimeout(function(){ dizer(temToque ? 'no ar, ▼ = SOCO' : 'no ar, ↓ = SOCO', 3.2); }, 1300);
+      setTimeout(function(){
+        dizer(temToque ? (PV.i18n ? PV.i18n.t('game_soco_touch') : 'no ar, ▼ = SOCO') : (PV.i18n ? PV.i18n.t('game_soco_key') : 'no ar, ↓ = SOCO'), 3.2);
+      }, 1300);
     }
   }
 
@@ -630,11 +634,11 @@
     if (!E.primeira || E.faseAtual > 0) return;
     if (!T.andou) {
       if (Math.abs(p.x - E.inicioX) > 60) { T.andou = true; E.dica = null; }
-      else if (!E.dica) dizer(temToque ? '◀ ▶ pra andar' : '← → pra andar', 99);
+      else if (!E.dica) dizer(temToque ? (PV.i18n ? PV.i18n.t('game_andar_touch') : '◀ ▶ pra andar') : (PV.i18n ? PV.i18n.t('game_andar_key') : '← → pra andar'), 99);
       return;
     }
     if (!T.pulou2) {
-      if (!E.dica) dizer(temToque ? '▲ pula, e no ar pula de novo' : 'espaço pula, e no ar pula de novo', 99);
+      if (!E.dica) dizer(temToque ? (PV.i18n ? PV.i18n.t('game_pulo_touch') : '▲ pula, e no ar pula de novo') : (PV.i18n ? PV.i18n.t('game_pulo_key') : 'espaço pula, e no ar pula de novo'), 99);
       return;
     }
     if (E.dica && E.dica.ate > E.t + 50) E.dica = null;
@@ -643,7 +647,7 @@
         var e = E.ents[i];
         if (e.tipo === 'bug' && e.vivo && !e.oculto && e.x !== undefined &&
             Math.abs(e.x - p.x) < 320 && Math.abs(e.y - p.y) < 160) {
-          T.bugAviso = true; dizer('isso é um bug. pisa nele!', 2.6); break;
+          T.bugAviso = true; dizer(PV.i18n ? PV.i18n.t('game_bug') : 'isso é um bug. pisa nele!', 2.6); break;
         }
       }
     }
@@ -808,7 +812,8 @@
         E.menuT -= dt;
         if (E.menuT <= 0) {
           E.menuT = 3.8; p.virado = !p.virado;
-          if (window.scrollY < H * 0.6) dizer(FALAS_MENU[E.menuI++ % FALAS_MENU.length], 2.6);
+          var fm = PV.i18n ? (temToque ? PV.i18n.t('menu_falas_touch') : PV.i18n.t('menu_falas')) : FALAS_MENU;
+          if (window.scrollY < H * 0.6) dizer(fm[E.menuI++ % fm.length], 2.6);
         }
       }
       aplicarTremor(dt);
@@ -1167,8 +1172,10 @@
     var f = M.fases[E.faseAtual];
     ctx.textAlign = 'right';
     var dx = W - 18;
-    textoPixel('FASE ' + E.faseAtual + ': ' + (f ? f.nome.toUpperCase() : ''), dx, 64, '#eaf1f5');
-    textoPixel('PROF. ' + milhar(p.y + p.h) + ' PX', dx, 82, '#6a8294');
+    var rotFase = (PV.i18n ? PV.i18n.t('hud_fase') : 'FASE') + ' ' + E.faseAtual + ': ' + (f ? f.nome.toUpperCase() : '');
+    var rotProf = (PV.i18n ? PV.i18n.t('hud_prof') : 'PROF.') + ' ' + milhar(p.y + p.h) + ' PX';
+    textoPixel(rotFase, dx, 64, '#eaf1f5');
+    textoPixel(rotProf, dx, 82, '#6a8294');
 
     // trilho de profundidade
     var r0 = 112, r1 = H - (temToque ? 130 : 40), rx = W - 20;
@@ -1288,7 +1295,9 @@
     atualizarRotulos();
     if (!E.avisouControles) {
       E.avisouControles = true;
-      aviso(temToque ? '◀ ▶ anda, ▲ pula, ▼ desce ou soca' : '← → anda, espaço pula, ↓ desce ou soca, P pausa', 4500);
+      aviso(temToque
+        ? (PV.i18n ? PV.i18n.t('game_aviso_touch') : '◀ ▶ anda, ▲ pula, ▼ desce ou soca')
+        : (PV.i18n ? PV.i18n.t('game_aviso_key') : '← → anda, espaço pula, ↓ desce ou soca, P pausa'), 4500);
     }
   }
 
@@ -1366,66 +1375,108 @@
   }
 
   function htmlControles(){
-    return temToque
-      ? '<ul class="controles"><li><kbd>◀</kbd><kbd>▶</kbd> anda</li><li><kbd>▲</kbd> pula, 2× no ar</li><li><kbd>▼</kbd> desce, no ar dá soco</li></ul>'
-      : '<ul class="controles"><li><kbd>←</kbd><kbd>→</kbd> anda</li><li><kbd>espaço</kbd> pula, 2× no ar</li><li><kbd>↓</kbd> desce, no ar dá soco</li><li><kbd>P</kbd> pausa</li><li><kbd>M</kbd> som</li></ul>';
+    var en = PV.i18n && PV.i18n.obterIdioma() === 'en';
+    if (temToque) {
+      return en
+        ? '<ul class="controles"><li><kbd>◀</kbd><kbd>▶</kbd> move</li><li><kbd>▲</kbd> jump, 2× in air</li><li><kbd>▼</kbd> drop / air slam</li></ul>'
+        : '<ul class="controles"><li><kbd>◀</kbd><kbd>▶</kbd> anda</li><li><kbd>▲</kbd> pula, 2× no ar</li><li><kbd>▼</kbd> desce, no ar dá soco</li></ul>';
+    }
+    return en
+      ? '<ul class="controles"><li><kbd>←</kbd><kbd>→</kbd> move</li><li><kbd>space</kbd> jump, 2× in air</li><li><kbd>↓</kbd> drop / air slam</li><li><kbd>P</kbd> pause</li><li><kbd>M</kbd> sound</li><li><kbd>L</kbd> lang</li></ul>'
+      : '<ul class="controles"><li><kbd>←</kbd><kbd>→</kbd> anda</li><li><kbd>espaço</kbd> pula, 2× no ar</li><li><kbd>↓</kbd> desce, no ar dá soco</li><li><kbd>P</kbd> pausa</li><li><kbd>M</kbd> som</li><li><kbd>L</kbd> idioma</li></ul>';
   }
 
   function htmlPausa(){
     var f = M.fases[E.faseAtual];
-    return '<p class="kicker">Pausa</p>' +
-      '<h2 id="painelTitulo">Jogo pausado</h2>' +
-      '<p class="sub">Você está na fase ' + E.faseAtual + (f ? ' (' + f.nome + ')' : '') + ', com ' + milhar(E.pontos) + ' pontos em ' + tempo(E.crono) + '.</p>' +
+    var i18n = PV.i18n;
+    var kicker = i18n ? i18n.t('pausa_kicker') : 'Pausa';
+    var titulo = i18n ? i18n.t('pausa_titulo') : 'Jogo pausado';
+    var sub = i18n && typeof i18n.t('pausa_sub') === 'function'
+      ? i18n.t('pausa_sub')(E.faseAtual, f ? f.nome : '', milhar(E.pontos), tempo(E.crono))
+      : 'Você está na fase ' + E.faseAtual + (f ? ' (' + f.nome + ')' : '') + ', com ' + milhar(E.pontos) + ' pontos em ' + tempo(E.crono) + '.';
+    var rotQualidade = i18n ? i18n.t('pausa_qualidade') : 'Qualidade';
+    var qAuto = i18n ? i18n.t('pausa_q_auto') : 'Automática';
+    var qAlto = i18n ? i18n.t('pausa_q_alto') : 'Alta';
+    var qMedio = i18n ? i18n.t('pausa_q_medio') : 'Média';
+    var qBaixo = i18n ? i18n.t('pausa_q_baixo') : 'Baixa';
+    var bContinuar = i18n ? i18n.t('pausa_continuar') : '▶ Continuar';
+    var bReiniciar = i18n ? i18n.t('pausa_reiniciar') : '↻ Recomeçar';
+    var bSair = i18n ? i18n.t('pausa_sair') : 'Sair e ler';
+
+    return '<p class="kicker">' + kicker + '</p>' +
+      '<h2 id="painelTitulo">' + titulo + '</h2>' +
+      '<p class="sub">' + sub + '</p>' +
       htmlControles() +
-      '<div class="qualidade" role="group" aria-label="Qualidade gráfica"><span>Qualidade</span>' +
-        '<button type="button" data-q="auto">Automática</button>' +
-        '<button type="button" data-q="alto">Alta</button>' +
-        '<button type="button" data-q="medio">Média</button>' +
-        '<button type="button" data-q="baixo">Baixa</button>' +
+      '<div class="qualidade" role="group" aria-label="' + rotQualidade + '"><span>' + rotQualidade + '</span>' +
+        '<button type="button" data-q="auto">' + qAuto + '</button>' +
+        '<button type="button" data-q="alto">' + qAlto + '</button>' +
+        '<button type="button" data-q="medio">' + qMedio + '</button>' +
+        '<button type="button" data-q="baixo">' + qBaixo + '</button>' +
         '<em class="qualidade-agora"></em>' +
       '</div>' +
       '<div class="painel-botoes">' +
-        '<button type="button" class="botao-pixel" data-p="continuar">▶ Continuar</button>' +
-        '<button type="button" class="botao-sec" data-p="reiniciar">↻ Recomeçar</button>' +
-        '<button type="button" class="botao-sec" data-p="sair">Sair e ler</button>' +
+        '<button type="button" class="botao-pixel" data-p="continuar">' + bContinuar + '</button>' +
+        '<button type="button" class="botao-sec" data-p="reiniciar">' + bReiniciar + '</button>' +
+        '<button type="button" class="botao-sec" data-p="sair">' + bSair + '</button>' +
       '</div>';
   }
 
   function htmlFim(r){
+    var i18n = PV.i18n;
+    var rankFrase = (i18n && i18n.t('fim_ranks') && i18n.t('fim_ranks')[r.rank]) || r.frase;
     var chips = E.listaSkills.map(function(n){
       return '<span class="' + (E.skills.indexOf(n) >= 0 ? 'ok' : '') + '">' + n + '</span>';
     }).join('');
     function item(rotulo, valor){ return '<div><dt>' + rotulo + '</dt><dd>' + valor + '</dd></div>'; }
-    return '<p class="kicker">Fim de jogo</p>' +
-      '<h2 id="painelTitulo">Você chegou ao fim</h2>' +
-      '<div class="rank"><span class="rank-letra">' + r.rank + '</span><p><b>' + r.frase[0] + '</b>' + r.frase[1] + '</p></div>' +
+    var lTempo = i18n ? i18n.t('fim_tempo') : 'Tempo';
+    var lPontos = i18n ? i18n.t('fim_pontos') : 'Pontos';
+    var lMortes = i18n ? i18n.t('fim_mortes') : 'Mortes';
+    var lRecorde = r.novo ? (i18n ? i18n.t('fim_novo_recorde') : 'Novo recorde!') : (i18n ? i18n.t('fim_recorde') : 'Recorde');
+    var lBugs = i18n && i18n.obterIdioma() === 'en' ? 'Bugs squashed' : 'Bugs esmagados';
+    var lTrofeus = i18n && i18n.obterIdioma() === 'en' ? 'Trophies' : 'Troféus';
+    var subFim = i18n ? i18n.t('fim_sub') : 'Obrigado por jogar! O botão abaixo abre um e-mail para mim.';
+    var bFalar = i18n ? i18n.t('fim_falar') : '✉ Falar comigo';
+    var bJogarNovo = i18n ? i18n.t('fim_jogar_novo') : '↻ Jogar de novo';
+    var bLerPort = i18n ? i18n.t('fim_ler_port') : 'Ler o portfólio';
+
+    return '<p class="kicker">' + (i18n ? i18n.t('fim_kicker') : 'Fim de jogo') + '</p>' +
+      '<h2 id="painelTitulo">' + (i18n ? i18n.t('fim_titulo') : 'Você chegou ao fim') + '</h2>' +
+      '<div class="rank"><span class="rank-letra">' + r.rank + '</span><p><b>' + rankFrase[0] + '</b>' + rankFrase[1] + '</p></div>' +
       '<dl class="placar">' +
-        item('Tempo', tempo(r.tempo)) +
-        item('Pontos', milhar(r.total)) +
+        item(lTempo, tempo(r.tempo)) +
+        item(lPontos, milhar(r.total)) +
         item('Bits', E.bits + '/' + E.bitsTotal) +
-        item('Bugs esmagados', E.bugs + '/' + E.bugsTotal) +
+        item(lBugs, E.bugs + '/' + E.bugsTotal) +
         item('Skills', E.skills.length + '/' + E.skillsTotal) +
-        item('Troféus', E.trofeus.length + '/' + E.trofeusTotal) +
-        item('Mortes', E.mortes) +
-        item(r.novo ? 'Novo recorde!' : 'Recorde', milhar(r.recorde)) +
+        item(lTrofeus, E.trofeus.length + '/' + E.trofeusTotal) +
+        item(lMortes, E.mortes) +
+        item(lRecorde, milhar(r.recorde)) +
       '</dl>' +
       '<div class="chips">' + chips + '</div>' +
-      '<p class="sub">Obrigado por jogar! O botão abaixo abre um e-mail para mim.</p>' +
+      '<p class="sub">' + subFim + '</p>' +
       '<div class="painel-botoes">' +
-        '<a class="botao-pixel" href="mailto:pedromathiasantiago@gmail.com">✉ Falar comigo</a>' +
-        '<button type="button" class="botao-sec" data-p="reiniciar">↻ Jogar de novo</button>' +
-        '<button type="button" class="botao-sec" data-p="sair">Ler o portfólio</button>' +
+        '<a class="botao-pixel" href="mailto:henrique.souza.lima@outlook.com">' + bFalar + '</a>' +
+        '<button type="button" class="botao-sec" data-p="reiniciar">' + bJogarNovo + '</button>' +
+        '<button type="button" class="botao-sec" data-p="sair">' + bLerPort + '</button>' +
       '</div>';
   }
 
   var NOME_NIVEL = { alto: 'alta', medio: 'média', baixo: 'baixa' };
+  var NOME_NIVEL_EN = { alto: 'high', medio: 'medium', baixo: 'low' };
   function atualizarQualidade(){
     if (!Q) return;
     caixa.querySelectorAll('[data-q]').forEach(function(b){
       b.setAttribute('aria-pressed', b.dataset.q === Q.escolha ? 'true' : 'false');
     });
     var agora = caixa.querySelector('.qualidade-agora');
-    if (agora) agora.textContent = Q.escolha === 'auto' ? 'agora: ' + NOME_NIVEL[Q.nivel] : '';
+    var en = PV.i18n && PV.i18n.obterIdioma() === 'en';
+    if (agora) {
+      if (Q.escolha === 'auto') {
+        agora.textContent = en ? 'now: ' + NOME_NIVEL_EN[Q.nivel] : 'agora: ' + NOME_NIVEL[Q.nivel];
+      } else {
+        agora.textContent = '';
+      }
+    }
   }
 
   function abrirPainel(html){
@@ -1465,8 +1516,16 @@
   if (btnPausa) btnPausa.addEventListener('click', function(){ pausar(); });
 
   function atualizarRotulos(){
-    var txt = (E.partida && !E.terminou && E.modo === 'fora') ? '▶ Continuar' : '▶ Jogar';
-    document.querySelectorAll('.rotulo-jogar').forEach(function(el){ el.textContent = txt; });
+    var en = PV.i18n && PV.i18n.obterIdioma() === 'en';
+    var txt = (E.partida && !E.terminou && E.modo === 'fora')
+      ? (en ? '▶ Resume' : '▶ Continuar')
+      : (en ? '▶ Play' : '▶ Jogar');
+    document.querySelectorAll('.rotulo-jogar').forEach(function(el){
+      if (el.closest('.nav')) el.textContent = txt;
+      else el.textContent = (E.partida && !E.terminou && E.modo === 'fora')
+        ? (en ? '▶ Resume Game' : '▶ Continuar Jogo')
+        : (en ? '▶ Play Resume' : '▶ Jogar o Currículo');
+    });
   }
 
   /* ==========================================================
@@ -1478,6 +1537,16 @@
   colocarNoPouso(0);
   window.addEventListener('resize', redimensionar);
   if (Q) Q.aoMudar(function(){ redimensionar(); if (E.modo === 'pausado' && !painel.hidden) atualizarQualidade(); });
+  if (PV.i18n) {
+    PV.i18n.aoMudar(function(){
+      redimensionar();
+      if (E.modo === 'pausado' && !painel.hidden) {
+        caixa.innerHTML = htmlPausa();
+        atualizarQualidade();
+      }
+      atualizarRotulos();
+    });
+  }
   window.addEventListener('load', pedirMedida);
   if (window.ResizeObserver) new ResizeObserver(pedirMedida).observe(main);
   if (document.fonts && document.fonts.ready) {

@@ -186,7 +186,14 @@
     <a href="#conquistas">Conquistas</a>
     <a href="#contato">Contato</a>
   </nav>
-  <button class="botao-pixel mini" type="button" data-acao="jogar"><span class="rotulo-jogar">▶ Jogar</span></button>
+  <div class="nav-acoes">
+    <button class="botao-idioma" type="button" id="btnIdioma" aria-label="Mudar idioma / Switch language" title="Mudar idioma para Inglês / Switch to English">
+      <span class="idioma-tag ativo" data-lang="pt">PT</span>
+      <span class="idioma-sep">/</span>
+      <span class="idioma-tag" data-lang="en">EN</span>
+    </button>
+    <button class="botao-pixel mini" type="button" data-acao="jogar"><span class="rotulo-jogar">▶ Jogar</span></button>
+  </div>
   <div class="progresso" id="progresso"></div>
 </header>
 
@@ -628,6 +635,7 @@
 <canvas id="jogo" aria-hidden="true"></canvas>
 
 <div class="hud-botoes" id="hudBotoes">
+  <button type="button" id="btnIdiomaHud" aria-label="Mudar idioma" title="Mudar idioma / Switch language (L)">EN</button>
   <button type="button" id="btnSom" aria-label="Som ligado" title="Som (M)">♪</button>
   <button type="button" id="btnPausa" aria-label="Pausar" title="Pausar (P)">II</button>
 </div>
@@ -654,6 +662,7 @@
 window.PV = window.PV || {};
 window.HL = window.PV;
 </script>
+<script src="js/i18n.js"></script>
 <script src="js/som.js"></script>
 <script src="js/desempenho.js"></script>
 <script src="js/sprites.js"></script>

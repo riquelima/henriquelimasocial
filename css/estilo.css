@@ -89,6 +89,17 @@ h3{font-family:var(--f-titulo);font-weight:700;font-size:clamp(17px,1.5vw,20px);
 }
 .nav-links a:hover{color:var(--texto);background:rgba(255,255,255,.05)}
 .nav-links a.ativo{color:var(--ciano)}
+.nav-acoes{display:flex;align-items:center;gap:12px;margin-left:14px}
+.botao-idioma{
+  font-family:var(--f-pixel);font-size:11px;letter-spacing:.06em;
+  padding:7px 11px 6px;background:rgba(6,11,20,.85);border:1px solid var(--fio-2);
+  color:var(--texto-3);cursor:pointer;display:inline-flex;align-items:center;gap:5px;
+  transition:border-color .15s,color .15s,background .15s,box-shadow .15s;flex-shrink:0;
+}
+.botao-idioma:hover{border-color:var(--ciano);color:var(--texto)}
+.botao-idioma .idioma-tag{transition:color .15s}
+.botao-idioma .idioma-tag.ativo{color:var(--ciano);font-weight:700;text-shadow:0 0 8px rgba(53,208,229,.4)}
+.botao-idioma .idioma-sep{color:var(--fio-2);font-size:10px}
 .progresso{position:absolute;left:0;bottom:-1px;height:2px;background:var(--ciano);width:0}
 
 /* ---------- botões ---------- */
@@ -507,7 +518,7 @@ h3{font-family:var(--f-titulo);font-weight:700;font-size:clamp(17px,1.5vw,20px);
 /* ================= RESPONSIVO ================= */
 @media (max-width:1100px){
   .nav-links{display:none}
-  .nav .botao-pixel{margin-left:auto}
+  .nav-acoes{margin-left:auto}
   .heroi-grade{grid-template-columns:1fr}
   .mapa{display:none}
   .fatos{grid-template-columns:repeat(3,minmax(0,1fr))}
