@@ -90,6 +90,13 @@ h3{font-family:var(--f-titulo);font-weight:700;font-size:clamp(17px,1.5vw,20px);
 .nav-links a:hover{color:var(--texto);background:rgba(255,255,255,.05)}
 .nav-links a.ativo{color:var(--ciano)}
 .nav-acoes{display:flex;align-items:center;gap:12px;margin-left:14px}
+.botao-blog-nav{
+  font-family:var(--f-pixel);font-size:11px;letter-spacing:.06em;
+  padding:7px 11px 6px;background:rgba(53,208,229,.12);border:1px solid var(--ciano);
+  color:var(--ciano);text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  transition:all .15s ease;flex-shrink:0;box-shadow:0 0 10px rgba(53,208,229,.18);
+}
+.botao-blog-nav:hover{background:var(--ciano);color:#04121b;box-shadow:0 0 16px rgba(53,208,229,.45)}
 .botao-idioma{
   font-family:var(--f-pixel);font-size:11px;letter-spacing:.06em;
   padding:7px 11px 6px;background:rgba(6,11,20,.85);border:1px solid var(--fio-2);
@@ -527,6 +534,14 @@ h3{font-family:var(--f-titulo);font-weight:700;font-size:clamp(17px,1.5vw,20px);
   .web-grade,.puppet-grade{grid-template-columns:1fr}
   .sites{padding-top:0}
   .galeria{padding-top:0}
+}
+@media (max-width:600px){
+  .nav{padding:0 10px;gap:6px}
+  .nav-acoes{gap:6px;margin-left:auto}
+  .marca{font-size:12px}
+  .botao-blog-nav{padding:5px 7px 4px;font-size:9.5px}
+  .botao-idioma{padding:5px 7px 4px;font-size:9.5px}
+  .botao-pixel.mini{padding:5px 8px 4px;font-size:9.5px;gap:4px}
 }
 @media (max-width:820px){
   #cena3d{opacity:.4}
