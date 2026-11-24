@@ -103,22 +103,124 @@ document.addEventListener('DOMContentLoaded', () => {
 
   applyLanguage(currentLang);
 
-  // --- 4. Carrossel de Cards 16:9 de Posts com Scroll Lateral & Deslize para o Post ---
+  // --- 4. Carrossel de Cards 16:9 de Posts com Scroll Lateral & Transição Suave do Post ---
   const cardsTrack = document.getElementById('blogCardsTrack');
   const postCards = document.querySelectorAll('.blog-post-card');
   const cardDots = document.querySelectorAll('.card-dot');
 
-  postCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      const isCurrent = card.classList.contains('active');
-      const targetAnchor = document.getElementById('post-conteudo');
-      
-      // Se já está na página do post, cancela a navegação e apenas desliza até o início da leitura
-      if (isCurrent && targetAnchor) {
-        e.preventDefault();
-        targetAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  function updateCardState(activeTargetId) {
+    postCards.forEach(card => {
+      const isTarget = card.getAttribute('data-post-target') === activeTargetId;
+      card.classList.toggle('active', isTarget);
+
+      const activeBadge = card.querySelector('[data-active-label]');
+      if (activeBadge) {
+        activeBadge.style.display = isTarget ? 'inline-flex' : 'none';
+      }
+
+      const actionText = card.querySelector('.action-text');
+      if (actionText) {
+        actionText.textContent = isTarget ? 'DESLIZAR PARA O POST' : 'LER ARTIGO';
       }
     });
+
+    // Atualizar dots
+    cardDots.forEach((dot, idx) => {
+      const associatedCard = postCards[idx];
+      const isTarget = associatedCard && associatedCard.getAttribute('data-post-target') === activeTargetId;
+      dot.classList.toggle('active', isTarget);
+    });
+  }
+
+  function switchPostView(targetId, targetUrl, pushState = true) {
+    const currentView = document.querySelector('.post-article-view.active');
+    const targetView = document.getElementById(targetId);
+
+    if (!targetView) {
+      if (targetUrl) window.location.href = targetUrl;
+      return;
+    }
+
+    // Se já é o post ativo, apenas desliza suavemente até o início da leitura
+    if (currentView === targetView) {
+      const anchor = document.getElementById('post-conteudo');
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      return;
+    }
+
+    // Atualiza estado visual dos cards imediatamente
+    updateCardState(targetId);
+
+    // Animação suave de saída do post atual
+    if (currentView) {
+      currentView.classList.add('fading-out');
+    }
+
+    setTimeout(() => {
+      if (currentView) {
+        currentView.classList.remove('active', 'fading-out');
+      }
+
+      // Ativa o novo post com animação suave de entrada
+      targetView.classList.add('active');
+
+      // Atualiza URL e Título da Página
+      if (targetId === 'post-view-claude') {
+        document.title = "O Claude agora edita no próprio editor do Instagram para Mac: Como configurar em 4 passos via MCP · Henrique Lima";
+        if (pushState) history.pushState({ postId: targetId }, '', '/blog/index.html');
+      } else if (targetId === 'post-view-7ferramentas') {
+        document.title = "7 Ferramentas Lucrativas com IA para Criar num Final de Semana · Henrique Lima";
+        if (pushState) history.pushState({ postId: targetId }, '', '/blog/7-ferramentas-lucrativas-ia.html');
+      }
+
+      // Desliza suavemente até o post abaixo dos cards
+      const anchor = document.getElementById('post-conteudo');
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 180);
+  }
+
+  // Intercepta cliques nos cards da vitrine
+  postCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Permite abrir em nova aba com Ctrl/Cmd/Shift
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+
+      e.preventDefault();
+      const targetId = card.getAttribute('data-post-target');
+      const targetUrl = card.getAttribute('href');
+      if (targetId) {
+        switchPostView(targetId, targetUrl, true);
+      }
+    });
+  });
+
+  // Intercepta botões de navegação no rodapé dos posts
+  document.querySelectorAll('[data-switch-to]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      const targetId = btn.getAttribute('data-switch-to');
+      const targetUrl = btn.getAttribute('href');
+      if (targetId) {
+        switchPostView(targetId, targetUrl, true);
+      }
+    });
+  });
+
+  // Suporte aos botões Voltar / Avançar do navegador
+  window.addEventListener('popstate', (e) => {
+    if (e.state && e.state.postId) {
+      switchPostView(e.state.postId, null, false);
+    } else {
+      // Define com base no path da URL
+      const path = window.location.pathname;
+      const targetId = path.includes('7-ferramentas') ? 'post-view-7ferramentas' : 'post-view-claude';
+      switchPostView(targetId, null, false);
+    }
   });
 
   // Atualização dos dots indicadores conforme o usuário roda lateralmente no mobile
@@ -154,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Se a URL contém #post-conteudo (ex: vindo de outro post), desliza suavemente até o post
+  // Se a URL contém #post-conteudo na chegada, desliza suavemente até o post
   if (window.location.hash === '#post-conteudo') {
     setTimeout(() => {
       const targetAnchor = document.getElementById('post-conteudo');

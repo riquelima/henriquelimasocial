@@ -1052,10 +1052,12 @@ body {
 }
 
 .blog-cards-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  flex-wrap: nowrap !important;
+  gap: 0.5rem;
 }
 
 .blog-section-tag {
@@ -1065,19 +1067,63 @@ body {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .blog-cards-swipe-hint {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.35rem;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   color: var(--text-muted);
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .blog-cards-swipe-hint svg {
   color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.tag-mob,
+.hint-mob {
+  display: none;
+}
+.tag-desk,
+.hint-desk {
+  display: inline;
+  white-space: nowrap !important;
+}
+
+/* ==========================================================
+   TRANSIÇÃO DINÂMICA SUAVE DOS POSTS ABAIXO DOS CARDS
+   ========================================================== */
+.post-dynamic-container {
+  position: relative;
+  width: 100%;
+  scroll-margin-top: 85px;
+}
+
+.post-article-view {
+  display: none;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.post-article-view.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.post-article-view.fading-out {
+  display: block;
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
 }
 
 .blog-cards-track-wrap {
@@ -1680,6 +1726,29 @@ body {
   .blog-carousel-section {
     margin-bottom: 2rem;
     padding-bottom: 1.25rem;
+  }
+  .blog-cards-title-row {
+    flex-wrap: nowrap !important;
+  }
+  .blog-section-tag {
+    font-size: 0.68rem !important;
+    white-space: nowrap !important;
+  }
+  .blog-cards-swipe-hint {
+    font-size: 0.64rem !important;
+    white-space: nowrap !important;
+  }
+  .tag-desk,
+  .hint-desk {
+    display: none !important;
+  }
+  .tag-mob,
+  .hint-mob {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+  .post-dynamic-container {
+    scroll-margin-top: 65px;
   }
   .blog-cards-track {
     display: flex;
