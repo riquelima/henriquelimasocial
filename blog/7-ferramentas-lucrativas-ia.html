@@ -1621,17 +1621,14 @@
               </p>
             </header>
 
-            <div class="scheduled-lock-card">
-              <div class="lock-icon-wrap">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
+            <div class="scheduled-lock-card" style="padding-top: 0; overflow: hidden;">
+              <div class="lock-card-media" style="margin: 0 -2.25rem 2rem -2.25rem; max-height: 380px; overflow: hidden; border-bottom: 1px solid rgba(0, 240, 255, 0.25); background: #000;">
+                <img src="/blog/assets/post_bloqueado_em_breve.jpg" alt="Calma aí! Postagem Agendada - Henrique Lima" style="width: 100%; height: auto; display: block; object-fit: cover;" />
               </div>
-              <span class="lock-badge">PUBLICAÇÃO AGENDADA // EM FASE FINAL</span>
+              <span class="lock-badge">PUBLICAÇÃO AGENDADA // 25 NOV, 09:00</span>
               <h2 class="lock-title">Volte em breve!</h2>
               <p class="lock-desc">
-                Este artigo com código fonte, tutorial para Claude Code/Cursor, vídeo de apresentação oficial do Henrique Lima e 5 demonstrações gravadas em alta resolução será liberado amanhã, <strong>25 de Novembro de 2026 às 09:00</strong> (Horário de Brasília).
+                Esta postagem será liberada no dia <strong>25 de Novembro de 2026 às 09:00</strong> (Horário de Brasília).
               </p>
               <div class="lock-countdown" id="mcpCountdownTimer">
                 Carregando contagem regressiva...
@@ -1988,16 +1985,28 @@
     </div>
   </footer>
 
-  <!-- Toast Flutuante de Artigo Agendado ("Volte em Breve") -->
-  <div id="scheduledNoticeToast" class="scheduled-notice-toast" role="alert">
-    <div class="toast-inner">
-      <div class="toast-icon">⏳</div>
-      <div class="toast-body">
-        <span class="toast-badge">AGENDADO // 25 NOV, 09:00</span>
-        <h4 class="toast-title">Volte em breve!</h4>
-        <p class="toast-msg">Este artigo exclusivo com código, templates e vídeo de apresentação será liberado amanhã, <strong>25 de Novembro às 09:00</strong> (Horário de Brasília).</p>
+  <!-- Modal de Post Agendado / Bloqueado -->
+  <div id="scheduledNoticeModal" class="scheduled-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="scheduledModalTitle">
+    <div class="scheduled-modal-card">
+      <button class="scheduled-modal-close" id="modalCloseBtn" aria-label="Fechar">&times;</button>
+      <div class="scheduled-modal-media">
+        <img src="/blog/assets/post_bloqueado_em_breve.jpg" alt="Calma aí! Postagem Agendada - Henrique Lima" class="scheduled-modal-img" />
       </div>
-      <button class="toast-close-btn" aria-label="Fechar">&times;</button>
+      <div class="scheduled-modal-content">
+        <span class="scheduled-modal-badge">AGENDADO // 25 NOV, 09:00</span>
+        <h3 class="scheduled-modal-title" id="scheduledModalTitle">Postagem Agendada</h3>
+        <p class="scheduled-modal-desc">
+          Esta postagem será liberada no dia <strong>25 de Novembro de 2026 às 09:00</strong> (Horário de Brasília).
+        </p>
+        <div class="scheduled-modal-countdown" id="modalCountdownTimer">
+          Carregando contagem regressiva...
+        </div>
+        <div class="scheduled-modal-actions">
+          <button class="btn-editorial-primary" id="modalUnderstoodBtn" style="padding: 0.75rem 1.4rem; font-size: 0.85rem; cursor: pointer; border: none;">
+            <span>ENTENDIDO, VOLTAREI DEPOIS</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

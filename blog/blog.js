@@ -201,42 +201,78 @@ document.addEventListener('DOMContentLoaded', () => {
     return false;
   }
 
-  function showScheduledToast(cardElement) {
-    let toast = document.getElementById('scheduledNoticeToast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.id = 'scheduledNoticeToast';
-      toast.className = 'scheduled-notice-toast';
-      toast.innerHTML = `
-        <div class="toast-inner">
-          <div class="toast-icon">⏳</div>
-          <div class="toast-body">
-            <span class="toast-badge">AGENDADO // 25 NOV, 09:00</span>
-            <h4 class="toast-title">Volte em breve!</h4>
-            <p class="toast-msg">Este artigo exclusivo com código, templates e vídeo de apresentação será liberado amanhã, <strong>25 de Novembro às 09:00</strong> (Horário de Brasília).</p>
+  function setupModalListeners(modal) {
+    if (!modal || modal._hasListeners) return;
+    const closeBtn = modal.querySelector('#modalCloseBtn');
+    const understoodBtn = modal.querySelector('#modalUnderstoodBtn');
+    if (closeBtn) closeBtn.addEventListener('click', closeScheduledModal);
+    if (understoodBtn) understoodBtn.addEventListener('click', closeScheduledModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeScheduledModal();
+    });
+    modal._hasListeners = true;
+  }
+
+  function openScheduledModal(cardElement) {
+    let modal = document.getElementById('scheduledNoticeModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'scheduledNoticeModal';
+      modal.className = 'scheduled-modal-overlay';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-labelledby', 'scheduledModalTitle');
+      modal.innerHTML = `
+        <div class="scheduled-modal-card">
+          <button class="scheduled-modal-close" id="modalCloseBtn" aria-label="Fechar">&times;</button>
+          <div class="scheduled-modal-media">
+            <img src="/blog/assets/post_bloqueado_em_breve.jpg" alt="Calma aí! Postagem Agendada - Henrique Lima" class="scheduled-modal-img" />
           </div>
-          <button class="toast-close-btn" aria-label="Fechar">&times;</button>
+          <div class="scheduled-modal-content">
+            <span class="scheduled-modal-badge">AGENDADO // 25 NOV, 09:00</span>
+            <h3 class="scheduled-modal-title" id="scheduledModalTitle">Postagem Agendada</h3>
+            <p class="scheduled-modal-desc">
+              Esta postagem será liberada no dia <strong>25 de Novembro de 2026 às 09:00</strong> (Horário de Brasília).
+            </p>
+            <div class="scheduled-modal-countdown" id="modalCountdownTimer">
+              Carregando contagem regressiva...
+            </div>
+            <div class="scheduled-modal-actions">
+              <button class="btn-editorial-primary" id="modalUnderstoodBtn" style="padding: 0.75rem 1.4rem; font-size: 0.85rem; cursor: pointer; border: none;">
+                <span>ENTENDIDO, VOLTAREI DEPOIS</span>
+              </button>
+            </div>
+          </div>
         </div>
       `;
-      document.body.appendChild(toast);
-
-      toast.querySelector('.toast-close-btn').addEventListener('click', () => {
-        toast.classList.remove('visible');
-      });
+      document.body.appendChild(modal);
     }
 
-    toast.classList.add('visible');
+    setupModalListeners(modal);
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 
     if (cardElement) {
       cardElement.classList.add('card-scheduled-highlight');
       setTimeout(() => cardElement.classList.remove('card-scheduled-highlight'), 1200);
     }
 
-    if (window._scheduledToastTimer) clearTimeout(window._scheduledToastTimer);
-    window._scheduledToastTimer = setTimeout(() => {
-      toast.classList.remove('visible');
-    }, 6500);
+    syncMcpReleaseState();
   }
+
+  function closeScheduledModal() {
+    const modal = document.getElementById('scheduledNoticeModal');
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Atalho para fechar com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeScheduledModal();
+  });
 
   // Sincroniza estado de bloqueio e contagem regressiva
   function syncMcpReleaseState() {
@@ -268,15 +304,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const timerEl = document.getElementById('mcpCountdownTimer');
-    if (timerEl && isLocked) {
+    const modalTimerEl = document.getElementById('modalCountdownTimer');
+    if (isLocked) {
       const diff = MCP_RELEASE_TIMESTAMP - Date.now();
       if (diff > 0) {
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const secs = Math.floor((diff % (1000 * 60)) / 1000);
-        timerEl.textContent = `Liberando em ${hours}h ${mins}m ${secs}s`;
+        const timeStr = `Liberando em ${hours}h ${mins}m ${secs}s`;
+        if (timerEl) timerEl.textContent = timeStr;
+        if (modalTimerEl) modalTimerEl.textContent = timeStr;
       } else {
-        timerEl.textContent = 'Liberado!';
+        if (timerEl) timerEl.textContent = 'Liberado!';
+        if (modalTimerEl) modalTimerEl.textContent = 'Liberado!';
+        closeScheduledModal();
       }
     }
   }
@@ -294,9 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetId = card.getAttribute('data-post-target');
       const targetUrl = card.getAttribute('href');
 
-      // Se o post ainda estiver agendado, NÃO abre o artigo e avisa o leitor
+      // Se o post ainda estiver agendado, NÃO abre o artigo e exibe a imagem de bloqueio com aviso
       if (isPostScheduled(targetId)) {
-        showScheduledToast(card);
+        openScheduledModal(card);
         return;
       }
 
@@ -315,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetUrl = btn.getAttribute('href');
 
       if (isPostScheduled(targetId)) {
-        showScheduledToast(btn);
+        openScheduledModal(btn);
         return;
       }
 
