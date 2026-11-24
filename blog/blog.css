@@ -2279,4 +2279,216 @@ body {
   }
 }
 
+/* ==========================================================================
+   SCHEDULED POST TOAST & LOCKED VIEW ("VOLTE EM BREVE")
+   ========================================================================== */
+.scheduled-notice-toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-140%);
+  z-index: 99999;
+  width: 92%;
+  max-width: 540px;
+  background: rgba(13, 17, 23, 0.97);
+  border: 1px solid var(--accent-amber);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(245, 158, 11, 0.28);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 1.25rem 1.4rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scheduled-notice-toast.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  position: relative;
+}
+
+.toast-icon {
+  font-size: 1.85rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.toast-body {
+  flex: 1;
+}
+
+.toast-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #040609;
+  background: var(--accent-amber);
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+}
+
+.toast-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: -0.015em;
+}
+
+.toast-msg {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.toast-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.1rem 0.35rem;
+  margin-left: 0.5rem;
+  transition: color 0.15s ease;
+}
+
+.toast-close-btn:hover {
+  color: #fff;
+}
+
+/* Card Bloqueado / Teaser dentro do post */
+.scheduled-locked-container {
+  padding: 3rem 1rem 5rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.scheduled-lock-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 3.5rem 2.25rem;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.scheduled-lock-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-amber), var(--accent-cyan));
+}
+
+.lock-icon-wrap {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.lock-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-amber);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.lock-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.lock-desc {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 0 auto 2rem;
+}
+
+.lock-countdown {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px dashed rgba(0, 240, 255, 0.35);
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-xs);
+  display: inline-block;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.lock-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Efeito pulsante de agendado no card */
+.blog-post-card.card-scheduled-highlight {
+  animation: scheduledPulse 1.2s ease;
+}
+
+@keyframes scheduledPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+@media (max-width: 768px) {
+  .scheduled-notice-toast {
+    width: 94%;
+    padding: 1rem;
+    top: 12px;
+  }
+  .scheduled-lock-card {
+    padding: 2.25rem 1.25rem;
+  }
+  .lock-title {
+    font-size: 1.7rem;
+  }
+  .lock-desc {
+    font-size: 0.92rem;
+  }
+  .lock-countdown {
+    font-size: 1rem;
+    padding: 0.65rem 1rem;
+  }
+}
+
+
 

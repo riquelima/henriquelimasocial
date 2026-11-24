@@ -191,6 +191,99 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 180);
   }
 
+  // --- 4.1 Gerenciamento de Artigos Agendados ("Volte em Breve") ---
+  const MCP_RELEASE_TIMESTAMP = new Date('2026-11-25T12:00:00Z').getTime(); // 25 de Novembro às 09:00 BRT
+
+  function isPostScheduled(targetId) {
+    if (targetId === 'post-view-mcp') {
+      return Date.now() < MCP_RELEASE_TIMESTAMP;
+    }
+    return false;
+  }
+
+  function showScheduledToast(cardElement) {
+    let toast = document.getElementById('scheduledNoticeToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'scheduledNoticeToast';
+      toast.className = 'scheduled-notice-toast';
+      toast.innerHTML = `
+        <div class="toast-inner">
+          <div class="toast-icon">⏳</div>
+          <div class="toast-body">
+            <span class="toast-badge">AGENDADO // 25 NOV, 09:00</span>
+            <h4 class="toast-title">Volte em breve!</h4>
+            <p class="toast-msg">Este artigo exclusivo com código, templates e vídeo de apresentação será liberado amanhã, <strong>25 de Novembro às 09:00</strong> (Horário de Brasília).</p>
+          </div>
+          <button class="toast-close-btn" aria-label="Fechar">&times;</button>
+        </div>
+      `;
+      document.body.appendChild(toast);
+
+      toast.querySelector('.toast-close-btn').addEventListener('click', () => {
+        toast.classList.remove('visible');
+      });
+    }
+
+    toast.classList.add('visible');
+
+    if (cardElement) {
+      cardElement.classList.add('card-scheduled-highlight');
+      setTimeout(() => cardElement.classList.remove('card-scheduled-highlight'), 1200);
+    }
+
+    if (window._scheduledToastTimer) clearTimeout(window._scheduledToastTimer);
+    window._scheduledToastTimer = setTimeout(() => {
+      toast.classList.remove('visible');
+    }, 6500);
+  }
+
+  // Sincroniza estado de bloqueio e contagem regressiva
+  function syncMcpReleaseState() {
+    const isLocked = isPostScheduled('post-view-mcp');
+    const lockedTeaser = document.getElementById('mcp-locked-teaser');
+    const unlockedContent = document.getElementById('mcp-unlocked-content');
+    const mcpCard = document.querySelector('.blog-post-card[data-post-target="post-view-mcp"]');
+
+    if (lockedTeaser && unlockedContent) {
+      if (isLocked) {
+        lockedTeaser.style.display = 'block';
+        unlockedContent.style.display = 'none';
+      } else {
+        lockedTeaser.style.display = 'none';
+        unlockedContent.style.display = 'block';
+      }
+    }
+
+    if (mcpCard) {
+      const actionText = mcpCard.querySelector('.action-text');
+      const badge = mcpCard.querySelector('.badge-novo');
+      if (isLocked) {
+        if (actionText) actionText.textContent = 'EM BREVE // 25 NOV';
+        if (badge) badge.textContent = 'AGENDADO // 25 NOV';
+      } else {
+        if (actionText) actionText.textContent = 'LER ARTIGO';
+        if (badge) badge.textContent = 'NOVO';
+      }
+    }
+
+    const timerEl = document.getElementById('mcpCountdownTimer');
+    if (timerEl && isLocked) {
+      const diff = MCP_RELEASE_TIMESTAMP - Date.now();
+      if (diff > 0) {
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+        timerEl.textContent = `Liberando em ${hours}h ${mins}m ${secs}s`;
+      } else {
+        timerEl.textContent = 'Liberado!';
+      }
+    }
+  }
+
+  setInterval(syncMcpReleaseState, 1000);
+  syncMcpReleaseState();
+
   // Intercepta cliques nos cards da vitrine
   postCards.forEach(card => {
     card.addEventListener('click', (e) => {
@@ -200,6 +293,13 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const targetId = card.getAttribute('data-post-target');
       const targetUrl = card.getAttribute('href');
+
+      // Se o post ainda estiver agendado, NÃO abre o artigo e avisa o leitor
+      if (isPostScheduled(targetId)) {
+        showScheduledToast(card);
+        return;
+      }
+
       if (targetId) {
         switchPostView(targetId, targetUrl, true);
       }
@@ -213,6 +313,12 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const targetId = btn.getAttribute('data-switch-to');
       const targetUrl = btn.getAttribute('href');
+
+      if (isPostScheduled(targetId)) {
+        showScheduledToast(btn);
+        return;
+      }
+
       if (targetId) {
         switchPostView(targetId, targetUrl, true);
       }

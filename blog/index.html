@@ -80,7 +80,7 @@
         <div class="blog-cards-track-wrap">
           <div class="blog-cards-track" id="blogCardsTrack">
             <!-- Card 04: Intelektus Landing Pages MCP -->
-            <a href="/blog/mcp-landing-pages-claude-code.html#post-conteudo" class="blog-post-card" data-post-target="post-view-mcp" title="Clique para carregar este artigo">
+            <a href="/blog/mcp-landing-pages-claude-code.html#post-conteudo" class="blog-post-card" data-post-target="post-view-mcp" data-scheduled-status="scheduled" data-release-date="2026-11-25T12:00:00Z" title="Artigo Agendado para 25 de Novembro às 09:00">
               <div class="blog-card-media-wrap">
                 <img src="/blog/assets/mcp_video_poster.jpg" alt="Intelektus Landing Pages MCP para Claude Code" class="blog-card-img" />
                 <div class="blog-card-overlay"></div>
@@ -91,8 +91,8 @@
                 <div class="blog-card-content">
                   <h3 class="blog-card-title">Intelektus Landing Pages: MCP de Sites no Claude Code</h3>
                   <div class="blog-card-action">
-                    <span class="action-text">LER ARTIGO</span>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    <span class="action-text">EM BREVE // 25 NOV</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                   </div>
                 </div>
               </div>
@@ -1606,6 +1606,49 @@
 
         <!-- VISÃO: POST 04 (Intelektus Landing Pages MCP) -->
         <div id="post-view-mcp" class="post-article-view">
+          <!-- ESTADO BLOQUEADO / VOLTE EM BREVE (Exibido enquanto o post estiver agendado) -->
+          <div id="mcp-locked-teaser" class="scheduled-locked-container">
+            <header class="post-header-hero" style="text-align: center; margin-bottom: 2rem;">
+              <div class="post-meta-strip" style="justify-content: center;">
+                <span class="live-dot" style="background:var(--accent-amber);"></span>
+                <span style="color:var(--accent-amber); font-weight:700;">CONTEÚDO AGENDADO // 25 DE NOVEMBRO ÀS 09:00 BRT</span>
+              </div>
+              <h1 class="post-main-title" style="font-size: clamp(1.8rem, 4vw, 2.5rem); max-width: 820px; margin: 1rem auto;">
+                Intelektus Landing Pages: O MCP que Transforma seu Claude Code em uma Máquina de Criar Sites de Alta Conversão
+              </h1>
+              <p class="post-lead-text" style="max-width: 720px; margin: 0 auto;">
+                Como instalar e plugar 142 templates e micro-interações de elite no terminal ou editor — sem programar do zero e fechando projetos de R$ 2.500 a R$ 5.000 em 48 horas.
+              </p>
+            </header>
+
+            <div class="scheduled-lock-card">
+              <div class="lock-icon-wrap">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <span class="lock-badge">PUBLICAÇÃO AGENDADA // EM FASE FINAL</span>
+              <h2 class="lock-title">Volte em breve!</h2>
+              <p class="lock-desc">
+                Este artigo com código fonte, tutorial para Claude Code/Cursor, vídeo de apresentação oficial do Henrique Lima e 5 demonstrações gravadas em alta resolução será liberado amanhã, <strong>25 de Novembro de 2026 às 09:00</strong> (Horário de Brasília).
+              </p>
+              <div class="lock-countdown" id="mcpCountdownTimer">
+                Carregando contagem regressiva...
+              </div>
+              <div class="lock-actions">
+                <a href="/blog/index.html#post-conteudo" data-switch-to="post-view-remoto" class="btn-editorial-primary" style="padding: 0.85rem 1.4rem; font-size: 0.85rem;">
+                  <span>LER ARTIGOS JÁ PUBLICADOS &rarr;</span>
+                </a>
+                <a href="https://www.youtube.com/@henriensina" target="_blank" rel="noopener noreferrer" class="btn-editorial-secondary" style="padding: 0.85rem 1.4rem; font-size: 0.85rem;">
+                  <span>CANAL NO YOUTUBE</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ESTADO LIBERADO / ARTIGO COMPLETO (Liberado automaticamente em 25/11 às 09:00) -->
+          <div id="mcp-unlocked-content" style="display: none;">
           <!-- Cabeçalho do Post -->
           <header class="post-header-hero">
             <div class="post-meta-strip">
@@ -1892,6 +1935,7 @@
             </div>
 
           </div>
+          </div>
         </div>
 
       </div>
@@ -1944,6 +1988,19 @@
       </div>
     </div>
   </footer>
+
+  <!-- Toast Flutuante de Artigo Agendado ("Volte em Breve") -->
+  <div id="scheduledNoticeToast" class="scheduled-notice-toast" role="alert">
+    <div class="toast-inner">
+      <div class="toast-icon">⏳</div>
+      <div class="toast-body">
+        <span class="toast-badge">AGENDADO // 25 NOV, 09:00</span>
+        <h4 class="toast-title">Volte em breve!</h4>
+        <p class="toast-msg">Este artigo exclusivo com código, templates e vídeo de apresentação será liberado amanhã, <strong>25 de Novembro às 09:00</strong> (Horário de Brasília).</p>
+      </div>
+      <button class="toast-close-btn" aria-label="Fechar">&times;</button>
+    </div>
+  </div>
 
   <script src="/blog/blog.js"></script>
 </body>
