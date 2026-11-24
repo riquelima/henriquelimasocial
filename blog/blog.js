@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn_return_game: 'JOGAR CURRÍCULO',
       post_badge: 'GUIA PRÁTICO // ENGENHARIA DE PRODUTO EM 48H',
       post_title: 'Você não precisa de meses para criar ferramentas lucrativas com IA. Dá pra construir cada uma dessas 7 soluções em um único fim de semana.',
-      post_lead: 'A maioria das pessoas passa semanas perdida em cursos teóricos sem nunca colocar um produto na mão de um cliente. Enquanto isso, quem aprende a conectar três ferramentas certas cria um produto funcional em 48 horas e fecha contratos de <strong>R$ 1.500 a R$ 5.000</strong>. Veja abaixo o mapa completo de cada uma das 7 ferramentas, quais tecnologias usar (com links) e o passo a passo para construir no próximo final de semana.',
+      post_lead: 'Você não precisa de um semestre inteiro para validar uma ferramenta de IA no mercado. Combinando automações em n8n, APIs de modelos de linguagem e agentes locais como o Claude Code, dá para estruturar um MVP funcional entre sexta à noite e domingo à tarde. Abaixo está a arquitetura técnica, as ferramentas com links diretos e o plano de 48 horas para construir 7 soluções comerciais reais, precificadas entre <strong>R$ 1.500 e R$ 5.000</strong>.',
       author_name: 'HENRIQUE LIMA • QA & AI ARCHITECT',
       author_bio: 'Engenheiro de Qualidade de Software, especialista em automação e arquiteto de agentes de IA. Documento nos meus canais soluções de alto valor em código aberto, sem rodeios ou teorias vazias.',
       yt_hint: 'Vídeos práticos com código aberto'
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn_return_game: 'PLAY RESUME',
       post_badge: 'PRACTICAL GUIDE // 48-HOUR PRODUCT ENGINEERING',
       post_title: 'You don\'t need months to build profitable AI tools. You can build every single one of these 7 solutions in a single weekend.',
-      post_lead: 'Most people spend weeks stuck in theory without ever launching a product for real clients. Meanwhile, those who know how to connect the right three tools build working MVPs in 48 hours and close deals from <strong>$300 to $1,000+</strong>. Here is the full breakdown of all 7 tools, software links, and the weekend execution roadmap.',
+      post_lead: 'You don\'t need months of theory to launch an AI tool. By combining n8n workflows, LLM APIs, and local coding agents like Claude Code, you can ship a working MVP from Friday night to Sunday afternoon. Here is the technical breakdown, software links, and the 48-hour execution plan for 7 commercial solutions priced from <strong>$300 to $1,000+</strong>.',
       author_name: 'HENRIQUE LIMA • QA & AI ARCHITECT',
       author_bio: 'Software QA Engineer, automation specialist, and AI agent architect. Documenting production-tested engineering solutions in open code.',
       yt_hint: 'Practical videos with open source code'
