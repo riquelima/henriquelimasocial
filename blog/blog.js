@@ -4,31 +4,33 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1. Galeria Interativa do Carrossel Instagram ---
-  const carouselImg = document.getElementById('carouselSlideImg');
-  const carouselCounter = document.getElementById('carouselCounter');
-  const navButtons = document.querySelectorAll('.carousel-dot-btn');
+  // --- 1. Galeria Interativa dos Carrosséis (Suporte a múltiplos carrosséis) ---
+  document.querySelectorAll('.carousel-showcase-box').forEach(box => {
+    const carouselImg = box.querySelector('.carousel-viewport img');
+    const carouselCounter = box.querySelector('.carousel-counter') || box.querySelector('#carouselCounter');
+    const navButtons = box.querySelectorAll('.carousel-dot-btn');
 
-  navButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      navButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-      const slideFile = btn.getAttribute('data-slide');
-      const slideIdx = btn.getAttribute('data-idx');
+        const slideFile = btn.getAttribute('data-slide');
+        const slideIdx = btn.getAttribute('data-idx');
 
-      if (carouselImg && slideFile) {
-        // Transição suave
-        carouselImg.style.opacity = '0.4';
-        setTimeout(() => {
-          carouselImg.src = `/blog/assets/${slideFile}`;
-          carouselImg.style.opacity = '1';
-        }, 120);
-      }
+        if (carouselImg && slideFile) {
+          // Transição suave
+          carouselImg.style.opacity = '0.4';
+          setTimeout(() => {
+            carouselImg.src = `/blog/assets/${slideFile}`;
+            carouselImg.style.opacity = '1';
+          }, 120);
+        }
 
-      if (carouselCounter && slideIdx) {
-        carouselCounter.textContent = `Slide ${slideIdx} de ${navButtons.length}`;
-      }
+        if (carouselCounter && slideIdx) {
+          carouselCounter.textContent = `Slide ${slideIdx} de ${navButtons.length}`;
+        }
+      });
     });
   });
 
@@ -84,12 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const langPt = document.getElementById('langPt');
     const langEn = document.getElementById('langEn');
     if (lang === 'en') {
-      langEn.classList.add('active');
-      langPt.classList.remove('active');
+      langEn?.classList.add('active');
+      langPt?.classList.remove('active');
       document.documentElement.lang = 'en';
     } else {
-      langPt.classList.add('active');
-      langEn.classList.remove('active');
+      langPt?.classList.add('active');
+      langEn?.classList.remove('active');
       document.documentElement.lang = 'pt-BR';
     }
   }
@@ -167,9 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
       targetView.classList.add('active');
 
       // Atualiza URL e Título da Página
-      if (targetId === 'post-view-claude') {
-        document.title = "O Claude agora edita no próprio editor do Instagram para Mac: Como configurar em 4 passos via MCP · Henrique Lima";
+      if (targetId === 'post-view-remoto') {
+        document.title = "20 sites secretos para ganhar em dólar trabalhando remoto · Henrique Lima";
         if (pushState) history.pushState({ postId: targetId }, '', '/blog/index.html');
+      } else if (targetId === 'post-view-claude') {
+        document.title = "O Claude agora edita no próprio editor do Instagram para Mac: Como configurar em 4 passos via MCP · Henrique Lima";
+        if (pushState) history.pushState({ postId: targetId }, '', '/blog/claude-edits-instagram-mac.html');
       } else if (targetId === 'post-view-7ferramentas') {
         document.title = "7 Ferramentas Lucrativas com IA para Criar num Final de Semana · Henrique Lima";
         if (pushState) history.pushState({ postId: targetId }, '', '/blog/7-ferramentas-lucrativas-ia.html');
@@ -216,10 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.state && e.state.postId) {
       switchPostView(e.state.postId, null, false);
     } else {
-      // Define com base no path da URL
       const path = window.location.pathname;
-      const targetId = path.includes('7-ferramentas') ? 'post-view-7ferramentas' : 'post-view-claude';
-      switchPostView(targetId, null, false);
+      if (path.includes('7-ferramentas')) {
+        switchPostView('post-view-7ferramentas', null, false);
+      } else if (path.includes('claude-edits')) {
+        switchPostView('post-view-claude', null, false);
+      } else {
+        switchPostView('post-view-remoto', null, false);
+      }
     }
   });
 
@@ -243,6 +252,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+  }
+
+  // Verifica rota na chegada
+  const currentPath = window.location.pathname;
+  if (currentPath.includes('7-ferramentas')) {
+    switchPostView('post-view-7ferramentas', null, false);
+  } else if (currentPath.includes('claude-edits')) {
+    switchPostView('post-view-claude', null, false);
+  } else if (currentPath.includes('20-sites')) {
+    switchPostView('post-view-remoto', null, false);
   }
 
   // No mobile, se o card ativo não for o primeiro, posiciona nele
