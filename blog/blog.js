@@ -102,4 +102,65 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   applyLanguage(currentLang);
+
+  // --- 4. Carrossel de Cards 16:9 de Posts com Scroll Lateral & Deslize para o Post ---
+  const cardsTrack = document.getElementById('blogCardsTrack');
+  const postCards = document.querySelectorAll('.blog-post-card');
+  const cardDots = document.querySelectorAll('.card-dot');
+
+  postCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const isCurrent = card.classList.contains('active');
+      const targetAnchor = document.getElementById('post-conteudo');
+      
+      // Se já está na página do post, cancela a navegação e apenas desliza até o início da leitura
+      if (isCurrent && targetAnchor) {
+        e.preventDefault();
+        targetAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Atualização dos dots indicadores conforme o usuário roda lateralmente no mobile
+  if (cardsTrack && cardDots.length > 0) {
+    cardsTrack.addEventListener('scroll', () => {
+      const scrollLeft = cardsTrack.scrollLeft;
+      const cardWidth = cardsTrack.querySelector('.blog-post-card')?.offsetWidth || 280;
+      const activeIdx = Math.min(cardDots.length - 1, Math.max(0, Math.round(scrollLeft / cardWidth)));
+
+      cardDots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === activeIdx);
+      });
+    }, { passive: true });
+
+    cardDots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        const targetCard = postCards[idx];
+        if (targetCard) {
+          targetCard.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        }
+      });
+    });
+  }
+
+  // No mobile, se o card ativo não for o primeiro, posiciona nele
+  const activePostCard = document.querySelector('.blog-post-card.active');
+  if (activePostCard && cardsTrack && window.innerWidth <= 768) {
+    const cardIndex = Array.from(postCards).indexOf(activePostCard);
+    if (cardIndex > 0) {
+      setTimeout(() => {
+        activePostCard.scrollIntoView({ behavior: 'auto', inline: 'start', block: 'nearest' });
+      }, 50);
+    }
+  }
+
+  // Se a URL contém #post-conteudo (ex: vindo de outro post), desliza suavemente até o post
+  if (window.location.hash === '#post-conteudo') {
+    setTimeout(() => {
+      const targetAnchor = document.getElementById('post-conteudo');
+      if (targetAnchor) {
+        targetAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 150);
+  }
 });

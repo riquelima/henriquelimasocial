@@ -55,24 +55,72 @@
   <main>
     <article class="post-container">
 
-      <!-- Barra de Navegação entre Artigos (2 Artigos) -->
-      <nav class="blog-posts-nav-bar" aria-label="Navegação entre posts">
-        <div class="blog-posts-pills-row">
-          <a href="/blog/index.html" class="post-pill-link">
-            <span class="pill-badge-novo">NOVO</span>
-            <span class="pill-text-desk">02/ Claude + Instagram Edits</span>
-            <span class="pill-text-mob">02/ Claude Edits</span>
-          </a>
-
-          <a href="/blog/7-ferramentas-lucrativas-ia.html" class="post-pill-link active">
-            <span class="pill-text-desk">01/ 7 Ferramentas com IA em 48h</span>
-            <span class="pill-text-mob">01/ 7 Ferramentas</span>
-          </a>
+      <!-- Vitrine de Cards 16:9 dos Artigos (Slider Horizontal) -->
+      <section class="blog-carousel-section" aria-label="Vitrine de Artigos do Blog">
+        <div class="blog-cards-header">
+          <div class="blog-cards-title-row">
+            <span class="blog-section-tag">PUBLICAÇÕES // EXPLORAR ARTIGOS</span>
+            <span class="blog-cards-swipe-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <span>Arraste para o lado</span>
+            </span>
+          </div>
         </div>
-      </nav>
-      
+
+        <div class="blog-cards-track-wrap">
+          <div class="blog-cards-track" id="blogCardsTrack">
+
+            <!-- Card 02: Claude + Instagram Edits -->
+            <a href="/blog/index.html#post-conteudo" class="blog-post-card" title="Clique para ler este artigo">
+              <div class="blog-card-media-wrap">
+                <img src="/blog/assets/claude_edits_01_capa.jpg" alt="Claude + Instagram Edits para Mac" class="blog-card-img" />
+                <div class="blog-card-overlay"></div>
+                <div class="blog-card-badges">
+                  <span class="badge-novo">NOVO</span>
+                </div>
+                <div class="blog-card-content">
+                  <span class="blog-card-cat">02 // APPLE SILICON &amp; IA</span>
+                  <h3 class="blog-card-title">Claude edita no Instagram Edits Mac via MCP</h3>
+                  <div class="blog-card-action">
+                    <span>LER ARTIGO</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- Card 01: 7 Ferramentas com IA (Ativo) -->
+            <a href="/blog/7-ferramentas-lucrativas-ia.html#post-conteudo" class="blog-post-card active" title="Clique para deslizar para o post">
+              <div class="blog-card-media-wrap">
+                <img src="/blog/assets/00_capa.jpg" alt="7 Ferramentas Lucrativas com IA em 48h" class="blog-card-img" />
+                <div class="blog-card-overlay"></div>
+                <div class="blog-card-badges">
+                  <span class="badge-cat">GUIA PRÁTICO</span>
+                  <span class="badge-status-active">● LENDO AGORA</span>
+                </div>
+                <div class="blog-card-content">
+                  <span class="blog-card-cat">01 // PRODUTOS &amp; NEGÓCIOS</span>
+                  <h3 class="blog-card-title">7 Ferramentas Lucrativas com IA em 48h</h3>
+                  <div class="blog-card-action">
+                    <span>DESLIZAR PARA O POST</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- Indicadores de navegação por dots -->
+          <div class="blog-cards-nav-dots" id="blogCardsDots">
+            <button class="card-dot" aria-label="Ir para card 1" data-index="0"></button>
+            <button class="card-dot active" aria-label="Ir para card 2" data-index="1"></button>
+          </div>
+        </div>
+      </section>
+
       <!-- Cabeçalho do Post -->
-      <header class="post-header-hero">
+      <header class="post-header-hero" id="post-conteudo">
         <div class="post-meta-strip">
           <span class="live-dot"></span>
           <span data-i18n="post_badge">GUIA PRÁTICO // ENGENHARIA DE PRODUTO EM 48H</span>

@@ -1039,88 +1039,239 @@ body {
 
 
 /* ==========================================================
-   BARRA DE NAVEGAÇÃO / ALTERNÂNCIA DE POSTS DO BLOG
+   VITRINE DE POSTS DO BLOG (CARDS HORIZONTAIS 16:9 SLIDER)
    ========================================================== */
-.blog-posts-nav-bar {
-  margin-bottom: 2rem;
-  padding: 0.35rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+.blog-carousel-section {
+  margin-bottom: 2.75rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.blog-cards-header {
+  margin-bottom: 1rem;
+}
+
+.blog-cards-title-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.blog-section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.blog-cards-swipe-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.blog-cards-swipe-hint svg {
+  color: var(--accent-cyan);
+}
+
+.blog-cards-track-wrap {
+  position: relative;
   width: 100%;
 }
 
-.blog-posts-pills-row {
+.blog-cards-track {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
   width: 100%;
 }
 
-.post-pill-link {
+.blog-post-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.blog-card-media-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.blog-post-card:hover .blog-card-media-wrap {
+  border-color: var(--accent-cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.blog-post-card.active .blog-card-media-wrap {
+  border: 2px solid var(--accent-cyan);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.28), 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.blog-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.blog-post-card:hover .blog-card-img {
+  transform: scale(1.04);
+}
+
+.blog-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 10, 15, 0.1) 0%,
+    rgba(8, 10, 15, 0.45) 45%,
+    rgba(8, 10, 15, 0.95) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blog-card-badges {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.badge-novo {
+  background: #f59e0b;
+  color: #05070a;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+}
+
+.badge-status-active {
+  background: rgba(5, 7, 10, 0.88);
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+  letter-spacing: 0.04em;
+}
+
+.badge-cat {
+  background: rgba(5, 7, 10, 0.8);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-medium);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 2px;
+}
+
+.blog-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.9rem 1.1rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.blog-card-cat {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.blog-card-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+}
+
+.blog-card-action {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.6rem 0.85rem;
-  border-radius: 4px;
+  gap: 0.4rem;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  min-width: 0;
-  text-align: center;
-}
-
-.post-pill-link.active {
-  background: var(--accent-cyan);
-  color: #05070a;
+  font-size: 0.72rem;
   font-weight: 700;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
-  border: 1px solid var(--accent-cyan);
-}
-
-.post-pill-link:not(.active) {
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
-  font-weight: 500;
-}
-
-.post-pill-link:not(.active):hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-primary);
-  border-color: var(--border-medium);
-}
-
-.pill-badge-novo {
-  padding: 0.12rem 0.35rem;
-  border-radius: 2px;
-  font-size: 0.62rem;
-  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-top: 0.25rem;
   letter-spacing: 0.04em;
-  line-height: 1.1;
-  flex-shrink: 0;
+  transition: gap 0.2s ease;
 }
 
-.post-pill-link.active .pill-badge-novo {
-  background: #05070a;
-  color: #f59e0b;
+.blog-post-card:hover .blog-card-action {
+  gap: 0.6rem;
 }
 
-.post-pill-link:not(.active) .pill-badge-novo {
-  background: rgba(245, 158, 11, 0.15);
-  color: #f59e0b;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-.pill-text-mob {
+.blog-cards-nav-dots {
   display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
 }
-.pill-text-desk {
-  display: inline;
+
+.card-dot {
+  width: 24px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--border-medium);
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.card-dot.active {
+  width: 40px;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
 /* ==========================================================
@@ -1134,6 +1285,7 @@ body {
 }
 
 .post-header-hero {
+  scroll-margin-top: 85px;
   margin-bottom: 3rem;
   border-bottom: 1px solid var(--border-medium);
   padding-bottom: 2.5rem;
@@ -1525,37 +1677,49 @@ body {
     font-size: 0.65rem;
   }
 
-  .blog-posts-nav-bar {
-    margin-bottom: 1.5rem;
-    padding: 0.25rem;
+  .blog-carousel-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
   }
-  .blog-posts-pills-row {
-    gap: 0.35rem;
+  .blog-cards-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.85rem;
+    padding: 0.35rem 0.15rem 0.6rem;
   }
-  .post-pill-link {
-    padding: 0.45rem 0.2rem;
-    font-size: 0.68rem;
-    letter-spacing: -0.02em;
-    gap: 0.25rem;
-  }
-  .pill-badge-novo {
-    padding: 0.1rem 0.25rem;
-    font-size: 0.58rem;
-  }
-  .pill-text-desk {
+  .blog-cards-track::-webkit-scrollbar {
     display: none;
   }
-  .pill-text-mob {
-    display: inline;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .blog-post-card {
+    flex: 0 0 85%;
+    max-width: 320px;
+    scroll-snap-align: start;
+  }
+  .blog-cards-nav-dots {
+    display: flex;
+  }
+  .blog-card-content {
+    padding: 0.75rem 0.85rem;
+    gap: 0.2rem;
+  }
+  .blog-card-title {
+    font-size: 0.88rem;
+  }
+  .blog-card-cat {
+    font-size: 0.62rem;
+  }
+  .blog-card-action {
+    font-size: 0.65rem;
   }
 
   .post-container {
     padding: 1.25rem 1rem 3.5rem;
   }
   .post-header-hero {
+    scroll-margin-top: 65px;
     margin-bottom: 1.5rem;
     padding-bottom: 1.25rem;
   }
