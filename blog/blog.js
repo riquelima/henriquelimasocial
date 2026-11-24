@@ -172,6 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetId === 'post-view-remoto') {
         document.title = "20 sites secretos para ganhar em dólar trabalhando remoto · Henrique Lima";
         if (pushState) history.pushState({ postId: targetId }, '', '/blog/index.html');
+      } else if (targetId === 'post-view-mcp') {
+        document.title = "Intelektus Landing Pages: O MCP que Transforma seu Claude Code em uma Máquina de Criar Sites de Alta Conversão · Henrique Lima";
+        if (pushState) history.pushState({ postId: targetId }, '', '/blog/mcp-landing-pages-claude-code.html');
       } else if (targetId === 'post-view-claude') {
         document.title = "O Claude agora edita no próprio editor do Instagram para Mac: Como configurar em 4 passos via MCP · Henrique Lima";
         if (pushState) history.pushState({ postId: targetId }, '', '/blog/claude-edits-instagram-mac.html');
@@ -217,12 +220,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Suporte aos botões Voltar / Avançar do navegador
-  window.addEventListener('popstate', (e) => {
+    window.addEventListener('popstate', (e) => {
     if (e.state && e.state.postId) {
       switchPostView(e.state.postId, null, false);
     } else {
       const path = window.location.pathname;
-      if (path.includes('7-ferramentas')) {
+      if (path.includes('mcp-landing-pages')) {
+        switchPostView('post-view-mcp', null, false);
+      } else if (path.includes('7-ferramentas')) {
         switchPostView('post-view-7ferramentas', null, false);
       } else if (path.includes('claude-edits')) {
         switchPostView('post-view-claude', null, false);
@@ -256,7 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Verifica rota na chegada
   const currentPath = window.location.pathname;
-  if (currentPath.includes('7-ferramentas')) {
+  if (currentPath.includes('mcp-landing-pages')) {
+    switchPostView('post-view-mcp', null, false);
+  } else if (currentPath.includes('7-ferramentas')) {
     switchPostView('post-view-7ferramentas', null, false);
   } else if (currentPath.includes('claude-edits')) {
     switchPostView('post-view-claude', null, false);
