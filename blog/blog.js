@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (carouselCounter && slideIdx) {
-        carouselCounter.textContent = `Slide ${slideIdx} de 8`;
+        carouselCounter.textContent = `Slide ${slideIdx} de ${navButtons.length}`;
       }
     });
   });

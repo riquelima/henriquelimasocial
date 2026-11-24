@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>7 Ferramentas Lucrativas com IA para Criar num Final de Semana · Henrique Lima</title>
-  <meta name="description" content="Aprenda a construir 7 ferramentas lucrativas com IA em apenas 48 horas: do WhatsApp 24h e minerador de leads a sistemas completos com Claude Code. Guia prático com links e passo a passo.">
+  <title>O Claude agora edita no próprio editor do Instagram para Mac: Como configurar em 4 passos via MCP · Henrique Lima</title>
+  <meta name="description" content="Aprenda a conectar o Claude Code diretamente à timeline do novo aplicativo oficial Instagram Edits para Mac via MCP. Edição no ritmo da música, legendas automáticas e exportação 9:16 em 4K.">
   
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,11 +16,10 @@
 <body>
   <!-- Marca d'água técnica de código ao fundo -->
   <div class="bg-code-watermark" aria-hidden="true">
-    const n8n = new Workflow({ trigger: 'webhook', ai: 'claude-3-5-sonnet', action: 'whatsapp_send' });<br>
-    apify.call('compass/crawler-google-places', { locationQuery: 'São Paulo', searchStringsArray: ['Dentistas'] });<br>
-    claude code --mcp-server supabase --skill auto-deploy --project b2b-crm;<br>
-    ffmpeg -i podcast.mp4 -ss 00:03:15 -to 00:04:10 -vf "crop=ih*(9/16):ih" -c:v libx264 -crf 18 cut_viral.mp4;<br>
-    manychat.subscribeWebhook({ event: 'comment_created', keyword: 'QUERO' });
+    claude mcp add --transport http --scope user edits http://127.0.0.1:19501/mcp --header "Authorization: Bearer TOKEN";<br>
+    instagram.edits.timeline.alignBeats({ track: 'audio_master.mp3', sensitivity: 0.85 });<br>
+    instagram.edits.export({ format: 'mp4', aspect: '9:16', resolution: '4K', fps: 30 });<br>
+    claude code --prompt "Corte meus clipes no ritmo da música, adicione legendas e exporte em 9:16";
   </div>
 
   <div class="reading-progress-bar" id="readingProgressBar"></div>
@@ -54,513 +53,296 @@
 
   <main>
     <article class="post-container">
-      
+
+      <!-- Barra de Navegação entre Artigos (2 Artigos) -->
+      <nav class="blog-posts-nav-bar" style="margin-bottom: 2rem; padding: 0.75rem 1rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">SELECIONE O POST:</span>
+          
+          <a href="/blog/index.html" class="post-pill-link" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.8rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; text-decoration: none; background: var(--accent-cyan); color: #05070a; box-shadow: 0 0 12px rgba(56,189,248,0.25);">
+            <span style="background: #05070a; color: #f59e0b; padding: 0.1rem 0.35rem; border-radius: 2px; font-size: 0.65rem; font-weight: 800;">NOVO</span>
+            <span>02/ Claude + Instagram Edits</span>
+          </a>
+
+          <a href="/blog/7-ferramentas-lucrativas-ia.html" class="post-pill-link" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.8rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500; text-decoration: none; background: rgba(255,255,255,0.04); color: var(--text-secondary); border: 1px solid var(--border-subtle);">
+            <span>01/ 7 Ferramentas com IA em 48h</span>
+          </a>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">2 POSTS PUBLICADOS</span>
+      </nav>
+
       <!-- Cabeçalho do Post -->
       <header class="post-header-hero">
         <div class="post-meta-strip">
           <span class="live-dot"></span>
-          <span data-i18n="post_badge">GUIA PRÁTICO // ENGENHARIA DE PRODUTO EM 48H</span>
+          <span>IA &amp; EDIÇÃO DE VÍDEO // APPLE SILICON</span>
           <span style="color:var(--text-muted);">&bull;</span>
-          <span style="color:var(--text-muted);">15 MIN DE LEITURA</span>
+          <span style="color:var(--text-muted);">24 DE NOVEMBRO DE 2026 &bull; 4 MIN DE LEITURA</span>
         </div>
 
-        <h1 class="post-main-title" data-i18n="post_title">
-          Você não precisa de meses para criar ferramentas lucrativas com IA. Dá pra construir cada uma dessas 7 soluções em um único fim de semana.
+        <h1 class="post-main-title">
+          O Claude agora edita no próprio editor do Instagram para Mac: Como configurar em 4 passos via MCP
         </h1>
 
-        <p class="post-lead-text" data-i18n="post_lead">
-          A maioria das pessoas passa semanas perdida em cursos teóricos sem nunca colocar um produto na mão de um cliente. Enquanto isso, quem aprende a conectar três ferramentas certas cria um produto funcional em 48 horas e fecha contratos de <strong>R$ 1.500 a R$ 5.000</strong>. Veja abaixo o mapa completo de cada uma das 7 ferramentas, quais tecnologias usar (com links) e o passo a passo para construir no próximo final de semana.
+        <p class="post-lead-text">
+          Você ainda perde horas cortando vídeos manualmente? Sem abrir CapCut, sem Premiere e sem entender nada de timeline: a Meta liberou um servidor MCP local no novo aplicativo oficial Instagram Edits para Mac. Agora, o Claude monta o vídeo inteiro, sincroniza com a batida da música, adiciona legendas automáticas e exporta em 9:16 com um único comando.
         </p>
 
-        <!-- Galeria Interativa dos Slides do Carrossel -->
+        <!-- Caixa de Download Oficial -->
+        <div class="reader-callout" style="background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(168,85,247,0.06)); border: 1px solid rgba(56,189,248,0.3); border-radius: var(--radius-sm); padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase;">DOWNLOAD OFICIAL MAC DESKTOP</span>
+            <h3 style="font-size: 1.05rem; color: #fff; margin-top: 0.2rem;">Instagram Edits para Desktop (Apple Silicon M1/M2/M3/M4)</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">
+              Aplicativo nativo gratuito oficial da Meta, exportação em 4K e sem marca d'água.
+            </p>
+          </div>
+          <a href="https://instagram.com/edits/download/mac" target="_blank" rel="noopener noreferrer" class="btn-editorial-primary" style="padding: 0.75rem 1.4rem; font-size: 0.85rem;">
+            <span>BAIXAR EDITS NO MAC &rarr;</span>
+          </a>
+        </div>
+
+        <!-- Galeria Interativa dos Slides do Carrossel (9 Slides) -->
         <div class="carousel-showcase-box">
           <div class="carousel-showcase-header">
-            <span>VISUALIZAÇÃO DO CARROSSEL (CLIQUE PARA NAVEGAR)</span>
-            <span id="carouselCounter">Slide 1 de 8</span>
+            <span>CARROSSEL DO VÍDEO (CLIQUE NOS BOTÕES PARA NAVEGAR)</span>
+            <span id="carouselCounter">Slide 1 de 9</span>
           </div>
 
           <div class="carousel-viewport">
-            <img src="/blog/assets/00_capa.jpg" alt="7 projetos com IA para criar num final de semana" id="carouselSlideImg">
+            <img src="/blog/assets/claude_edits_01_capa.jpg" alt="O Claude agora edita no próprio editor do Instagram para Mac" id="carouselSlideImg">
           </div>
 
           <div class="carousel-dots-row" id="carouselNav">
-            <button class="carousel-dot-btn active" data-slide="00_capa.jpg" data-idx="1">Capa</button>
-            <button class="carousel-dot-btn" data-slide="01_analisador_comentarios.jpg" data-idx="2">01 Comentários</button>
-            <button class="carousel-dot-btn" data-slide="02_atendimento_whatsapp.jpg" data-idx="3">02 WhatsApp</button>
-            <button class="carousel-dot-btn" data-slide="03_minerador_leads.jpg" data-idx="4">03 Leads B2B</button>
-            <button class="carousel-dot-btn" data-slide="04_leitor_pdfs_contratos.jpg" data-idx="5">04 PDFs/Contratos</button>
-            <button class="carousel-dot-btn" data-slide="05_cortador_videos_virais.jpg" data-idx="6">05 Vídeos Virais</button>
-            <button class="carousel-dot-btn" data-slide="06_sistemas_claude_code.jpg" data-idx="7">06 Claude Code</button>
-            <button class="carousel-dot-btn" data-slide="07_gerador_carrosseis_posts.jpg" data-idx="8">07 Carrosséis</button>
+            <button class="carousel-dot-btn active" data-slide="claude_edits_01_capa.jpg" data-idx="1">Capa</button>
+            <button class="carousel-dot-btn" data-slide="claude_edits_02_apresentacao.jpg" data-idx="2">Edits no Mac</button>
+            <button class="carousel-dot-btn" data-slide="claude_edits_03_recursos.jpg" data-idx="3">Recursos</button>
+            <button class="carousel-dot-btn" data-slide="claude_edits_04_passo1_instalar.jpg" data-idx="4">Passo 1</button>
+            <button class="carousel-dot-btn" data-slide="claude_edits_05_passo2_mcp.jpg" data-idx="5">Passo 2</button>
+            <button class="carousel-dot-btn" data-slide="claude_edits_06_passo3_terminal.jpg" data-idx="6">Passo 3</button>
+            <button class="carousel-dot-btn" data-slide="claude_edits_07_dica_master.jpg" data-idx="7">Dica Master</button>
+            <button class="carousel-dot-btn" data-slide="claude_edits_08_passo4_prompt.jpg" data-idx="8">Passo 4</button>
+            <button class="carousel-dot-btn" data-slide="claude_edits_09_cta_comunidade.jpg" data-idx="9">Comunidade</button>
           </div>
         </div>
       </header>
 
-      <!-- Conteúdo Profundo (Ordem 01 a 07) -->
+      <!-- Conteúdo do Passo a Passo -->
       <div class="post-body-content">
-        
-        <!-- ================= SOLUÇÃO 01 ================= -->
-        <section class="solution-block" id="solucao-1">
+
+        <!-- ================= PASSO 01 ================= -->
+        <section class="solution-block" id="passo-1">
           <div class="solution-header-row">
-            <span class="solution-badge-num">01 / 07</span>
-            <span class="solution-category">MINERAÇÃO DE CONTEÚDO &bull; AUTOMAÇÃO</span>
+            <span class="solution-badge-num">PASSO 01 / 04</span>
+            <span class="solution-category">INSTALAÇÃO &bull; MACOS APPLE SILICON</span>
           </div>
 
-          <h2 class="solution-title">Analisador de Comentários: Minere Dúvidas do Público e Tenha Pautas Infinitas</h2>
+          <h2 class="solution-title">Instale o Aplicativo Oficial Instagram Edits para Mac</h2>
 
           <p>
-            O maior pesadelo de criadores de conteúdo, infoprodutores e agências é o famoso bloqueio criativo: <em>"Sobre o que eu vou gravar hoje?"</em>. A verdade é que a própria audiência já respondeu isso na caixa de comentários dos vídeos e posts, mas ninguém tem tempo de ler 500 comentários manualmente.
+            O Instagram lançou oficialmente sua versão desktop do <strong>Edits</strong> para macOS, trazendo uma timeline profissional com suporte à aceleração por hardware dos processadores Apple Silicon (M1, M2, M3 e M4). A ferramenta é totalmente gratuita, exporta até 4K e não coloca nenhuma marca d'água nos seus vídeos.
           </p>
 
           <figure class="solution-slide-figure">
-            <img src="/blog/assets/01_analisador_comentarios.jpg" alt="01: Analisador de Comentários">
+            <img src="/blog/assets/claude_edits_04_passo1_instalar.jpg" alt="Passo 1: Instale o Edits para Mac">
             <figcaption class="solution-slide-caption">
-              <span>CARD 01 &bull; ANALISADOR DE COMENTÁRIOS</span>
-              <span>EXTRAÇÃO + IA DE AGRUPAMENTO</span>
+              <span>PASSO 01 &bull; ARRASTE PARA A PASTA APPLICATIONS</span>
+              <span>DOWNLOAD: INSTAGRAM.COM/EDITS/DOWNLOAD/MAC</span>
             </figcaption>
           </figure>
 
           <div class="tools-box">
-            <span class="tools-box-label">FERRAMENTAS NECESSÁRIAS (CLIQUE PARA ACESSAR):</span>
+            <span class="tools-box-label">LINK DIRETO DE DOWNLOAD:</span>
             <div class="tools-pills-row">
-              <a href="https://manychat.com" target="_blank" rel="noopener" class="tool-pill">ManyChat (Captura de comentários) &rarr;</a>
-              <a href="https://n8n.io" target="_blank" rel="noopener" class="tool-pill">n8n (Orquestrador de fluxo) &rarr;</a>
-              <a href="https://platform.openai.com" target="_blank" rel="noopener" class="tool-pill">OpenAI / Claude API (Agrupamento semântico) &rarr;</a>
-              <a href="https://notion.so" target="_blank" rel="noopener" class="tool-pill">Notion ou Google Sheets (Banco de pautas) &rarr;</a>
+              <a href="https://instagram.com/edits/download/mac" target="_blank" rel="noopener" class="tool-pill">instagram.com/edits/download/mac (Instalador .dmg oficial) &rarr;</a>
             </div>
           </div>
+        </section>
+
+        <!-- ================= PASSO 02 ================= -->
+        <section class="solution-block" id="passo-2">
+          <div class="solution-header-row">
+            <span class="solution-badge-num">PASSO 02 / 04</span>
+            <span class="solution-category">AUTOMAÇÃO &bull; MODEL CONTEXT PROTOCOL</span>
+          </div>
+
+          <h2 class="solution-title">Ative o Servidor de Automação MCP nos Ajustes</h2>
+
+          <p>
+            O grande diferencial desta versão é o suporte nativo ao <strong>Model Context Protocol (MCP)</strong>. Isso transforma o editor em um servidor local com o qual agentes de IA podem conversar diretamente para posicionar clipes, aplicar transições, sincronizar trilhas de áudio e renderizar o projeto.
+          </p>
+
+          <figure class="solution-slide-figure">
+            <img src="/blog/assets/claude_edits_05_passo2_mcp.jpg" alt="Passo 2: Ative o servidor de automação nos Ajustes">
+            <figcaption class="solution-slide-caption">
+              <span>PASSO 02 &bull; AJUSTES > AUTOMAÇÃO</span>
+              <span>ENDPOINT LOCAL: HTTP://127.0.0.1:19501/MCP</span>
+            </figcaption>
+          </figure>
 
           <div class="weekend-plan-box">
             <div class="weekend-plan-title">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              <span>PLANO DE EXECUÇÃO EM 48H:</span>
+              <span>COMO HABILITAR O MCP:</span>
             </div>
             <ul class="weekend-step-list">
               <li class="weekend-step-item">
-                <span class="step-marker">SEXTA</span>
-                <span>Crie uma conta gratuita no <strong>ManyChat</strong> e configure um gatilho de "User comments on a post". Envie esse comentário via Webhook para o <strong>n8n</strong>.</span>
+                <span class="step-marker">1</span>
+                <span>Abra o <strong>Instagram Edits</strong> e clique em <strong>Ajustes</strong> (ou pressione <code>Cmd + ,</code>).</span>
               </li>
               <li class="weekend-step-item">
-                <span class="step-marker">SÁBADO</span>
-                <span>No n8n, crie um prompt para o LLM: <em>"Analise os comentários recebidos, descarte elogios vazios, extraia apenas as dores e dúvidas reais e agrupe em 3 tópicos prioritários de conteúdo com títulos de vídeos sugeridos"</em>.</span>
+                <span class="step-marker">2</span>
+                <span>Na barra lateral esquerda, clique na aba <strong>Automação</strong>.</span>
               </li>
               <li class="weekend-step-item">
-                <span class="step-marker">DOMINGO</span>
-                <span>Faça o n8n salvar o resultado em uma tabela do Notion ou Google Sheets com o status "Pauta Aprovada". Pronto: uma máquina de ideias automáticas!</span>
+                <span class="step-marker">3</span>
+                <span>Ative a chave <strong>MCP Ativado</strong> (Habilita o servidor de automação).</span>
+              </li>
+              <li class="weekend-step-item">
+                <span class="step-marker">4</span>
+                <span>O endereço local será <code>http://127.0.0.1:19501/mcp</code>. Clique no botão <strong>Copiar</strong> ao lado de <strong>Token de Acesso</strong>.</span>
               </li>
             </ul>
           </div>
 
           <div class="pro-tip-box">
-            <strong>DICA DE OURO:</strong> Peça à IA para classificar o "Sentimento" e a "Frequência". Se mais de 5 pessoas fizeram a mesma pergunta com palavras diferentes, a IA marca aquela pauta como "FOGO / ALTA PRIORIDADE".
-          </div>
-
-          <div class="monetization-callout">
-            <span class="monetization-tag">COMO MONETIZAR:</span>
-            <p class="monetization-text">
-              Ofereça para canais de YouTube e perfis de Instagram com mais de 20k seguidores. Cobre uma taxa de implantação de <strong>R$ 800 a R$ 1.500</strong> para integrar o sistema e entregar um painel no Notion com 30 ideias de posts validadas por semana.
-            </p>
+            <strong>ATENÇÃO DE SEGURANÇA:</strong> Mantenha seu Token em sigilo! Ele concede controle de automação sobre sua biblioteca de projetos.
           </div>
         </section>
 
-        <!-- ================= SOLUÇÃO 02 ================= -->
-        <section class="solution-block" id="solucao-2">
+        <!-- ================= PASSO 03 ================= -->
+        <section class="solution-block" id="passo-3">
           <div class="solution-header-row">
-            <span class="solution-badge-num">02 / 07</span>
-            <span class="solution-category">AGENTES DE ATENDIMENTO &bull; WHATSAPP</span>
+            <span class="solution-badge-num">PASSO 03 / 04</span>
+            <span class="solution-category">TERMINAL &bull; CLAUDE CODE CLI</span>
           </div>
 
-          <h2 class="solution-title">Atendimento no WhatsApp: Agente 24h para Negócios Locais</h2>
+          <h2 class="solution-title">Conecte o Edits ao Claude Code via Terminal</h2>
 
           <p>
-            Quantos clientes uma clínica odontológica, barbearia, escritório de contabilidade ou imobiliária perde toda noite porque mandam mensagem às 21h e só recebem resposta no dia seguinte às 10h? Quem responde em menos de 5 minutos fecha até 7x mais vendas.
+            Com o servidor local ativo e seu token em mãos, basta registrar o Edits como um MCP server no seu <strong>Claude Code</strong>. Abra o Terminal do Mac e execute o comando abaixo:
           </p>
 
+          <div class="reader-code-block">
+            <div class="reader-code-header">
+              <span>TERMINAL DO MACOS &bull; REGISTRO MCP</span>
+              <span style="color:var(--accent-cyan);">BASH</span>
+            </div>
+            <pre><code>claude mcp add --transport http \
+  --scope user edits \
+  http://127.0.0.1:19501/mcp \
+  --header "Authorization: Bearer SEU_TOKEN"</code></pre>
+          </div>
+
           <figure class="solution-slide-figure">
-            <img src="/blog/assets/02_atendimento_whatsapp.jpg" alt="02: Atendimento no WhatsApp">
+            <img src="/blog/assets/claude_edits_06_passo3_terminal.jpg" alt="Passo 3: Conecte o Edits ao Claude Code">
             <figcaption class="solution-slide-caption">
-              <span>CARD 02 &bull; AGENTE 24 HORAS NO WHATSAPP</span>
-              <span>RESPOSTAS HUMANIZADAS + AGENDAMENTO</span>
+              <span>PASSO 03 &bull; INTEGRAÇÃO CONFIRMADA NO TERMINAL</span>
+              <span>STATUS: EDITS CONECTADO COM SUCESSO</span>
             </figcaption>
           </figure>
 
-          <div class="tools-box">
-            <span class="tools-box-label">FERRAMENTAS NECESSÁRIAS (CLIQUE PARA ACESSAR):</span>
-            <div class="tools-pills-row">
-              <a href="https://developers.facebook.com" target="_blank" rel="noopener" class="tool-pill">Facebook for Developers (WhatsApp Cloud API Oficial) &rarr;</a>
-              <a href="https://typebot.io" target="_blank" rel="noopener" class="tool-pill">Typebot (Interface de fluxo conversacional) &rarr;</a>
-              <a href="https://n8n.io" target="_blank" rel="noopener" class="tool-pill">n8n (Conexão e lógica de negócios) &rarr;</a>
-              <a href="https://supabase.com" target="_blank" rel="noopener" class="tool-pill">Supabase (Armazenar histórico e agendamentos) &rarr;</a>
+          <!-- Dica Master Zero Código -->
+          <div class="reader-callout" style="background: rgba(16, 185, 129, 0.06); border-left: 2px solid var(--accent-emerald); margin: 2rem 0;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="background: var(--accent-emerald); color: #05070a; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800; padding: 0.15rem 0.4rem; border-radius: 2px;">DICA MASTER</span>
+              <strong style="color: var(--text-primary);">Deixe o Claude instalar para você (Sem Terminal)</strong>
             </div>
-          </div>
-
-          <div class="weekend-plan-box">
-            <div class="weekend-plan-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              <span>PLANO DE EXECUÇÃO EM 48H:</span>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+              Não quer abrir o Terminal nem mexer com linhas de comando? Você pode colar diretamente este comando no chat do Claude:
+            </p>
+            <div class="reader-code-block" style="margin: 0.5rem 0;">
+              <pre style="color: #6ee7b7;"><code>Instale o MCP do Edits: URL http://127.0.0.1:19501/mcp e token SEU_TOKEN</code></pre>
             </div>
-            <ul class="weekend-step-list">
-              <li class="weekend-step-item">
-                <span class="step-marker">SEXTA</span>
-                <span>Crie um App gratuito no <strong>Meta for Developers</strong> e ative a WhatsApp Cloud API com um número de teste. Obtenha seu Token e ID do Número.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">SÁBADO</span>
-                <span>No n8n, crie o fluxo de Webhook para receber a mensagem. Passe a mensagem para o nó de IA com a instrução do negócio (ex: serviços, preços, endereço, horários disponíveis).</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">DOMINGO</span>
-                <span>Conecte uma ferramenta de calendário (como Google Calendar API) para quando o cliente falar <em>"Quero agendar terça às 14h"</em>, a IA checar disponibilidade e confirmar a reserva.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="pro-tip-box">
-            <strong>DICA DE OURO:</strong> Use sempre a <strong>WhatsApp Cloud API Oficial</strong> em vez de bibliotecas não-oficiais (web scraping do WhatsApp Web). A API oficial é gratuita até 1.000 conversas por mês e você tem risco ZERO de ter o número do seu cliente banido.
-          </div>
-
-          <div class="monetization-callout">
-            <span class="monetization-tag">COMO MONETIZAR:</span>
-            <p class="monetization-text">
-              Cobrança perfeita: <strong>R$ 1.500 de taxa de setup</strong> + <strong>R$ 350 a R$ 600/mês</strong> por empresa para manter o agente rodando e monitorado. Com 10 clientes locais, você tem R$ 5.000 recorrentes caindo na sua conta todo mês.
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+              O Claude executa a configuração de forma 100% automática em segundos.
             </p>
           </div>
-        </section>
-
-        <!-- ================= SOLUÇÃO 03 ================= -->
-        <section class="solution-block" id="solucao-3">
-          <div class="solution-header-row">
-            <span class="solution-badge-num">03 / 07</span>
-            <span class="solution-category">PROSPECÇÃO B2B &bull; DADOS &amp; VENDAS</span>
-          </div>
-
-          <h2 class="solution-title">Minerador de Leads B2B: Encontre Empresas Prontas para Comprar</h2>
-
-          <p>
-            Vender qualquer serviço (tráfego pago, criação de sites, automação de IA, gestão de redes) exige uma lista de clientes qualificados. Em vez de comprar listas frias e desatualizadas, você pode extrair empresas reais diretamente do Google Maps com telefone, site, endereço e nota de avaliação em minutos.
-          </p>
 
           <figure class="solution-slide-figure">
-            <img src="/blog/assets/03_minerador_leads.jpg" alt="03: Minerador de Leads B2B">
+            <img src="/blog/assets/claude_edits_07_dica_master.jpg" alt="Dica Master: Instalação automática sem terminal">
             <figcaption class="solution-slide-caption">
-              <span>CARD 03 &bull; MINERADOR DE LEADS QUALIFICADOS</span>
-              <span>GOOGLE MAPS + VALIDAÇÃO DE WHATSAPP</span>
+              <span>DICA MASTER &bull; 100% AUTOMÁTICO</span>
+              <span>ZERO CÓDIGO DIRETO NO CHAT</span>
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- ================= PASSO 04 ================= -->
+        <section class="solution-block" id="passo-4">
+          <div class="solution-header-row">
+            <span class="solution-badge-num">PASSO 04 / 04</span>
+            <span class="solution-category">PROMPT ÚNICO &bull; MONTAGEM AUTOMÁTICA</span>
+          </div>
+
+          <h2 class="solution-title">Dê ao Claude um Único Prompt e Veja a Mágica Acontecer</h2>
+
+          <p>
+            Com a integração concluída, você não precisa mais posicionar marcadores de áudio nem quebrar clipes manualmente. Dê sua instrução em linguagem natural e a IA cuidará de todo o fluxo na timeline:
+          </p>
+
+          <div class="reader-code-block">
+            <div class="reader-code-header">
+              <span>PROMPT DE MONTAGEM AUTOMÁTICA</span>
+              <span style="color:var(--accent-amber);">PROMPT</span>
+            </div>
+            <pre style="color: #fde68a;"><code>"Corte meus clipes no ritmo da música, adicione legendas e um título e exporte em 9:16."</code></pre>
+          </div>
+
+          <figure class="solution-slide-figure">
+            <img src="/blog/assets/claude_edits_08_passo4_prompt.jpg" alt="Passo 4: Dê ao Claude um único prompt">
+            <figcaption class="solution-slide-caption">
+              <span>PASSO 04 &bull; EXPORTAÇÃO FINALIZADA</span>
+              <span>CORTE NO BEAT + LEGENDAS AUTOMÁTICAS + 4K 9:16</span>
             </figcaption>
           </figure>
 
-          <div class="tools-box">
-            <span class="tools-box-label">FERRAMENTAS NECESSÁRIAS (CLIQUE PARA ACESSAR):</span>
-            <div class="tools-pills-row">
-              <a href="https://apify.com" target="_blank" rel="noopener" class="tool-pill">Apify (Google Maps Scraper Actor) &rarr;</a>
-              <a href="https://anthropic.com" target="_blank" rel="noopener" class="tool-pill">Claude Code / Claude API (Limpeza e qualificação) &rarr;</a>
-              <a href="https://sheets.google.com" target="_blank" rel="noopener" class="tool-pill">Google Sheets (Organização da planilha) &rarr;</a>
-            </div>
-          </div>
-
-          <div class="weekend-plan-box">
-            <div class="weekend-plan-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              <span>PLANO DE EXECUÇÃO EM 48H:</span>
-            </div>
-            <ul class="weekend-step-list">
-              <li class="weekend-step-item">
-                <span class="step-marker">SEXTA</span>
-                <span>Crie uma conta gratuita no <strong>Apify</strong> e use o Actor pronto <em>"Google Maps Extractor"</em>. Busque por exemplo: <em>"Clínicas em Salvador"</em> ou <em>"Restaurantes em Pinheiros SP"</em>.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">SÁBADO</span>
-                <span>Exporte o JSON dos contatos e use o <strong>Claude Code</strong> para rodar um script que filtra apenas números de celular válidos, checa se a empresa tem site e descarta duplicados.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">DOMINGO</span>
-                <span>Envie os contatos limpos para o Google Sheets formatado com colunas: <code>Nome da Empresa</code>, <code>Responsável</code>, <code>WhatsApp</code>, <code>Avaliação</code> e <code>Link de Contato Direto</code>.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="pro-tip-box">
-            <strong>DICA DE OURO:</strong> Peça ao Claude para gerar uma primeira mensagem personalizada para cada lead com base na nota do Google: <em>"Olá [Nome], vi que vocês têm nota 4.9 no Google Maps, parabéns pelo trabalho! Reparei num detalhe simples no site de vocês..."</em>. A taxa de resposta sobe de 3% para mais de 25%.
-          </div>
-
           <div class="monetization-callout">
-            <span class="monetization-tag">COMO MONETIZAR:</span>
-            <p class="monetization-text">
-              Venda listas segmentadas com 500 leads validados por <strong>R$ 400 a R$ 800</strong> para corretores, consultores e prestadores de serviço, ou cobre uma mensalidade de R$ 1.500 para alimentar o time de vendas de uma empresa todo mês.
+            <span class="monetization-tag">RECURSOS DO NOVO EDITS PARA MAC:</span>
+            <p class="monetization-text" style="font-size: 0.95rem;">
+              &bull; <strong>Cortes no beat:</strong> alinhamento dinâmico automático com a forma de onda da trilha sonora.<br>
+              &bull; <strong>Legendas automáticas:</strong> transcrição local com estilos de tipografia Hormozi/Modernos.<br>
+              &bull; <strong>Ajustes de curvas e equalização:</strong> controle tonal de imagem e som.<br>
+              &bull; <strong>Exportação 4K:</strong> renderização acelerada por GPU para Reels, TikTok e Shorts.
             </p>
           </div>
         </section>
 
-        <!-- ================= SOLUÇÃO 04 ================= -->
-        <section class="solution-block" id="solucao-4">
-          <div class="solution-header-row">
-            <span class="solution-badge-num">04 / 07</span>
-            <span class="solution-category">LEGAL TECH &bull; ANÁLISE DE DOCUMENTOS</span>
-          </div>
-
-          <h2 class="solution-title">Leitor de PDFs e Contratos: Audite Documentos Complexos em Segundos</h2>
-
-          <p>
-            Advogados, corretores de imóveis e departamentos de compras passam horas a fio lendo contratos de 30 a 80 páginas procurando pegadinhas: cláusulas de rescisão abusivas, multas fora da lei, prazos de renovação automática silenciosa e ambiguidades.
-          </p>
-
+        <!-- Seção CTA / Comunidade -->
+        <section class="solution-block" id="comunidade" style="border-top: 1px solid var(--border-medium); padding-top: 2rem;">
           <figure class="solution-slide-figure">
-            <img src="/blog/assets/04_leitor_pdfs_contratos.jpg" alt="04: Leitor de PDFs e Contratos">
+            <img src="/blog/assets/claude_edits_09_cta_comunidade.jpg" alt="Quer o guia completo? Me segue e comenta EDIT">
             <figcaption class="solution-slide-caption">
-              <span>CARD 04 &bull; AUDITOR DE CONTRATOS E PDFS</span>
-              <span>EXTRAÇÃO DE RISCO + SUMÁRIO EXECUTIVO</span>
+              <span>COMUNIDADE &bull; MATERIAIS DE APOIO</span>
+              <span>COMENTE EDIT NO INSTAGRAM @LIMAHENRIQUE</span>
             </figcaption>
           </figure>
 
-          <div class="tools-box">
-            <span class="tools-box-label">FERRAMENTAS NECESSÁRIAS (CLIQUE PARA ACESSAR):</span>
-            <div class="tools-pills-row">
-              <a href="https://claude.ai" target="_blank" rel="noopener" class="tool-pill">Claude 3.5 Sonnet (A melhor LLM do mundo para raciocínio em texto longo) &rarr;</a>
-              <a href="https://streamlit.io" target="_blank" rel="noopener" class="tool-pill">Streamlit (Interface web pronta em Python sem precisar saber HTML) &rarr;</a>
-              <a href="https://pypdf.readthedocs.io" target="_blank" rel="noopener" class="tool-pill">PyPDF / pdfplumber (Extração de texto de PDF) &rarr;</a>
-              <a href="https://vercel.com" target="_blank" rel="noopener" class="tool-pill">Vercel (Deploy gratuito da aplicação na nuvem) &rarr;</a>
-            </div>
-          </div>
-
-          <div class="weekend-plan-box">
-            <div class="weekend-plan-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              <span>PLANO DE EXECUÇÃO EM 48H:</span>
-            </div>
-            <ul class="weekend-step-list">
-              <li class="weekend-step-item">
-                <span class="step-marker">SEXTA</span>
-                <span>Instale o <strong>Claude Code</strong> no terminal e digite: <em>"Crie uma aplicação em Streamlit em Python com um botão de upload de PDF e uma barra lateral com resumo"</em>.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">SÁBADO</span>
-                <span>Conecte a API do Claude com um prompt estruturado: <em>"Você é um auditor sênior de contratos. Analise o documento anexo e gere: 1. Riscos críticos, 2. Multas e prazos, 3. Cláusulas atípicas, 4. Veredito final em linguagem simples"</em>.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">DOMINGO</span>
-                <span>Suba o projeto no Streamlit Community Cloud ou Vercel. O cliente arrasta o PDF do navegador e recebe o relatório em 10 segundos.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="pro-tip-box">
-            <strong>DICA DE OURO:</strong> Adicione uma função de <em>"Perguntar ao Contrato"</em>. O usuário digita: <em>"Posso rescindir o contrato antes de 12 meses sem pagar multa?"</em> e a IA responde citando a página e o parágrafo exato onde a regra está escrita.
-          </div>
-
-          <div class="monetization-callout">
-            <span class="monetization-tag">COMO MONETIZAR:</span>
-            <p class="monetization-text">
-              Advocacias e imobiliárias têm alto poder aquisitivo. Você pode vender o sistema personalizado com a marca do escritório por <strong>R$ 3.000 a R$ 6.000</strong>, com suporte mensal de R$ 400.
-            </p>
-          </div>
-        </section>
-
-        <!-- ================= SOLUÇÃO 05 ================= -->
-        <section class="solution-block" id="solucao-5">
-          <div class="solution-header-row">
-            <span class="solution-badge-num">05 / 07</span>
-            <span class="solution-category">VÍDEO VIRAL &bull; REAPROVEITAMENTO</span>
-          </div>
-
-          <h2 class="solution-title">Cortador de Vídeos Virais: Detecte Ganchos e Crie Shorts com Legendas</h2>
-
-          <p>
-            Vídeos verticais (Reels, TikTok e Shorts) são a maior fonte de alcance orgânico hoje. Porém, transformar um podcast ou aula de 1 hora em 5 cortes verticais envolventes leva horas no Premiere ou CapCut. Com ferramentas open-source e IA de transcrição, esse processo pode ser 100% automatizado no terminal.
-          </p>
-
-          <figure class="solution-slide-figure">
-            <img src="/blog/assets/05_cortador_videos_virais.jpg" alt="05: Cortador de Vídeos Virais">
-            <figcaption class="solution-slide-caption">
-              <span>CARD 05 &bull; CORTADOR DE VÍDEOS VIRAIS</span>
-              <span>WHISPERX + AUTOCROP 9:16 + LEGENDAS DINÂMICAS</span>
-            </figcaption>
-          </figure>
-
-          <div class="tools-box">
-            <span class="tools-box-label">FERRAMENTAS NECESSÁRIAS (CLIQUE PARA ACESSAR):</span>
-            <div class="tools-pills-row">
-              <a href="https://github.com/m-bain/whisperX" target="_blank" rel="noopener" class="tool-pill">WhisperX (Transcrição local rápida com timestamps por palavra) &rarr;</a>
-              <a href="https://ffmpeg.org" target="_blank" rel="noopener" class="tool-pill">FFmpeg (O canivete suíço de corte e edição de vídeo) &rarr;</a>
-              <a href="https://github.com/google/mediapipe" target="_blank" rel="noopener" class="tool-pill">MediaPipe (Face tracking automático para centralizar o rosto em 9:16) &rarr;</a>
-            </div>
-          </div>
-
-          <div class="weekend-plan-box">
-            <div class="weekend-plan-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              <span>PLANO DE EXECUÇÃO EM 48H:</span>
-            </div>
-            <ul class="weekend-step-list">
-              <li class="weekend-step-item">
-                <span class="step-marker">SEXTA</span>
-                <span>Instale o <strong>FFmpeg</strong> e o <strong>WhisperX</strong> no seu computador. Teste extrair o áudio de um vídeo do YouTube com um comando simples do FFmpeg.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">SÁBADO</span>
-                <span>Rode o WhisperX para gerar o arquivo de transcrição <code>.srt</code> ou <code>.json</code> com as marcações de tempo exatas de cada frase falada. Passe o texto para o Claude e peça: <em>"Encontre os 3 momentos de maior retenção/curiosidade de 30 a 60 segundos com início e fim exatos"</em>.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">DOMINGO</span>
-                <span>O FFmpeg corta o trecho selecionado, converte a proporção de 16:9 para 9:16 centralizando o rosto e queima legendas animadas em amarelo/ciano estilo Hormozi.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="pro-tip-box">
-            <strong>DICA DE OURO:</strong> Corte os primeiros 0.5s de silêncio de cada frase. Esse ritmo acelerado prende a atenção do espectador no primeiro segundo e aumenta a taxa de retenção no algoritmo do TikTok e Instagram.
-          </div>
-
-          <div class="monetization-callout">
-            <span class="monetization-tag">COMO MONETIZAR:</span>
-            <p class="monetization-text">
-              Criadores pagam em média <strong>R$ 30 a R$ 60 por corte pronto</strong>. Com o sistema automatizado, você processa um podcast de 1h em 15 minutos e entrega um pacote de 20 cortes cobrando <strong>R$ 1.000</strong>.
-            </p>
-          </div>
-        </section>
-
-        <!-- ================= SOLUÇÃO 06 ================= -->
-        <section class="solution-block" id="solucao-6">
-          <div class="solution-header-row">
-            <span class="solution-badge-num">06 / 07</span>
-            <span class="solution-category">DESENVOLVIMENTO ÁGIL &bull; CLAUDE CODE</span>
-          </div>
-
-          <h2 class="solution-title">Sistemas com Claude Code: Dashboards e SaaS em Tempo Recorde</h2>
-
-          <p>
-            Construir um sistema web completo (com banco de dados, login de usuários, telas bonitas e deploy online) costumava levar semanas de engenharia. Com o <strong>Claude Code</strong> no terminal conectado a Skills e MCPs, você programa aplicações inteiras conversando com a máquina e editando arquivos diretamente.
-          </p>
-
-          <figure class="solution-slide-figure">
-            <img src="/blog/assets/06_sistemas_claude_code.jpg" alt="06: Sistemas com Claude Code">
-            <figcaption class="solution-slide-caption">
-              <span>CARD 06 &bull; APLICAÇÕES WEB COMPLETAS PELO TERMINAL</span>
-              <span>CLAUDE CODE + MCPS + SUPABASE + VERCEL</span>
-            </figcaption>
-          </figure>
-
-          <div class="tools-box">
-            <span class="tools-box-label">FERRAMENTAS NECESSÁRIAS (CLIQUE PARA ACESSAR):</span>
-            <div class="tools-pills-row">
-              <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code" target="_blank" rel="noopener" class="tool-pill">Claude Code (Agente CLI oficial da Anthropic) &rarr;</a>
-              <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener" class="tool-pill">MCPs (Protocolo para conectar bancos e APIs) &rarr;</a>
-              <a href="https://supabase.com" target="_blank" rel="noopener" class="tool-pill">Supabase (Postgres, Autenticação e Storage em 1 clique) &rarr;</a>
-              <a href="https://vercel.com" target="_blank" rel="noopener" class="tool-pill">Vercel (Deploy instantâneo com link compartilhavel) &rarr;</a>
-            </div>
-          </div>
-
-          <div class="weekend-plan-box">
-            <div class="weekend-plan-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              <span>PLANO DE EXECUÇÃO EM 48H:</span>
-            </div>
-            <ul class="weekend-step-list">
-              <li class="weekend-step-item">
-                <span class="step-marker">SEXTA</span>
-                <span>Instale o Claude Code via terminal com <code>npm install -g @anthropic-ai/claude-code</code>. Conecte sua chave de API e crie o repositório do projeto.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">SÁBADO</span>
-                <span>Peça ao Claude Code: <em>"Crie uma aplicação Vite com React e Tailwind, com um dashboard de métricas de vendas, gráficos interativos e integração com Supabase"</em>. Ele vai criar os componentes, instalar os pacotes e corrigir os bugs sozinho.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">DOMINGO</span>
-                <span>Rode <code>vercel</code> no terminal. Sua aplicação está publicada com HTTPS e link funcionando para mostrar para clientes ou investidores.</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="pro-tip-box">
-            <strong>DICA DE OURO:</strong> Use o padrão de <em>"Test-Driven Development" (TDD)</em> com o Claude Code. Peça para ele escrever o teste antes da tela; assim o agente não inventa funções quebradas e testa cada botão antes de te entregar o código.
-          </div>
-
-          <div class="monetization-callout">
-            <span class="monetization-tag">COMO MONETIZAR:</span>
-            <p class="monetization-text">
-              Empresas precisam desesperadamente de portais internos, dashboards operacionais e calculadoras sob medida. Entregue em menos de 48h cobrando <strong>R$ 2.500 a R$ 5.000</strong> por projeto entregue.
-            </p>
-          </div>
-        </section>
-
-        <!-- ================= SOLUÇÃO 07 ================= -->
-        <section class="solution-block" id="solucao-7">
-          <div class="solution-header-row">
-            <span class="solution-badge-num">07 / 07</span>
-            <span class="solution-category">DESIGN ESCALÁVEL &bull; SOCIAL MEDIA</span>
-          </div>
-
-          <h2 class="solution-title">Gerador de Carrosséis e Posts: Design e Roteiros Prontos em Minutos</h2>
-
-          <p>
-            Produzir carrosséis de alto valor para o Instagram é a melhor forma de gerar autoridade, seguidores e vendas no B2B. Mas diagramar 8 slides bonitos no Figma ou Photoshop do zero cansa e toma dias. Você pode automatizar a criação do roteiro e a renderização dos slides conectando uma LLM a templates em código.
-          </p>
-
-          <figure class="solution-slide-figure">
-            <img src="/blog/assets/07_gerador_carrosseis_posts.jpg" alt="07: Gerador de Carrosséis e Posts">
-            <figcaption class="solution-slide-caption">
-              <span>CARD 07 &bull; FÁBRICA DE CARROSSÉIS E POSTS</span>
-              <span>ROTEIRO ESTRUTURADO + RENDERIZAÇÃO AUTOMÁTICA</span>
-            </figcaption>
-          </figure>
-
-          <div class="tools-box">
-            <span class="tools-box-label">FERRAMENTAS NECESSÁRIAS (CLIQUE PARA ACESSAR):</span>
-            <div class="tools-pills-row">
-              <a href="https://claude.ai" target="_blank" rel="noopener" class="tool-pill">Claude / ChatGPT (Estruturação dos ganchos e micro-cópias) &rarr;</a>
-              <a href="https://pptr.dev" target="_blank" rel="noopener" class="tool-pill">Puppeteer ou HTML2Canvas (Renderizar HTML direto em imagem 1080x1350) &rarr;</a>
-              <a href="https://www.canva.com/developers" target="_blank" rel="noopener" class="tool-pill">Canva Connect API (Automação de templates oficiais) &rarr;</a>
-              <a href="https://manychat.com" target="_blank" rel="noopener" class="tool-pill">ManyChat (Disparo automático de links via DM) &rarr;</a>
-            </div>
-          </div>
-
-          <div class="weekend-plan-box">
-            <div class="weekend-plan-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-              <span>PLANO DE EXECUÇÃO EM 48H:</span>
-            </div>
-            <ul class="weekend-step-list">
-              <li class="weekend-step-item">
-                <span class="step-marker">SEXTA</span>
-                <span>Crie um template em HTML/CSS com proporção 4:5 (1080×1350 pixels), com tipografia limpa, gradiente escuro e slots para título, número do slide e corpo de texto.</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">SÁBADO</span>
-                <span>Use um script em Node.js com <strong>Puppeteer</strong> para injetar o texto gerado pela IA no template e salvar 8 imagens numeradas (<code>01.png</code> a <code>08.png</code>).</span>
-              </li>
-              <li class="weekend-step-item">
-                <span class="step-marker">DOMINGO</span>
-                <span>Conecte o <strong>ManyChat</strong> no post do Instagram: quem comentar <em>"CARROSSEL"</em> recebe automaticamente o link do tutorial completo na DM. Ciclo viral fechado!</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="pro-tip-box">
-            <strong>DICA DE OURO:</strong> O primeiro slide (a capa) define 80% do sucesso do post. Use a fórmula: <em>"Número + Solução Desejada + Prazo Chocante"</em> (ex: <em>"7 projetos com IA para criar num final de semana"</em>).
-          </div>
-
-          <div class="monetization-callout">
-            <span class="monetization-tag">COMO MONETIZAR:</span>
-            <p class="monetization-text">
-              Empresas locais e especialistas pagam de <strong>R$ 1.200 a R$ 2.500 por mês</strong> para ter 12 carrosséis postados no perfil. Com esse pipeline pronto, você gera o mês inteiro em menos de 2 horas.
-            </p>
-          </div>
-        </section>
-
-        <!-- ================= CONCLUSÃO & CTA ================= -->
-        <section class="solution-block" style="border-top: 2px solid var(--border-medium); margin-top: 5rem;">
-          <h2 class="solution-title next-step-title" style="margin-bottom: 1rem;">O Próximo Passo: Escolha UMA<br class="mobile-only-br"> e Construa Neste Fim de Semana</h2>
+          <h2 class="solution-title" style="margin-top: 1.5rem;">Quer o Guia Completo com Scripts &amp; Prompts Prontos?</h2>
           <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 2rem;">
-            O erro mais comum é tentar fazer as sete de uma vez só. Escolha a que mais resolve uma dor sua ou de alguém que você conhece, reserve o próximo sábado e domingo, siga o plano de execução e coloque a primeira ferramenta no ar.
+            Compartilhei os templates prontos de automação, o arquivo de configuração MCP e o checklist de corte rítmico no meu Instagram. Basta me seguir e comentar <strong>EDIT</strong> no post para receber o material direto na sua DM!
           </p>
           <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a href="https://www.youtube.com/@henriensina" target="_blank" rel="noopener noreferrer" class="btn-editorial-primary" style="padding: 1rem 1.8rem; font-size: 0.9rem;">
-              <span>ASSISTIR TUTORIAIS NO YOUTUBE @HENRIENSINA</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <a href="https://www.instagram.com/_henriquelima/" target="_blank" rel="noopener noreferrer" class="btn-editorial-primary" style="padding: 1rem 1.8rem; font-size: 0.9rem;">
+              <span>ME SIGA NO INSTAGRAM @_HENRIQUELIMA &rarr;</span>
             </a>
-            <a href="https://wa.me/5571985431158" target="_blank" rel="noopener noreferrer" class="btn-editorial-secondary" style="padding: 1rem 1.5rem; font-size: 0.9rem;">
-              <span>CONSULTORIA OU PROJETOS VIA WHATSAPP &rarr;</span>
+            <a href="https://instagram.com/edits/download/mac" target="_blank" rel="noopener noreferrer" class="btn-editorial-secondary" style="padding: 1rem 1.5rem; font-size: 0.9rem;">
+              <span>BAIXAR O INSTAGRAM EDITS NO MAC &rarr;</span>
             </a>
           </div>
         </section>
+
+        <!-- Navegação Entre Artigos (Voltar para o Post 1) -->
+        <div class="next-post-nav-card" style="margin: 3rem 0 1rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">&larr; LER ARTIGO ANTERIOR</span>
+            <h4 style="font-size: 1.05rem; color: var(--text-primary); margin-top: 0.25rem;">7 Ferramentas Lucrativas com IA para Criar num Final de Semana</h4>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Construa produtos reais em 48h: WhatsApp 24h, leads B2B e Claude Code.</p>
+          </div>
+          <a href="/blog/7-ferramentas-lucrativas-ia.html" class="btn-editorial-secondary" style="padding: 0.75rem 1.4rem; font-size: 0.85rem; shrink-0;">
+            <span>VER ARTIGO &rarr;</span>
+          </a>
+        </div>
 
       </div>
     </article>
