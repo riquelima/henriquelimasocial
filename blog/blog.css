@@ -1423,6 +1423,20 @@ body {
   display: block;
 }
 
+.carousel-showcase-box.carousel-portrait .carousel-viewport {
+  max-width: 620px;
+  margin: 0 auto;
+  background: #070b10;
+}
+
+.carousel-showcase-box.carousel-portrait .carousel-viewport img {
+  aspect-ratio: 4 / 5;
+  max-width: 620px;
+  max-height: 775px;
+  object-fit: contain;
+  background: #070b10;
+}
+
 .carousel-dots-row {
   display: flex;
   justify-content: center;
@@ -2681,6 +2695,43 @@ body {
     margin-bottom: 1rem;
   }
 }
+
+/* ==========================================================================
+   TABELA COMPARATIVA & CODE SNIPPETS
+   ========================================================================== */
+.comparison-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 2rem 0;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+}
+
+.comparison-table-wrap table {
+  width: 100%;
+  min-width: 580px;
+  border-collapse: collapse;
+}
+
+.comparison-table-wrap th,
+.comparison-table-wrap td {
+  padding: 1rem 1.25rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .comparison-table-wrap table {
+    min-width: 520px;
+    font-size: 0.85rem;
+  }
+  .comparison-table-wrap th,
+  .comparison-table-wrap td {
+    padding: 0.8rem 0.95rem;
+  }
+}
+
 
 
 

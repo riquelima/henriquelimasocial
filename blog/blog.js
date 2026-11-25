@@ -169,7 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
       targetView.classList.add('active');
 
       // Atualiza URL e Título da Página
-      if (targetId === 'post-view-remoto') {
+      if (targetId === 'post-view-skills-vs-mcps') {
+        document.title = "Skills vs MCPs no Claude Code: A Diferença Prática que Ninguém Te Explicou · Henrique Lima";
+        if (pushState) history.pushState({ postId: targetId }, '', '/blog/skills-vs-mcps-claude-code.html');
+      } else if (targetId === 'post-view-remoto') {
         document.title = "20 sites secretos para ganhar em dólar trabalhando remoto · Henrique Lima";
         if (pushState) history.pushState({ postId: targetId }, '', '/blog/index.html');
       } else if (targetId === 'post-view-mcp') {
@@ -372,14 +375,16 @@ document.addEventListener('DOMContentLoaded', () => {
       switchPostView(e.state.postId, null, false);
     } else {
       const path = window.location.pathname;
-      if (path.includes('mcp-landing-pages')) {
+      if (path.includes('skills-vs-mcps')) {
+        switchPostView('post-view-skills-vs-mcps', null, false);
+      } else if (path.includes('mcp-landing-pages')) {
         switchPostView('post-view-mcp', null, false);
       } else if (path.includes('7-ferramentas')) {
         switchPostView('post-view-7ferramentas', null, false);
       } else if (path.includes('claude-edits')) {
         switchPostView('post-view-claude', null, false);
       } else {
-        switchPostView('post-view-remoto', null, false);
+        switchPostView('post-view-skills-vs-mcps', null, false);
       }
     }
   });
@@ -408,7 +413,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Verifica rota na chegada
   const currentPath = window.location.pathname;
-  if (currentPath.includes('mcp-landing-pages')) {
+  if (currentPath.includes('skills-vs-mcps')) {
+    switchPostView('post-view-skills-vs-mcps', null, false);
+  } else if (currentPath.includes('mcp-landing-pages')) {
     switchPostView('post-view-mcp', null, false);
   } else if (currentPath.includes('7-ferramentas')) {
     switchPostView('post-view-7ferramentas', null, false);
@@ -416,6 +423,9 @@ document.addEventListener('DOMContentLoaded', () => {
     switchPostView('post-view-claude', null, false);
   } else if (currentPath.includes('20-sites')) {
     switchPostView('post-view-remoto', null, false);
+  } else {
+    // Por padrão no blog index, ativa o artigo mais novo (Post 05)
+    switchPostView('post-view-skills-vs-mcps', null, false);
   }
 
   // No mobile, se o card ativo não for o primeiro, posiciona nele
