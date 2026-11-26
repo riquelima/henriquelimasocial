@@ -93,61 +93,112 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Sincronizar slider de mídia (Foto <-> Vídeo) do produto de Templates
-  const templatesSlider = document.getElementById('templatesSlider');
-  const templatesDots = document.querySelectorAll('#templatesMediaDots .media-dot');
-  const templatesHint = document.getElementById('templatesMediaHint');
-  const templatesVideo = document.getElementById('templatesVideo');
+  // Sincronizar todos os sliders de mídia (Foto <-> Vídeo) com setas e dots
+  const mediaContainers = document.querySelectorAll('.loja-media-slider-container');
+  mediaContainers.forEach(container => {
+    const slider = container.querySelector('.loja-media-slider');
+    const dots = container.querySelectorAll('.loja-media-dots .media-dot');
+    const hint = container.querySelector('.loja-media-zoom-hint');
+    const prevArrow = container.querySelector('.loja-slider-arrow.arrow-prev');
+    const nextArrow = container.querySelector('.loja-slider-arrow.arrow-next');
+    const video = container.querySelector('video');
+    const slides = container.querySelectorAll('.loja-media-slide');
 
-  if (templatesSlider && templatesDots.length) {
-    templatesSlider.addEventListener('scroll', () => {
-      const scrollLeft = templatesSlider.scrollLeft;
-      const slideWidth = templatesSlider.offsetWidth || 1;
+    if (!slider) return;
+
+    const updateSliderState = () => {
+      const scrollLeft = slider.scrollLeft;
+      const slideWidth = slider.offsetWidth || 1;
       const activeIdx = Math.round(scrollLeft / slideWidth);
 
-      templatesDots.forEach((dot, i) => {
+      dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === activeIdx);
       });
 
-      if (templatesHint) {
+      if (prevArrow) {
+        prevArrow.classList.toggle('disabled', activeIdx === 0);
+      }
+      if (nextArrow) {
+        nextArrow.classList.toggle('disabled', activeIdx >= slides.length - 1);
+      }
+
+      if (hint) {
         if (activeIdx === 0) {
-          templatesHint.innerHTML = '&larr; Deslize para ver o vídeo &rarr;';
+          hint.innerHTML = '&larr; Toque na seta ou deslize para ver o vídeo &rarr;';
         } else {
-          templatesHint.innerHTML = '&larr; Deslize para ver a foto &rarr;';
+          hint.innerHTML = '&larr; Toque na seta para voltar à foto &rarr;';
         }
       }
 
-      // Se o usuário voltar para o slide da foto, pausa o vídeo automaticamente
-      if (activeIdx === 0 && templatesVideo && !templatesVideo.paused) {
-        templatesVideo.pause();
+      // Se voltar para a foto, pausa o vídeo automaticamente
+      if (activeIdx === 0 && video && !video.paused) {
+        video.pause();
       }
-    }, { passive: true });
+    };
 
-    templatesDots.forEach((dot, idx) => {
+    slider.addEventListener('scroll', updateSliderState, { passive: true });
+
+    dots.forEach((dot, idx) => {
       dot.addEventListener('click', () => {
-        const slideWidth = templatesSlider.offsetWidth;
-        templatesSlider.scrollTo({
-          left: idx * slideWidth,
+        slider.scrollTo({
+          left: idx * slider.offsetWidth,
           behavior: 'smooth'
         });
       });
     });
-  }
 
-  // Sincronizar dots dos carrosséis de planos no mobile
-  const carousels = document.querySelectorAll('.loja-plans-carousel');
-  carousels.forEach(carousel => {
-    const dotsContainer = carousel.nextElementSibling;
-    if (!dotsContainer || !dotsContainer.classList.contains('loja-carousel-dots')) return;
-    const dots = dotsContainer.querySelectorAll('.dot');
-    const cards = carousel.querySelectorAll('.loja-plan-card');
+    if (prevArrow) {
+      prevArrow.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const slideWidth = slider.offsetWidth;
+        const currentIdx = Math.round(slider.scrollLeft / slideWidth);
+        const targetIdx = Math.max(0, currentIdx - 1);
+        slider.scrollTo({ left: targetIdx * slideWidth, behavior: 'smooth' });
+      });
+    }
 
-    carousel.addEventListener('scroll', () => {
+    if (nextArrow) {
+      nextArrow.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const slideWidth = slider.offsetWidth;
+        const currentIdx = Math.round(slider.scrollLeft / slideWidth);
+        const targetIdx = Math.min(slides.length - 1, currentIdx + 1);
+        slider.scrollTo({ left: targetIdx * slideWidth, behavior: 'smooth' });
+      });
+    }
+
+    updateSliderState();
+  });
+
+  // Sincronizar todos os carrosséis de planos com dots e setas laterais no mobile
+  const planWraps = document.querySelectorAll('.loja-plans-carousel-wrap');
+  planWraps.forEach(wrap => {
+    const carousel = wrap.querySelector('.loja-plans-carousel');
+    const prevArrow = wrap.querySelector('.plan-arrow-prev');
+    const nextArrow = wrap.querySelector('.plan-arrow-next');
+    const showcase = wrap.closest('.loja-details-col');
+    const dotsContainer = showcase ? showcase.querySelector('.loja-carousel-dots') : wrap.nextElementSibling;
+    const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+    const cards = carousel ? carousel.querySelectorAll('.loja-plan-card') : [];
+
+    if (!carousel || !cards.length) return;
+
+    const updatePlanCarouselState = () => {
       const scrollLeft = carousel.scrollLeft;
-      const cardWidth = (cards[0] ? cards[0].offsetWidth : 260) + 14;
-      const activeIndex = Math.max(0, Math.min(Math.round(scrollLeft / cardWidth), dots.length - 1));
+      const cardWidth = (cards[0] ? cards[0].offsetWidth : 280) + 14;
+      const activeIndex = Math.max(0, Math.min(Math.round(scrollLeft / cardWidth), cards.length - 1));
+
       dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
-    }, { passive: true });
+
+      if (prevArrow) {
+        prevArrow.classList.toggle('disabled', activeIndex === 0);
+      }
+      if (nextArrow) {
+        nextArrow.classList.toggle('disabled', activeIndex >= cards.length - 1);
+      }
+    };
+
+    carousel.addEventListener('scroll', updatePlanCarouselState, { passive: true });
 
     dots.forEach((dot, idx) => {
       dot.addEventListener('click', () => {
@@ -156,5 +207,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+
+    if (prevArrow) {
+      prevArrow.addEventListener('click', () => {
+        const cardWidth = (cards[0] ? cards[0].offsetWidth : 280) + 14;
+        const currentIdx = Math.round(carousel.scrollLeft / cardWidth);
+        const targetIdx = Math.max(0, currentIdx - 1);
+        if (cards[targetIdx]) {
+          cards[targetIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    }
+
+    if (nextArrow) {
+      nextArrow.addEventListener('click', () => {
+        const cardWidth = (cards[0] ? cards[0].offsetWidth : 280) + 14;
+        const currentIdx = Math.round(carousel.scrollLeft / cardWidth);
+        const targetIdx = Math.min(cards.length - 1, currentIdx + 1);
+        if (cards[targetIdx]) {
+          cards[targetIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    }
+
+    updatePlanCarouselState();
   });
 });
