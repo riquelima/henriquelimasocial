@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja Intelektus · Automações com IA &amp; Templates · Henrique Lima</title>
+  <meta name="description" content="Templates de landing pages para Claude Code, robôs de atendimento no Direct do Instagram e automação de postagens em +30 redes sociais.">
+  
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/loja/loja.css?v=2.6">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="loja-header">
+    <div class="loja-container loja-header-inner">
+      <a href="/" class="loja-brand">
+        <img src="/imagemPerfil.jpg?v=3" alt="Henrique Lima" class="loja-avatar">
+        <div class="loja-brand-text">
+          <span class="loja-brand-name">Henrique Lima</span>
+          <span class="loja-brand-badge">INTELEKTUS // LOJA</span>
+        </div>
+      </a>
+
+      <nav class="loja-nav-links">
+        <a href="/" class="loja-nav-item">Portfólio</a>
+        <a href="/blog" class="loja-nav-item">Blog</a>
+        <a href="#templates" class="loja-nav-item">Templates</a>
+        <a href="#direct" class="loja-nav-item">Direct</a>
+        <a href="#redes" class="loja-nav-item">+30 Redes</a>
+        <a href="#faq" class="loja-nav-item">Dúvidas</a>
+      </nav>
+
+      <div class="loja-header-actions">
+        <a href="/blog" class="loja-btn-blog-header" title="Acessar o Blog de Artigos">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span>Blog</span>
+        </a>
+        <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20vim%20pela%20sua%20loja%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida." target="_blank" rel="noopener noreferrer" class="loja-btn-wpp-header" title="Falar no WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="loja-container">
+
+    <!-- Hero -->
+    <section class="loja-hero">
+      <span class="loja-kicker">AUTOMAÇÕES &amp; CÓDIGO</span>
+      <h1 class="loja-hero-title">
+        Ferramentas com IA para <span class="glow-cyan">Vender</span> e <span class="glow-gold">Produzir</span> Mais
+      </h1>
+      <p class="loja-hero-subtitle">
+        Templates abertos em código para Claude Code, robôs de atendimento no Instagram e publicação simultânea em redes sociais. Tudo pronto para usar.
+      </p>
+
+      <!-- Abas de navegação rápida -->
+      <div class="loja-tabs-nav">
+        <a href="#templates" class="loja-tab-chip active">Templates IA (R$ 39,90)</a>
+        <a href="#direct" class="loja-tab-chip">Direct no Automático</a>
+        <a href="#redes" class="loja-tab-chip">Poste em +30 Redes</a>
+        <a href="/blog" class="loja-tab-chip" style="border-color:var(--neon-cyan); color:var(--neon-cyan);">Artigos do Blog &rarr;</a>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         PRODUTO 1: +150 TEMPLATES PREMIUM
+         ======================================================= -->
+    <section class="loja-product-block" id="templates">
+      <div class="loja-product-showcase">
+        
+        <div class="loja-media-col">
+          <div class="loja-media-slider-container">
+            <div class="loja-media-slider" id="templatesSlider">
+              
+              <!-- Slide 1: Foto -->
+              <div class="loja-media-slide">
+                <div class="loja-media-frame">
+                  <img src="/loja/assets/templates-ia.jpg" alt="+150 Templates Premium Prontos" loading="lazy">
+                  <span class="slide-pill-badge">1 / 2 • Foto</span>
+                </div>
+              </div>
+
+              <!-- Slide 2: Vídeo Demonstrativo -->
+              <div class="loja-media-slide">
+                <div class="loja-media-frame video-frame">
+                  <video id="templatesVideo" src="/loja/assets/templates-video.mp4" playsinline controls preload="metadata" poster="/loja/assets/templates-ia.jpg"></video>
+                  <span class="slide-pill-badge badge-video">2 / 2 • Vídeo</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Dots de Navegação e Hint -->
+            <div class="loja-media-dots" id="templatesMediaDots">
+              <button type="button" class="media-dot active" data-index="0" aria-label="Ver Foto"></button>
+              <button type="button" class="media-dot" data-index="1" aria-label="Ver Vídeo"></button>
+            </div>
+            <span class="loja-media-zoom-hint" id="templatesMediaHint">&larr; Deslize para ver o vídeo &rarr;</span>
+          </div>
+        </div>
+
+        <div class="loja-details-col">
+          <span class="loja-product-tag tag-cyan">PRODUTO DIGITAL // ACESSO VITALÍCIO</span>
+          <h2 class="loja-product-heading">+150 Templates Prontos para Landing Pages</h2>
+          <p class="loja-product-desc">
+            Código limpo em Vite, React e Tailwind pronto para rodar. Acompanha servidor MCP para você pedir alterações direto no terminal do Claude Code em linguagem natural.
+          </p>
+
+          <div class="loja-offer-box-gold">
+            <div class="loja-offer-header">
+              <span class="loja-offer-crown-badge">OFERTA VITALÍCIA</span>
+              <span class="loja-offer-vitalicio-badge">PAGAMENTO ÚNICO</span>
+            </div>
+
+            <div class="loja-price-row">
+              <span class="loja-price-old">R$ 197</span>
+              <span class="loja-price-main">R$ 39,90</span>
+              <span class="loja-price-period">à vista</span>
+            </div>
+
+            <ul class="loja-feature-list">
+              <li>
+                <span class="loja-bullet bullet-gold">&bull;</span>
+                <span><strong>+150 modelos testados:</strong> clínicas, SaaS, consultorias e serviços locais.</span>
+              </li>
+              <li>
+                <span class="loja-bullet bullet-gold">&bull;</span>
+                <span><strong>Código 100% aberto:</strong> sem bloqueios, pronto para Vercel, Netlify ou VPS.</span>
+              </li>
+              <li>
+                <span class="loja-bullet bullet-gold">&bull;</span>
+                <span><strong>Servidor MCP incluso:</strong> instale e edite páginas pelo Claude Code.</span>
+              </li>
+              <li>
+                <span class="loja-bullet bullet-gold">&bull;</span>
+                <span><strong>Acesso vitalício:</strong> inclui novos modelos lançados no repositório.</span>
+              </li>
+            </ul>
+
+            <div class="loja-actions-group">
+              <a href="#checkout-templates-ia" class="btn-buy-gold btn-checkout" data-product="templates-ia">
+                <span>Garantir Acesso • R$ 39,90 &rarr;</span>
+              </a>
+              <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20tenho%20interesse%20no%20pacote%20de%20%2B150%20Templates%20por%20R%24%2039,90" target="_blank" rel="noopener noreferrer" class="btn-link-wpp">
+                <span>Dúvidas? Chame no WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================
+         PRODUTO 2: VENDA NO DIRECT NO AUTOMÁTICO
+         ======================================================= -->
+    <section class="loja-product-block" id="direct">
+      <div class="loja-product-showcase">
+        
+        <div class="loja-media-col">
+          <div class="loja-media-frame">
+            <img src="/loja/assets/direct-automatico.jpg" alt="Venda no Direct no Automático" loading="lazy">
+          </div>
+          <span class="loja-media-zoom-hint">Toque para ver a imagem completa</span>
+        </div>
+
+        <div class="loja-details-col">
+          <span class="loja-product-tag tag-gold">ATENDIMENTO &amp; CONVERSÃO NO INSTAGRAM</span>
+          <h2 class="loja-product-heading">Venda no Direct no Automático</h2>
+          <p class="loja-product-desc">
+            Agente de IA que responde comentários em posts, tira dúvidas de clientes e envia links de pagamento no Direct 24 horas por dia.
+          </p>
+
+          <p class="loja-swipe-hint">&larr; Deslize para comparar os 3 planos &rarr;</p>
+
+          <!-- Carrossel Horizontal de Planos no Mobile -->
+          <div class="loja-plans-carousel">
+            
+            <!-- SOLO -->
+            <div class="loja-plan-card card-cyan">
+              <div class="plan-header">
+                <h3 class="plan-title">SOLO</h3>
+                <div class="plan-price-block">
+                  <span class="plan-price price-cyan">R$ 67</span>
+                  <span class="plan-period">/mês</span>
+                </div>
+              </div>
+
+              <ul class="plan-features-list">
+                <li><span class="loja-bullet">&bull;</span><span>1 perfil conectado</span></li>
+                <li><span class="loja-bullet">&bull;</span><span>Mensagens ilimitadas</span></li>
+                <li><span class="loja-bullet">&bull;</span><span>Respostas em comentários</span></li>
+                <li><span class="loja-bullet">&bull;</span><span>Gatilhos por palavra-chave</span></li>
+              </ul>
+
+              <div class="loja-actions-group">
+                <a href="#checkout-direct-solo" class="btn-buy-cyan btn-checkout" data-product="direct-solo">
+                  <span>Assinar Solo &rarr;</span>
+                </a>
+                <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20tenho%20d%C3%BAvidas%20sobre%20o%20plano%20SOLO%20do%20Direct%20no%20Autom%C3%A1tico" target="_blank" rel="noopener noreferrer" class="btn-link-wpp">
+                  <span>Tirar dúvidas</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- PRO -->
+            <div class="loja-plan-card card-gold">
+              <span class="plan-featured-badge">MAIS ESCOLHIDO</span>
+              <div class="plan-header">
+                <h3 class="plan-title">PRO</h3>
+                <div class="plan-price-block">
+                  <span class="plan-price price-gold">R$ 127</span>
+                  <span class="plan-period">/mês</span>
+                </div>
+              </div>
+
+              <ul class="plan-features-list">
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span><strong>Até 3 perfis</strong></span></li>
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span>Mensagens ilimitadas</span></li>
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span><strong>Agente de IA treinado</strong></span></li>
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span>Qualificação de clientes</span></li>
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span>Suporte VIP no WhatsApp</span></li>
+              </ul>
+
+              <div class="loja-actions-group">
+                <a href="#checkout-direct-pro" class="btn-buy-gold btn-checkout" data-product="direct-pro">
+                  <span>Assinar Pro &rarr;</span>
+                </a>
+                <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20tenho%20d%C3%BAvidas%20sobre%20o%20plano%20PRO%20do%20Direct%20no%20Autom%C3%A1tico" target="_blank" rel="noopener noreferrer" class="btn-link-wpp">
+                  <span>Tirar dúvidas</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- SETUP VIP -->
+            <div class="loja-plan-card card-purple">
+              <div class="plan-header">
+                <h3 class="plan-title">SETUP VIP</h3>
+                <div class="plan-price-block">
+                  <span class="plan-price price-purple">R$ 297</span>
+                  <span class="plan-period">único</span>
+                </div>
+              </div>
+
+              <ul class="plan-features-list">
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Configuração completa</span></li>
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>IA treinada no seu nicho</span></li>
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Integração com planilhas</span></li>
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Alinhamento com Henrique</span></li>
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Suporte prioritário</span></li>
+              </ul>
+
+              <div class="loja-actions-group">
+                <a href="#checkout-direct-vip" class="btn-buy-purple btn-checkout" data-product="direct-vip">
+                  <span>Contratar Setup &rarr;</span>
+                </a>
+                <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20quero%20o%20SETUP%20VIP%20do%20Direct%20no%20Autom%C3%A1tico" target="_blank" rel="noopener noreferrer" class="btn-link-wpp">
+                  <span>Tirar dúvidas</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+          <div class="loja-carousel-dots" aria-label="Navegar entre planos">
+            <span class="dot active" data-index="0" title="Plano Solo"></span>
+            <span class="dot" data-index="1" title="Plano Pro"></span>
+            <span class="dot" data-index="2" title="Setup VIP"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================
+         PRODUTO 3: POSTE EM +30 REDES NO AUTOMÁTICO
+         ======================================================= -->
+    <section class="loja-product-block" id="redes">
+      <div class="loja-product-showcase">
+        
+        <div class="loja-media-col">
+          <div class="loja-media-frame">
+            <img src="/loja/assets/post-30-redes.jpg" alt="Poste em +30 Redes no Automático" loading="lazy">
+          </div>
+          <span class="loja-media-zoom-hint">Toque para ver a imagem completa</span>
+        </div>
+
+        <div class="loja-details-col">
+          <span class="loja-product-tag tag-purple">DISTRIBUIÇÃO DE CONTEÚDO</span>
+          <h2 class="loja-product-heading">Poste em +30 Redes no Automático</h2>
+          <p class="loja-product-desc">
+            Suba um vídeo ou post em um único lugar e deixe o sistema publicar no Instagram, TikTok, YouTube Shorts, X, LinkedIn e mais 25 plataformas de uma vez.
+          </p>
+
+          <p class="loja-swipe-hint">&larr; Deslize para comparar os 3 planos &rarr;</p>
+
+          <!-- Carrossel Horizontal de Planos no Mobile -->
+          <div class="loja-plans-carousel">
+            
+            <!-- SOLO -->
+            <div class="loja-plan-card card-cyan">
+              <div class="plan-header">
+                <h3 class="plan-title">SOLO</h3>
+                <div class="plan-price-block">
+                  <span class="plan-price price-cyan">R$ 47</span>
+                  <span class="plan-period">/mês</span>
+                </div>
+              </div>
+
+              <ul class="plan-features-list">
+                <li><span class="loja-bullet">&bull;</span><span>Posts ilimitados</span></li>
+                <li><span class="loja-bullet">&bull;</span><span>+30 redes conectadas</span></li>
+                <li><span class="loja-bullet">&bull;</span><span>Agendamento em lote</span></li>
+                <li><span class="loja-bullet">&bull;</span><span>Suporte padrão</span></li>
+              </ul>
+
+              <div class="loja-actions-group">
+                <a href="#checkout-post-solo" class="btn-buy-cyan btn-checkout" data-product="post-solo">
+                  <span>Assinar Solo &rarr;</span>
+                </a>
+                <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20tenho%20d%C3%BAvidas%20sobre%20o%20plano%20SOLO%20de%20%2B30%20Redes" target="_blank" rel="noopener noreferrer" class="btn-link-wpp">
+                  <span>Tirar dúvidas</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- PRO -->
+            <div class="loja-plan-card card-gold">
+              <span class="plan-featured-badge">MAIS ESCOLHIDO</span>
+              <div class="plan-header">
+                <h3 class="plan-title">PRO</h3>
+                <div class="plan-price-block">
+                  <span class="plan-price price-gold">R$ 97</span>
+                  <span class="plan-period">/mês</span>
+                </div>
+              </div>
+
+              <ul class="plan-features-list">
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span><strong>Múltiplos perfis</strong></span></li>
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span>Acesso para equipe</span></li>
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span>Posts ilimitados</span></li>
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span>Métricas consolidadas</span></li>
+                <li><span class="loja-bullet bullet-gold">&bull;</span><span>Suporte prioritário</span></li>
+              </ul>
+
+              <div class="loja-actions-group">
+                <a href="#checkout-post-pro" class="btn-buy-gold btn-checkout" data-product="post-pro">
+                  <span>Assinar Pro &rarr;</span>
+                </a>
+                <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20tenho%20d%C3%BAvidas%20sobre%20o%20plano%20PRO%20de%20%2B30%20Redes" target="_blank" rel="noopener noreferrer" class="btn-link-wpp">
+                  <span>Tirar dúvidas</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- SETUP VIP -->
+            <div class="loja-plan-card card-purple">
+              <div class="plan-header">
+                <h3 class="plan-title">SETUP VIP</h3>
+                <div class="plan-price-block">
+                  <span class="plan-price price-purple">R$ 197</span>
+                  <span class="plan-period">único</span>
+                </div>
+              </div>
+
+              <ul class="plan-features-list">
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Configuração de contas</span></li>
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Conexão de APIs</span></li>
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Templates de postagem</span></li>
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Treinamento de uso</span></li>
+                <li><span class="loja-bullet bullet-purple">&bull;</span><span>Suporte individual</span></li>
+              </ul>
+
+              <div class="loja-actions-group">
+                <a href="#checkout-post-vip" class="btn-buy-purple btn-checkout" data-product="post-vip">
+                  <span>Contratar Setup &rarr;</span>
+                </a>
+                <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20quero%20o%20SETUP%20VIP%20de%20%2B30%20Redes" target="_blank" rel="noopener noreferrer" class="btn-link-wpp">
+                  <span>Tirar dúvidas</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+          <div class="loja-carousel-dots" aria-label="Navegar entre planos">
+            <span class="dot active" data-index="0" title="Plano Solo"></span>
+            <span class="dot" data-index="1" title="Plano Pro"></span>
+            <span class="dot" data-index="2" title="Setup VIP"></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================
+         DÚVIDAS FREQUENTES
+         ======================================================= -->
+    <section class="loja-faq-section" id="faq">
+      <h3 class="faq-title">Dúvidas Frequentes</h3>
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h4>Como recebo o acesso?</h4>
+          <p>Após a confirmação do pagamento, os dados de acesso ao repositório e os tutoriais chegam no seu e-mail e no WhatsApp.</p>
+        </div>
+        <div class="faq-card">
+          <h4>Preciso saber programar?</h4>
+          <p>Os templates rodam com comandos simples. Pelo Claude Code com o MCP incluso, você pede ajustes em português.</p>
+        </div>
+        <div class="faq-card">
+          <h4>A automação do Instagram causa bloqueio?</h4>
+          <p>Não. A conexão utiliza as diretrizes oficiais de API de mensagens, com pausas naturais entre envios.</p>
+        </div>
+        <div class="faq-card">
+          <h4>Quais são as formas de pagamento?</h4>
+          <p>Pix com liberação imediata, cartão de crédito em até 12 vezes e boleto bancário.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         BANNER DE CONTATO
+         ======================================================= -->
+    <section class="loja-help-banner">
+      <h3 class="help-title">Precisa de ajuda para escolher?</h3>
+      <p class="help-desc">
+        Mande uma mensagem no WhatsApp. Avalio seu negócio e indico a ferramenta certa para o seu momento.
+      </p>
+      <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20estou%20na%20loja%20e%20gostaria%20de%20ajuda%20para%20escolher." target="_blank" rel="noopener noreferrer" class="btn-help-wpp-large">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>Falar no WhatsApp &rarr;</span>
+      </a>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Slim (Linha única) -->
+  <footer class="loja-footer">
+    <div class="loja-container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+      <p class="loja-footer-text">&copy; 2026 Intelektus &middot; Henrique Lima &middot; Todos os direitos reservados</p>
+      <a href="/blog" style="color:var(--neon-cyan); font-size:0.78rem; text-decoration:none; font-family:var(--font-mono); font-weight:700;">Acessar Blog &rarr;</a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Flutuante (Desktop) -->
+  <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20vim%20pela%20sua%20loja." target="_blank" rel="noopener noreferrer" class="loja-floating-wpp">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    <span>Falar no WhatsApp</span>
+  </a>
+
+  <!-- Barra Fixa Slim no Mobile (1 Linha Limpa) -->
+  <div class="loja-mobile-bar">
+    <a href="https://wa.me/5571999088651?text=Ol%C3%A1%20Henrique,%20estou%20na%20loja%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida." target="_blank" rel="noopener noreferrer" class="mobile-bar-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <span>Falar no WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- Modal Lightbox -->
+  <div id="lojaLightbox" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.92); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:1rem;">
+    <button id="lightboxClose" style="position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.15); border:none; color:#fff; font-size:1.6rem; width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;">&times;</button>
+    <img id="lightboxImg" src="" alt="Arte" style="max-width:92vw; max-height:88vh; border-radius:8px; border:1px solid rgba(255,255,255,0.2); object-fit:contain;">
+  </div>
+
+  <style>
+    #lojaLightbox.active {
+      display: flex !important;
+    }
+  </style>
+
+  <script src="/loja/loja.js?v=2.5"></script>
+</body>
+</html>
