@@ -20,9 +20,9 @@ const CHECKOUT_LINKS = {
   'direct-vip': '',  // R$ 297
 
   // Produto 3: Poste em +30 Redes no Automático
-  'post-solo': '',   // R$ 47/mês
-  'post-pro': '',    // R$ 97/mês
-  'post-vip': ''     // R$ 197
+  'post-solo': 'https://payment-link-v3.stone.com.br/pl_MAnEXBV7bxjav3EURSMq9YzrqyLme1l6',   // R$ 47/mês
+  'post-pro': 'https://payment-link-v3.stone.com.br/pl_DALjYbKnwQZpKkOCwahgp0z3RJGPy6N8',    // R$ 97/mês
+  'post-vip': 'https://payment-link-v3.stone.com.br/pl_krNeKVjd6m8p2xuJrUXw5wOWvgRM4Eqx'     // R$ 197
 };
 
 const WHATSAPP_PHONE = '5571999088651';
