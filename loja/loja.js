@@ -12,11 +12,11 @@
 // ==========================================================
 const CHECKOUT_LINKS = {
   // Produto 1: +150 Templates Premium Prontos (R$ 39,90)
-  'templates-ia': '',
+  'templates-ia': 'https://payment-link-v3.stone.com.br/pl_EVqorAgbeR6PW9rCYqtgyJQDBx2Ow4kX',
 
   // Produto 2: Venda no Direct no Automático
-  'direct-solo': '', // R$ 67/mês
-  'direct-pro': '',  // R$ 127/mês
+  'direct-solo': 'https://payment-link-v3.stone.com.br/pl_9zwXeP5v7Moy25VuB3FEeJ2Yad6QO8LK', // R$ 67/mês
+  'direct-pro': 'https://payment-link-v3.stone.com.br/pl_PjD4ROJqbpl5XwjHybUL6kE8M9NnvLVw',  // R$ 127/mês
   'direct-vip': '',  // R$ 297
 
   // Produto 3: Poste em +30 Redes no Automático
