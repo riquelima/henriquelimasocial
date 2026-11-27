@@ -978,6 +978,15 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.faq-carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+.faq-nav-arrow {
+  display: none;
+}
+
 .faq-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -1002,6 +1011,10 @@ body {
   font-size: 0.84rem;
   color: var(--text-secondary);
   line-height: 1.55;
+}
+
+.faq-carousel-dots {
+  display: none;
 }
 
 /* Help Banner */
@@ -1425,6 +1438,74 @@ body {
     white-space: nowrap;
   }
 
+  /* Ocultar WhatsApp flutuante no mobile para evitar sobreposição com a barra fixa */
+  .loja-floating-wpp {
+    display: none !important;
+  }
+
+  /* FAQ Horizontal Scroll-Snap Carousel no Mobile */
+  .faq-carousel-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .faq-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 0.85rem !important;
+    padding: 0.35rem 1rem 0.85rem 1rem !important;
+    margin: 0 -1rem !important;
+    scrollbar-width: none !important;
+  }
+
+  .faq-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .faq-card {
+    flex: 0 0 84% !important;
+    min-width: 260px !important;
+    max-width: 320px !important;
+    scroll-snap-align: center !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    min-height: 140px !important;
+  }
+
+  .faq-nav-arrow {
+    display: none !important;
+  }
+
+  .faq-carousel-dots {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+    margin-top: 0.6rem !important;
+  }
+
+  .faq-carousel-dots .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .faq-carousel-dots .dot.active {
+    width: 18px;
+    border-radius: 9999px;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 8px var(--neon-cyan-glow);
+  }
+
   /* Barra Fixa Slim no Mobile (1 Linha Limpa) */
   .loja-mobile-bar {
     display: flex;
@@ -1461,6 +1542,6 @@ body {
   }
 
   body {
-    padding-bottom: 60px;
+    padding-bottom: 72px;
   }
 }

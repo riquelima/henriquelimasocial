@@ -224,12 +224,14 @@ body {
   box-shadow: 0 0 12px rgba(255, 190, 26, 0.4);
 }
 
-.hdr-btn-blog {
+.hdr-btn-blog,
+.hdr-btn-game {
   background: rgba(0, 240, 255, 0.08);
   border: 1px solid #00f0ff;
   color: #00f0ff;
 }
-.hdr-btn-blog:hover {
+.hdr-btn-blog:hover,
+.hdr-btn-game:hover {
   background: #00f0ff;
   color: #06090e;
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);

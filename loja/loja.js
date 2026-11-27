@@ -232,4 +232,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updatePlanCarouselState();
   });
+
+  // Sincronizar carrossel de FAQ (Dúvidas Frequentes) no mobile
+  const faqContainer = document.querySelector('.faq-carousel-container');
+  if (faqContainer) {
+    const faqGrid = faqContainer.querySelector('.faq-grid');
+    const prevArrow = faqContainer.querySelector('.faq-arrow-prev');
+    const nextArrow = faqContainer.querySelector('.faq-arrow-next');
+    const dotsContainer = document.querySelector('.faq-carousel-dots');
+    const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+    const cards = faqGrid ? faqGrid.querySelectorAll('.faq-card') : [];
+
+    if (faqGrid && cards.length) {
+      const updateFaqState = () => {
+        const scrollLeft = faqGrid.scrollLeft;
+        const cardWidth = (cards[0] ? cards[0].offsetWidth : 280) + 14;
+        const activeIdx = Math.max(0, Math.min(Math.round(scrollLeft / cardWidth), cards.length - 1));
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+
+        if (prevArrow) {
+          prevArrow.classList.toggle('disabled', activeIdx === 0);
+        }
+        if (nextArrow) {
+          nextArrow.classList.toggle('disabled', activeIdx >= cards.length - 1);
+        }
+      };
+
+      faqGrid.addEventListener('scroll', updateFaqState, { passive: true });
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          if (cards[idx]) {
+            cards[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        });
+      });
+
+      if (prevArrow) {
+        prevArrow.addEventListener('click', () => {
+          const cardWidth = (cards[0] ? cards[0].offsetWidth : 280) + 14;
+          const currentIdx = Math.round(faqGrid.scrollLeft / cardWidth);
+          const targetIdx = Math.max(0, currentIdx - 1);
+          if (cards[targetIdx]) {
+            cards[targetIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        });
+      }
+
+      if (nextArrow) {
+        nextArrow.addEventListener('click', () => {
+          const cardWidth = (cards[0] ? cards[0].offsetWidth : 280) + 14;
+          const currentIdx = Math.round(faqGrid.scrollLeft / cardWidth);
+          const targetIdx = Math.min(cards.length - 1, currentIdx + 1);
+          if (cards[targetIdx]) {
+            cards[targetIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        });
+      }
+
+      updateFaqState();
+    }
+  }
 });
