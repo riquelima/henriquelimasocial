@@ -628,6 +628,72 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--neon-gold-subtle);
 }
 
+/* Single Offer Box (Product 4: Disparos no WhatsApp) */
+.loja-offer-box-green {
+  background: linear-gradient(180deg, rgba(37, 211, 102, 0.06) 0%, rgba(14, 18, 26, 0.95) 100%);
+  border: 1.5px solid var(--neon-green);
+  border-radius: var(--radius-md);
+  padding: 1.35rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--neon-green-glow);
+}
+
+.kicker-green {
+  color: var(--neon-green);
+  border-color: rgba(37, 211, 102, 0.35);
+}
+
+.bullet-green {
+  color: var(--neon-green);
+}
+
+.loja-offer-green-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #06090e;
+  background: var(--neon-green);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.04em;
+}
+
+.loja-offer-green-outline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+}
+
+.price-green {
+  color: var(--neon-green) !important;
+}
+
+.btn-buy-green {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--neon-green);
+  color: #06090e;
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 20px var(--neon-green-glow);
+  transition: all 0.2s ease;
+}
+
+.btn-buy-green:hover {
+  background: #2fe774;
+  transform: translateY(-1px);
+}
+
 .loja-offer-header {
   display: flex;
   align-items: center;
@@ -1248,7 +1314,8 @@ body {
     margin-bottom: 1.15rem;
   }
 
-  .loja-offer-box-gold {
+  .loja-offer-box-gold,
+  .loja-offer-box-green {
     padding: 1.25rem 1.15rem !important;
     border-radius: var(--radius-md) !important;
   }
@@ -1427,7 +1494,8 @@ body {
 
   .btn-buy-gold,
   .btn-buy-cyan,
-  .btn-buy-purple {
+  .btn-buy-purple,
+  .btn-buy-green {
     font-size: 0.86rem;
     padding: 0.75rem 0.85rem;
     white-space: nowrap;

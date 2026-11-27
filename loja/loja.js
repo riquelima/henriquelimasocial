@@ -123,10 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (hint) {
-        if (activeIdx === 0) {
-          hint.innerHTML = '&larr; Toque na seta ou deslize para ver o vídeo &rarr;';
+        if (slides.length > 1) {
+          if (activeIdx === 0) {
+            hint.innerHTML = '&larr; Toque na seta ou deslize para ver o vídeo &rarr;';
+          } else {
+            hint.innerHTML = '&larr; Toque na seta para voltar à foto &rarr;';
+          }
         } else {
-          hint.innerHTML = '&larr; Toque na seta para voltar à foto &rarr;';
+          hint.innerHTML = 'Toque para ver a imagem completa';
         }
       }
 
