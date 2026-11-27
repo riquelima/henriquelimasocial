@@ -17,7 +17,7 @@ const CHECKOUT_LINKS = {
   // Produto 2: Venda no Direct no Automático
   'direct-solo': 'https://payment-link-v3.stone.com.br/pl_9zwXeP5v7Moy25VuB3FEeJ2Yad6QO8LK', // R$ 67/mês
   'direct-pro': 'https://payment-link-v3.stone.com.br/pl_PjD4ROJqbpl5XwjHybUL6kE8M9NnvLVw',  // R$ 127/mês
-  'direct-vip': '',  // R$ 297
+  'direct-vip': 'https://payment-link-v3.stone.com.br/pl_DZkGQoalMbzWrX8c7YUM2NP6jvKyp1B7',  // R$ 297
 
   // Produto 3: Poste em +30 Redes no Automático
   'post-solo': 'https://payment-link-v3.stone.com.br/pl_MAnEXBV7bxjav3EURSMq9YzrqyLme1l6',   // R$ 47/mês
